@@ -1,20 +1,79 @@
 ---
 import '../styles/global.css';
-import { site } from '../config';
+import { site, contact, pricing, deliversTo } from '../config';
 
 interface Props {
   title?: string;
   description?: string;
   path?: string;
+  /** Set on pages that should not be indexed on their own. */
+  noindex?: boolean;
 }
 
 const {
   title = site.title,
   description = site.description,
   path = '/',
+  noindex = false,
 } = Astro.props;
 
-const canonical = new URL(path, Astro.site ?? `https://${site.domain}`).href;
+const origin = (Astro.site ?? new URL(`https://${site.domain}`)).origin;
+const canonical = new URL(path, origin).href;
+const ogImage = new URL('/og.jpg', origin).href;
+
+const prices = pricing.map((t) => t.price);
+
+/**
+ * One graph, two nodes: the studio and the thing it sells. Search engines and
+ * the assistants that read them both want the price range and the area we
+ * actually serve — the two questions every competitor leaves unanswered.
+ */
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'LocalBusiness',
+      '@id': `${origin}/#studio`,
+      name: site.name,
+      description: site.description,
+      url: `${origin}/`,
+      image: ogImage,
+      email: contact.email,
+      priceRange: `$${Math.min(...prices)}–$${Math.max(...prices)} USD`,
+      currenciesAccepted: 'USD, MXN',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Puerto Morelos',
+        addressRegion: 'Quintana Roo',
+        addressCountry: 'MX',
+      },
+      areaServed: deliversTo.map((place) => ({
+        '@type': 'City',
+        name: place,
+      })),
+      knowsLanguage: ['en', 'es'],
+    },
+    {
+      '@type': 'Product',
+      '@id': `${origin}/#welcome-bag`,
+      name: 'Wedding welcome bag',
+      description:
+        'A cotton tote printed with the couple’s names and date, holding a weekend card, two bottle labels and a luggage tag. Assembled in Puerto Morelos and delivered to the resort three days before the wedding.',
+      image: ogImage,
+      brand: { '@id': `${origin}/#studio` },
+      offers: {
+        '@type': 'AggregateOffer',
+        priceCurrency: 'USD',
+        lowPrice: Math.min(...prices),
+        highPrice: Math.max(...prices),
+        offerCount: prices.length,
+        availability: 'https://schema.org/InStock',
+        areaServed: deliversTo.join(', '),
+        seller: { '@id': `${origin}/#studio` },
+      },
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -22,17 +81,27 @@ const canonical = new URL(path, Astro.site ?? `https://${site.domain}`).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+    <meta name="theme-color" content="#f6f3ec" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="631" />
+    <meta property="og:image:alt" content="A printed cotton welcome tote on the sand in the Riviera Maya" />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -42,30 +111,7 @@ const canonical = new URL(path, Astro.site ?? `https://${site.domain}`).href;
       href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Figtree:wght@400;500;600&display=swap"
     />
 
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'LocalBusiness',
-        name: site.name,
-        description: site.description,
-        url: `https://${site.domain}`,
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Puerto Morelos',
-          addressRegion: 'Quintana Roo',
-          addressCountry: 'MX',
-        },
-        areaServed: [
-          'Puerto Morelos',
-          'Cancún',
-          'Playa Mujeres',
-          'Playa del Carmen',
-          'Akumal',
-          'Tulum',
-        ],
-      })}
-    />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body>
     <slot />

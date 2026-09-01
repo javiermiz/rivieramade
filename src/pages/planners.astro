@@ -1,0 +1,353 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Shot from '../components/Shot.astro';
+import Wave from '../components/Wave.astro';
+import toteBeach from '../assets/tote-beach.jpg';
+import { contact, mailtoFor, pricing, deliversTo, site } from '../config';
+
+const relief = [
+  {
+    title: 'The parcel in customs',
+    body: 'Nothing we make leaves the state. No tracking number to chase, no broker to telephone at nine at night, and no couple asking you where their gifts have gone.',
+  },
+  {
+    title: 'The count that moved on a Tuesday',
+    body: 'Final numbers ten days out. Extras are made, anything unused comes back to us, and nobody pays for freight in a hurry.',
+  },
+  {
+    title: 'The suitcase of loose totes',
+    body: 'Ours arrive finished, three days ahead, at the front desk with a signed receipt. Nobody is folding cards in a hotel room the night before.',
+  },
+  {
+    title: 'The twelve-bag wedding',
+    body: 'Twelve is a real order to us. No minimum means you never have to tell a small wedding it is not worth a supplier’s time.',
+  },
+];
+
+const priceLine = pricing
+  .map((t) => `$${t.price} for ${t.label.replace(' bags', '').replace('50 or more', 'fifty or more')}`)
+  .join(' · ');
+
+const terms = [
+  ['Price', `${priceLine} — USD, delivery included`],
+  ['Minimum', 'None'],
+  ['Lead time', 'Four to six weeks comfortably · ten days is possible, ask first'],
+  ['Count due', 'Ten days before the wedding · leftovers collected, never billed'],
+  ['Proof', 'A drawing of the bag within a day, free, before anything is charged'],
+  ['Payment', 'Half to hold the date, the balance on delivery'],
+  ['Capacity', 'One wedding a week — we tell you early when a week is taken'],
+  ['Delivery', `${deliversTo.join(', ')} — and nowhere else`],
+  ['Referral', '[ Commission or trade — decide before this page goes live ]'],
+  ['Language', 'English or Spanish — hablamos español'],
+];
+
+const sampleMailto = `mailto:${contact.email}?subject=${encodeURIComponent(
+  'Sample set for our studio',
+)}&body=${encodeURIComponent(
+  `Hello —
+
+We plan weddings at [venues] and would like a sample bag for the studio.
+
+You can drop it at [address], any [day/time].
+
+Thank you,
+[name], [studio]`,
+)}`;
+---
+
+<Base
+  title={`For wedding planners & venues | ${site.name}`}
+  description="Welcome bags made in Puerto Morelos and delivered to your venue. No customs, no minimum, final counts ten days out, and a free sample set for your studio."
+  path="/planners"
+>
+  <Nav />
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section class="section hero">
+    <div class="container hero__grid">
+      <div class="hero__text">
+        <span class="cap">For planners and venues</span>
+        <h1>When the box doesn’t arrive, it’s your telephone that rings.</h1>
+        <p class="hero__lede">
+          We make one thing — the welcome bag — twenty minutes up the road, and
+          deliver it to your venue. Nothing crosses a border, there is no minimum,
+          and the count can move until ten days out.
+        </p>
+        <div class="hero__cta">
+          <a href={sampleMailto} class="btn">Ask for a sample set</a>
+          <span class="hero__note">Free, and it stays on your shelf</span>
+        </div>
+      </div>
+      <div class="hero__window">
+        <Shot
+          class="arch"
+          src={toteBeach}
+          alt="A printed cotton welcome tote on the sand in the Riviera Maya"
+          eager
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── What stops being theirs ─────────────────────────────── -->
+  <section class="section relief">
+    <div class="container">
+      <h2 class="relief__head">Four things that stop being yours to fix</h2>
+      <dl class="relief__list">
+        {
+          relief.map((item) => (
+            <div class="relief__row">
+              <dt><h3>{item.title}</h3></dt>
+              <dd>{item.body}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- ── Terms ───────────────────────────────────────────────── -->
+  <section class="section terms">
+    <div class="container">
+      <div class="terms__head">
+        <h2>Everything, before you have to ask for it</h2>
+        <p>
+          Nothing here changes because a wedding is large. Forward this page to a
+          couple and they read the same numbers you do.
+        </p>
+      </div>
+      <dl class="terms__list">
+        {
+          terms.map(([label, value]) => (
+            <div class="terms__row">
+              <dt class="cap">{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- ── The sample ──────────────────────────────────────────── -->
+  <section class="section sample">
+    <div class="container sample__inner">
+      <Wave />
+      <h2>A sample bag for your studio, printed with your name rather than ours.</h2>
+      <p>
+        So it sits on your shelf and goes into a couple’s hands when they ask what a
+        welcome bag looks like. No cost, and no obligation to ever use us. If you are
+        in Puerto Morelos we will walk it over this week.
+      </p>
+      <a href={sampleMailto} class="btn btn--inline">Tell us where to bring it</a>
+    </div>
+  </section>
+
+  <!-- ── The question ────────────────────────────────────────── -->
+  <section class="section ask">
+    <div class="container ask__inner">
+      <h2>One question we would genuinely like answered</h2>
+      <p>
+        Do you have a wedding in the next six weeks that still has no welcome bags?
+        Say so and we will have a drawing with you tomorrow.
+      </p>
+      <a href={mailtoFor()} class="btn btn--light btn--inline">Write to us</a>
+      <a class="ask__mail" href={mailtoFor()}>{contact.email}</a>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  /* ── hero ─────────────────────────────────────────────────── */
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xl);
+    align-items: end;
+  }
+  .hero__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-lg);
+  }
+  .hero h1 {
+    font-size: clamp(40px, 5.6vw, 78px);
+    max-width: 15ch;
+  }
+  .hero__lede {
+    font-size: 18.5px;
+    color: var(--c-body);
+    line-height: 1.7;
+  }
+  .hero__cta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-xs);
+    text-align: center;
+  }
+  .hero__note {
+    font-size: 16px;
+    color: var(--c-quiet);
+  }
+
+  /* ── relief ───────────────────────────────────────────────── */
+  .relief__head {
+    font-size: clamp(32px, 4vw, 52px);
+    max-width: 22ch;
+    margin-bottom: var(--sp-lg);
+  }
+  .relief__list {
+    display: flex;
+    flex-direction: column;
+  }
+  .relief__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xs);
+    border-top: var(--stroke-hair) solid var(--c-rule);
+    padding-block: var(--sp-lg);
+  }
+  .relief__row:last-child {
+    border-bottom: var(--stroke-hair) solid var(--c-rule);
+  }
+  .relief__row dt {
+    margin: 0;
+  }
+  .relief__row h3 {
+    font-size: clamp(24px, 2.4vw, 32px);
+    line-height: 1.2;
+  }
+  .relief__row dd {
+    margin: 0;
+    font-size: 17.5px;
+    color: var(--c-body);
+    max-width: 62ch;
+    line-height: 1.8;
+  }
+
+  /* ── terms ────────────────────────────────────────────────── */
+  .terms {
+    background: var(--c-sand);
+    width: 100%;
+  }
+  .terms__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-sm);
+    margin-bottom: var(--sp-lg);
+  }
+  .terms h2 {
+    font-size: clamp(30px, 3.6vw, 46px);
+    max-width: 18ch;
+  }
+  .terms__head p {
+    font-size: 17.5px;
+    color: var(--c-body);
+  }
+  .terms__list {
+    display: flex;
+    flex-direction: column;
+  }
+  .terms__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-3xs);
+    border-top: var(--stroke-hair) solid rgb(31 43 39 / 0.14);
+    padding-block: var(--sp-sm);
+  }
+  .terms__row:last-child {
+    border-bottom: var(--stroke-hair) solid rgb(31 43 39 / 0.14);
+  }
+  .terms__row dt {
+    margin: 0;
+  }
+  .terms__row dd {
+    margin: 0;
+    font-size: 17px;
+  }
+
+  /* ── sample ───────────────────────────────────────────────── */
+  .sample__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-md);
+  }
+  .sample h2 {
+    font-size: clamp(30px, 3.8vw, 52px);
+    max-width: 20ch;
+  }
+  .sample p {
+    font-size: 18px;
+    color: var(--c-body);
+    max-width: 56ch;
+  }
+
+  /* ── ask ──────────────────────────────────────────────────── */
+  .ask {
+    background: var(--c-ink);
+    color: var(--c-ink-fg);
+    width: 100%;
+  }
+  .ask__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-md);
+  }
+  .ask h2 {
+    font-size: clamp(30px, 3.8vw, 48px);
+    color: var(--c-ink-head);
+    max-width: 24ch;
+  }
+  .ask p {
+    font-size: 18px;
+    color: var(--c-ink-body);
+    max-width: 54ch;
+  }
+  .ask__mail {
+    font-size: 18px;
+    color: var(--c-ochre);
+    word-break: break-word;
+  }
+
+  @media (min-width: 700px) {
+    .hero__cta {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--sp-lg);
+      text-align: left;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .hero__grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: var(--sp-3xl);
+    }
+    .hero__lede {
+      font-size: 21px;
+    }
+    .relief__row,
+    .terms__row {
+      grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+      gap: var(--sp-3xl);
+    }
+    .relief__row {
+      padding-block: var(--sp-xl);
+    }
+    .relief__row dd,
+    .terms__head p {
+      font-size: 19px;
+    }
+    .terms__head {
+      max-width: 62ch;
+    }
+  }
+</style>

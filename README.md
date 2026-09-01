@@ -44,6 +44,34 @@ One rule that outlives the placeholders: these are product shots and belong
 where the bag is described. Nothing may present them as a wedding we delivered —
 that section stays offline until there is a real delivery to photograph.
 
+## Pages
+
+| Path | What it is |
+| --- | --- |
+| `/` | The one that sells. One product, one price, one email. |
+| `/planners` | The trade page. Terms in full, and a free sample set for the studio. Linked quietly from the footer, not from the nav — a couple should never land on it. |
+| `/venues/<slug>` | One page per venue, generated from `src/data/venues.ts`. |
+
+A venue starts as `draft: true`, which keeps it `noindex` and out of the sitemap
+and prints a banner on the page. Fill in the minutes, the drop-off, the placement
+fee and the typical size, flip the flag, and it goes live. Acamaya is first;
+Dreams, Secrets, Xcaret and Playa Mujeres are the order after that.
+
+The venue page writes the venue's name into the email draft, so a couple asking
+about Acamaya sends a message that already says Acamaya.
+
+## Search
+
+- Title, description, canonical, Open Graph and Twitter cards on every page,
+  from `src/config.ts` and the layout.
+- `public/og.jpg` at 1200×631 is the share image.
+- One JSON-LD graph: `LocalBusiness` with the seven towns we deliver to and the
+  price range, plus a `Product` with an `AggregateOffer` of $23–$31. Those are
+  exactly the two questions every competitor leaves unanswered, which is why
+  they are the two we hand over in machine-readable form.
+- `@astrojs/sitemap` generates `sitemap-index.xml`; draft venues are filtered
+  out in `astro.config.mjs`.
+
 ## Why the page is built this way
 
 - **One product.** The welcome bag. No catalogue, no tiers with names.

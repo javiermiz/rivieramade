@@ -4,7 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Shot from '../components/Shot.astro';
 import toteBeach from '../assets/tote-beach.jpg';
-import totePrint from '../assets/tote-print.jpg';
+import totePalm from '../assets/tote-palm.jpg';
 import Wave from '../components/Wave.astro';
 import PriceEstimator from '../components/PriceEstimator.astro';
 import { contact, mailto, deliversTo } from '../config';
@@ -66,8 +66,9 @@ const deliveryLine = `We deliver to ${deliversTo
     <div class="bleed bag__grid">
       <Shot
         class="arch bag__shot"
-        src={totePrint}
-        alt="Close up of the printing on the canvas: the couple's names, the date and the town"
+        src={totePalm}
+        alt="A printed cotton welcome tote hanging by a palm on the beach in the Riviera Maya"
+        widths={[372]}
       />
       <div class="bag__text">
         <h2>The welcome bag. Nothing else.</h2>
@@ -237,7 +238,7 @@ const deliveryLine = `We deliver to ${deliversTo
   /* The arch escapes the gutter on the left on purpose — the page is
      otherwise too even. It keeps its own ratio, never a height. */
   .bag__shot {
-    --well-ratio: 5 / 4;
+    --well-ratio: 1 / 1;
     background: var(--c-mist);
     border-radius: 0 260px 18px 0;
     margin-right: var(--container-pad);
@@ -459,11 +460,12 @@ const deliveryLine = `We deliver to ${deliversTo
       font-size: 21px;
     }
     .bag__grid {
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
       gap: var(--sp-3xl);
+      align-items: center;
     }
     .bag__shot {
-      --well-ratio: var(--ratio-shot);
+      --well-ratio: 1 / 1;
       border-radius: 0 999px 18px 0;
       margin-right: 0;
     }

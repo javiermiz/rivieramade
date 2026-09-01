@@ -13,17 +13,25 @@ interface Props {
   alt: string;
   /** Above the fold, so the hero opts out of lazy loading. */
   eager?: boolean;
+  /** Cap the srcset at the source's own width — never upscale a placeholder. */
+  widths?: number[];
   class?: string;
 }
 
-const { src, alt, eager = false, class: klass = '' } = Astro.props;
+const {
+  src,
+  alt,
+  eager = false,
+  widths = [420, 700, 1000],
+  class: klass = '',
+} = Astro.props;
 ---
 
 <figure class:list={['well', 'shot', klass]}>
   <Image
     src={src}
     alt={alt}
-    widths={[420, 700, 1000]}
+    widths={widths}
     sizes="(min-width: 900px) 46vw, 100vw"
     loading={eager ? 'eager' : 'lazy'}
     fetchpriority={eager ? 'high' : 'auto'}

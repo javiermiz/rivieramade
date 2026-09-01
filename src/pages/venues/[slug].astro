@@ -1,0 +1,383 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Shot from '../../components/Shot.astro';
+import toteBeach from '../../assets/tote-beach.jpg';
+import totePalm from '../../assets/tote-palm.jpg';
+import { venues, type Venue } from '../../data/venues';
+import { contact, mailtoFor, tierFor, site } from '../../config';
+
+export function getStaticPaths() {
+  return venues.map((venue) => ({ params: { slug: venue.slug }, props: { venue } }));
+}
+
+interface Props {
+  venue: Venue;
+}
+
+const { venue } = Astro.props;
+
+/** A blank stays visibly blank. Inventing a drive time would be worse than an empty one. */
+const or = (value: string | number | null, fallback: string) =>
+  value === null || value === '' ? fallback : String(value);
+
+const typical = venue.typicalBags ?? 30;
+const typicalTier = tierFor(typical);
+
+const venueMailto = `mailto:${contact.email}?subject=${encodeURIComponent(
+  `Welcome bags — ${venue.name}`,
+)}&body=${encodeURIComponent(
+  `Hello —
+
+We're marrying at ${venue.name} on [date] and would like about [number] welcome bags.
+Our colours are [colours].
+
+Could you send us a drawing?
+
+Thank you,
+[names]`,
+)}`;
+
+const facts = [
+  {
+    figure: or(venue.minutes && `${venue.minutes} min`, '[X] min'),
+    label: 'from the studio',
+    note: 'We make the drive ourselves, every time.',
+  },
+  {
+    figure: or(venue.dropOff, '[front desk]'),
+    label: 'where the bags are left',
+    note: or(venue.note, '[Any access rule this venue keeps.]'),
+  },
+  {
+    figure: or(venue.placementFee, '[$X]'),
+    label: 'to place them in the rooms',
+    note: 'Charged by the resort, never by us.',
+  },
+  {
+    figure: `${typical} bags`,
+    label: 'a wedding here, typically',
+    note: `About $${(typical * typicalTier.price).toLocaleString('en-US')} at that size.`,
+  },
+];
+---
+
+<Base
+  title={`Wedding Welcome Bags for ${venue.name}, ${venue.town} | ${site.name}`}
+  description={`Welcome bags for weddings at ${venue.name} in ${venue.town} — made by hand nearby and delivered to the front desk three days before you marry. No customs, no minimum, from $23 a bag.`}
+  path={`/venues/${venue.slug}`}
+  noindex={venue.draft}
+>
+  <Nav />
+
+  {
+    venue.draft && (
+      <div class="container">
+        <p class="draft">
+          Draft — the bracketed facts are still blank, so this page is kept out of
+          the index. Fill them in <code>src/data/venues.ts</code> and set
+          <code>draft: false</code>.
+        </p>
+      </div>
+    )
+  }
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section class="section hero">
+    <div class="container hero__grid">
+      <div class="hero__text">
+        <span class="cap">Welcome bags · {venue.town}</span>
+        <h1>Welcome bags for weddings at {venue.name}.</h1>
+        <p class="hero__lede">
+          We are {or(venue.minutes, '[X]')} minutes away. Your bags are made here and
+          handed to the front desk three days before the wedding — nothing shipped,
+          nothing through customs, and your count is due ten days out.
+        </p>
+        <div class="hero__cta">
+          <a href={venueMailto} class="btn">Write to us</a>
+          <span class="hero__note">A drawing of your bag comes back the same day</span>
+        </div>
+      </div>
+      <div class="hero__window">
+        <Shot
+          class="arch"
+          src={toteBeach}
+          alt={`A printed cotton welcome tote on the sand near ${venue.name}`}
+          eager
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── What we know about this venue ───────────────────────── -->
+  <section class="section facts">
+    <div class="container">
+      <h2 class="facts__head">What we already know about {venue.name}</h2>
+      <dl class="facts__grid">
+        {
+          facts.map((fact) => (
+            <div class="facts__cell">
+              <dt class="facts__figure">{fact.figure}</dt>
+              <dd>
+                <span class="cap">{fact.label}</span>
+                <p>{fact.note}</p>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- ── The bag ─────────────────────────────────────────────── -->
+  <section class="section bag">
+    <div class="container bag__grid">
+      <Shot
+        class="arch bag__shot"
+        src={totePalm}
+        alt="A printed cotton welcome tote hanging by a palm on the beach"
+        widths={[372]}
+      />
+      <div class="bag__text">
+        <h2>The welcome bag. Nothing else.</h2>
+        <p>
+          A cotton tote carrying your names and your date, and inside it the weekend
+          printed on a card, two bottle labels and a luggage tag. Assembled here, so
+          nothing at all travels in your suitcase.
+        </p>
+        <p class="bag__price">
+          From ${Math.min(...[23])} a bag, delivered — see the whole scale on the
+          <a href="/#price">price page</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── A wedding here ──────────────────────────────────────── -->
+  <section class="section proof">
+    <div class="container proof__inner">
+      <h2>A wedding at {venue.name}</h2>
+      <p>
+        [ Written after the first one: how many bags, the colours, and one true
+        detail about the delivery. Never before it. ]
+      </p>
+      <p class="proof__rule">
+        This section stays offline until there is a real delivery to photograph.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Ask ─────────────────────────────────────────────────── -->
+  <section class="section ask">
+    <div class="container ask__inner">
+      <h2>Marrying at {venue.name}?</h2>
+      <p>
+        Send the date and your colours. Within a day you will have a picture of your
+        own bag — at no cost, and yours to keep even if you go elsewhere.
+      </p>
+      <a href={venueMailto} class="btn btn--light btn--inline">Write to us</a>
+      <a class="ask__mail" href={venueMailto}>{contact.email}</a>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .draft {
+    background: var(--c-sand);
+    border-left: 3px solid var(--c-ochre);
+    padding: var(--sp-sm) var(--sp-md);
+    margin-top: var(--sp-md);
+    font-size: 15.5px;
+    color: var(--c-body);
+    max-width: none;
+  }
+  .draft code {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 14px;
+  }
+
+  /* ── hero ─────────────────────────────────────────────────── */
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xl);
+    align-items: end;
+  }
+  .hero__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-lg);
+  }
+  .hero h1 {
+    font-size: clamp(40px, 5.6vw, 80px);
+    max-width: 14ch;
+  }
+  .hero__lede {
+    font-size: 18.5px;
+    color: var(--c-body);
+    line-height: 1.7;
+  }
+  .hero__cta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-xs);
+    text-align: center;
+  }
+  .hero__note {
+    font-size: 16px;
+    color: var(--c-quiet);
+  }
+
+  /* ── facts ────────────────────────────────────────────────── */
+  .facts {
+    background: var(--c-sand);
+    width: 100%;
+  }
+  .facts__head {
+    font-size: clamp(30px, 3.6vw, 46px);
+    max-width: 22ch;
+    margin-bottom: var(--sp-lg);
+  }
+  .facts__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin: 0;
+  }
+  .facts__cell {
+    border-top: var(--stroke-hair) solid rgb(31 43 39 / 0.14);
+    padding-block: var(--sp-md);
+  }
+  .facts__cell:last-child {
+    border-bottom: var(--stroke-hair) solid rgb(31 43 39 / 0.14);
+  }
+  .facts__figure {
+    font-family: var(--f-display);
+    font-size: 34px;
+    line-height: 1.1;
+    margin: 0;
+  }
+  .facts__cell dd {
+    margin: var(--sp-3xs) 0 0;
+  }
+  .facts__cell p {
+    font-size: 16.5px;
+    color: var(--c-body);
+    margin-top: 4px;
+  }
+
+  /* ── bag ──────────────────────────────────────────────────── */
+  .bag__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xl);
+    align-items: center;
+  }
+  .bag__shot {
+    --well-ratio: 1 / 1;
+  }
+  .bag__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-md);
+  }
+  .bag h2 {
+    font-size: clamp(32px, 3.8vw, 52px);
+    max-width: 14ch;
+  }
+  .bag p {
+    font-size: 17.5px;
+    color: var(--c-body);
+    line-height: 1.85;
+  }
+  .bag__price a {
+    border-bottom: var(--stroke-hair) solid var(--c-ochre);
+  }
+
+  /* ── proof ────────────────────────────────────────────────── */
+  .proof__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-sm);
+  }
+  .proof h2 {
+    font-size: clamp(28px, 3.2vw, 42px);
+  }
+  .proof p {
+    font-size: 17.5px;
+    color: var(--c-body);
+  }
+  .proof__rule {
+    color: var(--c-quiet);
+    font-size: 15.5px;
+  }
+
+  /* ── ask ──────────────────────────────────────────────────── */
+  .ask {
+    background: var(--c-ink);
+    color: var(--c-ink-fg);
+    width: 100%;
+  }
+  .ask__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-md);
+  }
+  .ask h2 {
+    font-size: clamp(32px, 4.4vw, 58px);
+    color: var(--c-ink-head);
+    max-width: 20ch;
+  }
+  .ask p {
+    font-size: 18px;
+    color: var(--c-ink-body);
+    max-width: 54ch;
+  }
+  .ask__mail {
+    font-size: 18px;
+    color: var(--c-ochre);
+    word-break: break-word;
+  }
+
+  @media (min-width: 700px) {
+    .hero__cta {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--sp-lg);
+      text-align: left;
+    }
+    .facts__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: var(--sp-2xl);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .hero__grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: var(--sp-3xl);
+    }
+    .hero__lede {
+      font-size: 21px;
+    }
+    .facts__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: var(--sp-xl);
+    }
+    .facts__cell:last-child {
+      border-bottom: 0;
+    }
+    .bag__grid {
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+      gap: var(--sp-3xl);
+    }
+    .bag p {
+      font-size: 19px;
+    }
+  }
+</style>
