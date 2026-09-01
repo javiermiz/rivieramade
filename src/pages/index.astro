@@ -23,13 +23,6 @@ const care = [
   },
 ];
 
-const contents = [
-  { n: 'I', label: 'What we make', href: '#bag' },
-  { n: 'II', label: 'What we take off your hands', href: '#care' },
-  { n: 'III', label: 'What it costs', href: '#price' },
-  { n: 'IV', label: 'How to begin', href: '#write' },
-];
-
 const deliveryLine = `We deliver to ${deliversTo
   .slice(0, -1)
   .join(', ')} and ${deliversTo.at(-1)} — and we do not ship anywhere at all.`;
@@ -60,25 +53,6 @@ const deliveryLine = `We deliver to ${deliversTo
     </div>
   </section>
 
-  <!-- ── Contents ────────────────────────────────────────────── -->
-  <section class="section contents">
-    <div class="container">
-      <hr class="rule" />
-      <ol class="contents__list">
-        {
-          contents.map((item) => (
-            <li>
-              <a href={item.href}>
-                <span class="num">{item.n}</span>
-                <span class="contents__label">{item.label}</span>
-              </a>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
   <!-- ── II. The bag ─────────────────────────────────────────── -->
   <section id="bag" class="section bag">
     <div class="bleed bag__grid">
@@ -86,9 +60,8 @@ const deliveryLine = `We deliver to ${deliversTo
         <figcaption class="cap">Photograph — the bag, on the bed, at check-in</figcaption>
       </figure>
       <div class="bag__text">
-        <div class="eyebrow"><span class="num">I</span><span class="cap">What we make</span></div>
         <h2>The welcome bag. Nothing else.</h2>
-        <p class="drop">
+        <p>
           A cotton tote carrying your names and your date, and inside it the weekend
           printed on a card, two bottle labels and a luggage tag. Every piece is cut
           and printed by the two of us, for your wedding and no one else's.
@@ -123,9 +96,6 @@ const deliveryLine = `We deliver to ${deliversTo
   <!-- ── III. What we take off your hands ────────────────────── -->
   <section id="care" class="section care">
     <div class="container">
-      <div class="eyebrow care__head">
-        <span class="num">II</span><span class="cap">What we take off your hands</span>
-      </div>
       <dl class="care__list">
         {
           care.map((item) => (
@@ -143,7 +113,6 @@ const deliveryLine = `We deliver to ${deliversTo
   <section id="price" class="section price">
     <div class="container price__grid">
       <div class="price__text">
-        <div class="eyebrow"><span class="num">III</span><span class="cap">What it costs</span></div>
         <h2>Published, so you needn't ask.</h2>
         <p>
           Delivery to your resort is included, there is no minimum and no setup fee. It
@@ -182,9 +151,6 @@ const deliveryLine = `We deliver to ${deliversTo
 
     <div class="container write__grid">
       <div class="write__text">
-        <div class="eyebrow">
-          <span class="num">IV</span><span class="cap write__cap">How to begin</span>
-        </div>
         <h2>Tell us the date. We will draw the bag.</h2>
         <p>
           You will have a picture of your own bag — your names, your date, your colours
@@ -258,22 +224,6 @@ const deliveryLine = `We deliver to ${deliversTo
     color: var(--c-quiet);
   }
 
-  /* ── contents ─────────────────────────────────────────────── */
-  .contents__list {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--sp-xs);
-    margin-top: var(--sp-md);
-  }
-  .contents__list a {
-    display: flex;
-    gap: var(--sp-xs);
-    align-items: baseline;
-    color: var(--c-body);
-  }
-  .contents__label {
-    font-size: 17px;
-  }
 
   /* ── the bag ──────────────────────────────────────────────── */
   .bag__grid {
@@ -336,9 +286,6 @@ const deliveryLine = `We deliver to ${deliversTo
   }
 
   /* ── care ─────────────────────────────────────────────────── */
-  .care__head {
-    margin-bottom: var(--sp-lg);
-  }
   .care__row {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -437,9 +384,6 @@ const deliveryLine = `We deliver to ${deliversTo
     gap: var(--sp-md);
     align-items: flex-start;
   }
-  .write__cap {
-    color: var(--c-ink-faint);
-  }
   .write h2 {
     font-size: clamp(38px, 5.2vw, 74px);
     color: var(--c-ink-head);
@@ -451,10 +395,12 @@ const deliveryLine = `We deliver to ${deliversTo
     line-height: 1.85;
   }
   .write__mail {
-    font-family: var(--f-display);
-    font-size: 24px;
+    font-size: 18px;
+    letter-spacing: 0.01em;
     color: var(--c-ochre);
     word-break: break-word;
+    border-bottom: var(--stroke-hair) solid rgb(201 138 75 / 0.5);
+    padding-bottom: 3px;
   }
 
   .letter {
@@ -518,10 +464,6 @@ const deliveryLine = `We deliver to ${deliversTo
       gap: var(--sp-lg);
       text-align: left;
     }
-    .contents__list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--sp-sm) var(--sp-2xl);
-    }
     .letter {
       padding: var(--sp-2xl) var(--sp-3xl);
     }
@@ -577,11 +519,10 @@ const deliveryLine = `We deliver to ${deliversTo
       font-size: 20px;
     }
     .write__mail {
-      font-size: 32px;
+      font-size: 20px;
     }
     .letter {
-      transform: rotate(-0.9deg);
-      box-shadow: 0 30px 70px rgb(0 0 0 / 0.28);
+      box-shadow: 0 24px 60px rgb(0 0 0 / 0.22);
     }
     .letter__body {
       font-size: 19px;
@@ -590,10 +531,6 @@ const deliveryLine = `We deliver to ${deliversTo
   }
 
   @media (min-width: 1280px) {
-    .contents__list {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: var(--sp-xl);
-    }
     .price__grid,
     .write__grid {
       gap: var(--sp-4xl);

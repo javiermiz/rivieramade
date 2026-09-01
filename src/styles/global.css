@@ -21,20 +21,20 @@
   --c-sea: #2a5d53;
   --c-ochre: #c98a4b;
 
-  --c-body: #4e5c57;
-  --c-quiet: #7c8a84;
-  --c-faint: #8a968f;
+  --c-body: #414f4a;
+  --c-quiet: #5c6a65;
+  --c-faint: #64716b;
   --c-rule: #e0d9cb;
 
   /* On the ink section only. */
   --c-ink-fg: #dce3df;
   --c-ink-head: #f4f1ea;
   --c-ink-body: #9eaaa4;
-  --c-ink-faint: #7e8c86;
+  --c-ink-faint: #93a09a;
 
   /* --- Type --- */
-  --f-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-  --f-body: Jost, 'Helvetica Neue', Arial, sans-serif;
+  --f-display: Newsreader, Georgia, 'Times New Roman', serif;
+  --f-body: Figtree, 'Helvetica Neue', Arial, sans-serif;
 
   /* --- Layout ---
      The container caps at the design width so ultra-wide screens centre the
@@ -111,9 +111,9 @@ body {
   background-image: var(--grain);
   color: var(--c-ink);
   font-family: var(--f-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 17px;
-  line-height: 1.8;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -152,8 +152,8 @@ h2,
 h3 {
   font-family: var(--f-display);
   font-weight: 400;
-  line-height: 1.02;
-  letter-spacing: -0.012em;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
   text-wrap: balance;
 }
 
@@ -244,24 +244,11 @@ button:focus-visible {
 .cap {
   font-family: var(--f-body);
   font-weight: 400;
-  font-size: 11.5px;
-  letter-spacing: 0.3em;
+  font-size: 13px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  line-height: 2;
-  color: var(--c-faint);
-}
-
-.num {
-  font-family: var(--f-display);
-  font-size: 15px;
-  letter-spacing: 0.24em;
-  color: var(--c-ochre);
-}
-
-.eyebrow {
-  display: flex;
-  align-items: baseline;
-  gap: var(--sp-sm);
+  line-height: 1.7;
+  color: var(--c-quiet);
 }
 
 .rule {
@@ -270,27 +257,11 @@ button:focus-visible {
   border: 0;
 }
 
-.drop::first-letter {
-  font-family: var(--f-display);
-  font-size: 58px;
-  line-height: 0.78;
-  float: left;
-  padding: 6px 11px 0 0;
-  color: var(--c-sea);
-}
-
-@media (min-width: 900px) {
-  .drop::first-letter {
-    font-size: 76px;
-    padding: 8px 14px 0 0;
-  }
-}
-
 .pill {
   border: var(--stroke-hair) solid #ddd6c8;
   border-radius: 999px;
-  padding: 9px 18px;
-  color: #5e6b65;
+  padding: 10px 18px;
+  color: var(--c-body);
 }
 
 /* ============================================================

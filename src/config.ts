@@ -4,8 +4,7 @@
  */
 
 export const contact = {
-  // TODO: real inbox. This address is a placeholder.
-  email: 'hola@rivieramade.com',
+  email: 'rivieramadestore@gmail.com',
   // TODO: international format, no + and no spaces, e.g. '5219981234567'
   whatsapp: '',
   instagram: '',
