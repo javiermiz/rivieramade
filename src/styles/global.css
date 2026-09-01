@@ -42,8 +42,8 @@
      let the layout breathe wider. */
   --container-max: 1440px;
   --container-pad: 26px;
-  --section-py: 64px;
-  --section-gap: 34px;
+  --section-py: 52px;
+  --section-gap: 28px;
 
   /* --- Spacing scale, taken from the rhythm the design actually uses --- */
   --sp-3xs: 6px;

@@ -166,7 +166,7 @@ const initialTotal = initial * initialTier.price;
   .est {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--sp-md);
+    gap: var(--sp-sm);
     background: var(--c-paper);
     border: var(--stroke-hair) solid var(--c-rule);
     padding: var(--sp-lg) var(--sp-md);
@@ -176,7 +176,7 @@ const initialTotal = initial * initialTier.price;
   .est__result {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-md);
+    gap: var(--sp-sm);
   }
 
   .est__ask {
@@ -269,7 +269,7 @@ const initialTotal = initial * initialTier.price;
     flex-direction: column;
     gap: var(--sp-3xs);
     border-top: var(--stroke-hair) solid var(--c-rule);
-    padding-top: var(--sp-md);
+    padding-top: var(--sp-sm);
   }
 
   .est__total {
@@ -353,6 +353,10 @@ const initialTotal = initial * initialTier.price;
     .est {
       padding: var(--sp-xl) var(--sp-lg);
       gap: var(--sp-lg);
+    }
+    .est__controls,
+    .est__result {
+      gap: var(--sp-md);
     }
     .est__figure {
       font-size: 68px;

@@ -67,12 +67,6 @@ const deliveryLine = `We deliver to ${deliversTo
   <!-- ── II. The bag ─────────────────────────────────────────── -->
   <section id="bag" class="section bag">
     <div class="bleed bag__grid">
-      <Shot
-        class="arch bag__shot"
-        src={totePalm}
-        alt="A printed cotton welcome tote hanging by a palm on the beach in the Riviera Maya"
-        widths={[372]}
-      />
       <div class="bag__text">
         <h2>The welcome bag. Nothing else.</h2>
         <p>
@@ -92,6 +86,13 @@ const deliveryLine = `We deliver to ${deliversTo
           <li class="cap pill">Assembled &amp; delivered</li>
         </ul>
       </div>
+
+      <Shot
+        class="arch bag__shot"
+        src={totePalm}
+        alt="A printed cotton welcome tote hanging by a palm on the beach in the Riviera Maya"
+        widths={[372]}
+      />
     </div>
 
     <div class="container bag__gallery">
@@ -208,7 +209,7 @@ const deliveryLine = `We deliver to ${deliversTo
 
   /* ── hero ─────────────────────────────────────────────────── */
   .hero__window :global(.shot) {
-    --well-ratio: var(--ratio-window);
+    --well-ratio: 1 / 1;
   }
 
   .hero__grid {
@@ -250,12 +251,23 @@ const deliveryLine = `We deliver to ${deliversTo
   .bag__grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--sp-2xl);
+    gap: var(--sp-lg);
     align-items: center;
+  }
+  /* Stacked, the copy leads: the hero photograph and this one would otherwise
+     sit against each other with nothing to read in between. The markup is in
+     that order, so it holds without any ordering trick.
+
+     And on a phone this photograph steps aside altogether — the row below
+     already shows the bag three ways, and two image blocks against each other
+     is what made the page feel like scrolling a gallery. The browser still
+     fetches it (24 KB), which is not worth a second markup path. */
+  .bag__grid :global(.bag__shot) {
+    display: none;
   }
   /* The arch escapes the gutter on the left on purpose — the page is
      otherwise too even. It keeps its own ratio, never a height. */
-  .bag__shot {
+  .bag__grid :global(.bag__shot) {
     --well-ratio: 1 / 1;
     background: var(--c-mist);
     border-radius: 0 260px 18px 0;
@@ -288,9 +300,21 @@ const deliveryLine = `We deliver to ${deliversTo
      grid of squares reads like a contact sheet. */
   .bag__gallery {
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--sp-md);
+    grid-auto-flow: column;
+    grid-auto-columns: 74%;
+    gap: var(--sp-2xs);
     align-items: end;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding-bottom: var(--sp-3xs);
+  }
+  .bag__gallery::-webkit-scrollbar {
+    display: none;
+  }
+  .bag__plate {
+    scroll-snap-align: start;
   }
   .bag__plate {
     display: flex;
@@ -497,6 +521,16 @@ const deliveryLine = `We deliver to ${deliversTo
       grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
       gap: var(--sp-3xl);
     }
+    .hero__window :global(.shot) {
+      --well-ratio: var(--ratio-window);
+    }
+    /* With room for two columns the photograph comes back, on the left. */
+    .bag__grid :global(.bag__shot) {
+      display: flex;
+    }
+    .bag__text {
+      order: 2;
+    }
     .hero__lede {
       font-size: 21px;
     }
@@ -505,7 +539,7 @@ const deliveryLine = `We deliver to ${deliversTo
       gap: var(--sp-3xl);
       align-items: center;
     }
-    .bag__shot {
+    .bag__grid :global(.bag__shot) {
       --well-ratio: 1 / 1;
       border-radius: 0 999px 18px 0;
       margin-right: 0;
@@ -519,8 +553,11 @@ const deliveryLine = `We deliver to ${deliversTo
       font-size: 19px;
     }
     .bag__gallery {
+      grid-auto-flow: row;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: var(--sp-lg);
+      overflow-x: visible;
+      padding-bottom: 0;
     }
     .care__row {
       grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);

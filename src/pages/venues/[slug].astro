@@ -133,12 +133,6 @@ const facts = [
   <!-- ── The bag ─────────────────────────────────────────────── -->
   <section class="section bag">
     <div class="container bag__grid">
-      <Shot
-        class="arch bag__shot"
-        src={totePalm}
-        alt="A printed cotton welcome tote hanging by a palm on the beach"
-        widths={[372]}
-      />
       <div class="bag__text">
         <h2>The welcome bag. Nothing else.</h2>
         <p>
@@ -151,6 +145,13 @@ const facts = [
           <a href="/#price">price page</a>.
         </p>
       </div>
+
+      <Shot
+        class="arch bag__shot"
+        src={totePalm}
+        alt="A printed cotton welcome tote hanging by a palm on the beach"
+        widths={[372]}
+      />
     </div>
   </section>
 
@@ -276,7 +277,7 @@ const facts = [
     gap: var(--sp-2xl);
     align-items: center;
   }
-  .bag__shot {
+  .bag__grid :global(.bag__shot) {
     --well-ratio: 1 / 1;
   }
   .bag__text {
@@ -375,6 +376,9 @@ const facts = [
     .bag__grid {
       grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
       gap: var(--sp-3xl);
+    }
+    .bag__text {
+      order: 2;
     }
     .bag p {
       font-size: 19px;
