@@ -1,0 +1,354 @@
+---
+/**
+ * The price block.
+ *
+ * A couple counts guests, not bags, and they want one number: what this
+ * costs. The tier table alone made them do that arithmetic themselves, so
+ * this shows the total, marks the band they land in, and carries the count
+ * straight into the email — the address bar does the rest.
+ *
+ * It renders complete without JavaScript: the default count is priced on the
+ * server and the tier table is real markup. The script only makes it live.
+ */
+import { pricing, tierFor, quickCounts, mailtoFor } from '../config';
+
+const initial = 30;
+const initialTier = tierFor(initial);
+const initialTotal = initial * initialTier.price;
+---
+
+<div class="est" data-est>
+  <div class="est__ask">
+    <label class="est__label" for="bags">How many bags?</label>
+    <div class="est__field">
+      <button type="button" class="est__step" data-step="-5" aria-label="Five fewer bags">–</button>
+      <input
+        class="est__input"
+        id="bags"
+        name="bags"
+        type="number"
+        inputmode="numeric"
+        min="1"
+        max="400"
+        step="1"
+        value={initial}
+        data-input
+      />
+      <button type="button" class="est__step" data-step="5" aria-label="Five more bags">+</button>
+    </div>
+  </div>
+
+  <ul class="est__quick" aria-label="Common counts">
+    {
+      quickCounts.map((n) => (
+        <li>
+          <button
+            type="button"
+            class="est__chip"
+            data-quick={n}
+            aria-pressed={n === initial ? 'true' : 'false'}
+          >
+            {n}
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="est__hint">
+    Most couples order one bag per room — roughly half the guest list.
+  </p>
+
+  <div class="est__out">
+    <div class="est__total">
+      <span class="est__figure" data-total>${initialTotal.toLocaleString('en-US')}</span>
+      <span class="est__unit">
+        <span data-count>{initial}</span> bags × <span data-unit>${initialTier.price}</span>
+      </span>
+    </div>
+    <p class="est__note" data-note>Delivery to your resort included. Half holds your date, the rest on handover.</p>
+  </div>
+
+  <a class="btn est__cta" href={mailtoFor(initial)} data-cta>
+    Write to us with these numbers
+  </a>
+
+  <p class="est__more">
+    A number that isn't here — eighty, a hundred and twenty? Type it in. We price
+    every size the same day.
+  </p>
+
+  <table class="est__tiers">
+    <caption class="cap">Price per bag, delivered</caption>
+    <tbody>
+      {
+        pricing.map((tier) => (
+          <tr data-tier={tier.from} class={tier.from === initialTier.from ? 'is-on' : undefined}>
+            <th scope="row">{tier.label}</th>
+            <td>${tier.price}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<script>
+  import { pricing, tierFor, mailtoFor } from '../config';
+
+  const root = document.querySelector<HTMLElement>('[data-est]');
+  if (root) {
+    const input = root.querySelector<HTMLInputElement>('[data-input]')!;
+    const totalEl = root.querySelector<HTMLElement>('[data-total]')!;
+    const countEl = root.querySelector<HTMLElement>('[data-count]')!;
+    const unitEl = root.querySelector<HTMLElement>('[data-unit]')!;
+    const noteEl = root.querySelector<HTMLElement>('[data-note]')!;
+    const cta = root.querySelector<HTMLAnchorElement>('[data-cta]')!;
+    const chips = [...root.querySelectorAll<HTMLButtonElement>('[data-quick]')];
+    const rows = [...root.querySelectorAll<HTMLElement>('[data-tier]')];
+
+    const notes = {
+      base: 'Delivery to your resort included. Half holds your date, the rest on handover.',
+      best: 'That is our best price, and delivery is included. Half holds your date, the rest on handover.',
+      big: 'Above a hundred we will want to talk about the date before we promise it — say the number and we answer the same day.',
+      small:
+        'Under twelve we still say yes, we just price it by hand. Tell us the number in the email.',
+    };
+
+    const render = (n: number) => {
+      const bags = Math.min(400, Math.max(1, Math.round(n) || 1));
+      const tier = tierFor(bags);
+      const unit = tier.price;
+
+      totalEl.textContent = `$${(bags * unit).toLocaleString('en-US')}`;
+      countEl.textContent = String(bags);
+      unitEl.textContent = `$${unit}`;
+      cta.href = mailtoFor(bags);
+
+      noteEl.textContent =
+        bags < 12 ? notes.small : bags > 100 ? notes.big : unit === 23 ? notes.best : notes.base;
+
+      rows.forEach((row) =>
+        row.classList.toggle('is-on', Number(row.dataset.tier) === tier.from),
+      );
+      chips.forEach((chip) =>
+        chip.setAttribute('aria-pressed', Number(chip.dataset.quick) === bags ? 'true' : 'false'),
+      );
+    };
+
+    input.addEventListener('input', () => render(input.valueAsNumber));
+
+    chips.forEach((chip) =>
+      chip.addEventListener('click', () => {
+        input.value = chip.dataset.quick!;
+        render(Number(chip.dataset.quick));
+      }),
+    );
+
+    root.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const next = (input.valueAsNumber || 0) + Number(btn.dataset.step);
+        input.value = String(Math.min(400, Math.max(1, next)));
+        render(input.valueAsNumber);
+      }),
+    );
+
+    // Guard against a stale value restored by the browser on reload.
+    render(input.valueAsNumber || pricing[1].from);
+  }
+</script>
+
+<style>
+  .est {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-md);
+    background: var(--c-paper);
+    border: var(--stroke-hair) solid var(--c-rule);
+    padding: var(--sp-lg) var(--sp-md);
+  }
+
+  .est__ask {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2xs);
+  }
+
+  .est__label {
+    font-family: var(--f-display);
+    font-size: 26px;
+  }
+
+  .est__field {
+    display: flex;
+    align-items: stretch;
+    gap: var(--sp-3xs);
+    max-width: 260px;
+  }
+
+  .est__step,
+  .est__chip {
+    font-family: var(--f-body);
+    font-size: 17px;
+    color: var(--c-ink);
+    background: transparent;
+    border: var(--stroke-hair) solid var(--c-rule);
+    cursor: pointer;
+    min-height: 56px;
+    transition: border-color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+  }
+
+  .est__step {
+    width: 56px;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .est__step:hover,
+  .est__chip:hover {
+    border-color: var(--c-sea);
+  }
+
+  .est__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    font-family: var(--f-display);
+    font-size: 32px;
+    text-align: center;
+    color: var(--c-ink);
+    background: transparent;
+    border: var(--stroke-hair) solid var(--c-rule);
+    /* The native spinners duplicate the − and + and crowd the number. */
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
+
+  .est__input::-webkit-outer-spin-button,
+  .est__input::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
+  .est__quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3xs);
+  }
+
+  .est__chip {
+    min-width: 64px;
+    padding-inline: var(--sp-sm);
+    border-radius: 999px;
+  }
+
+  .est__chip[aria-pressed='true'] {
+    background: var(--c-ink);
+    border-color: var(--c-ink);
+    color: var(--c-paper);
+  }
+
+  .est__hint {
+    font-size: 15.5px;
+    color: var(--c-quiet);
+  }
+
+  .est__out {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+    border-top: var(--stroke-hair) solid var(--c-rule);
+    padding-top: var(--sp-md);
+  }
+
+  .est__total {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-xs);
+    flex-wrap: wrap;
+  }
+
+  .est__figure {
+    font-family: var(--f-display);
+    font-size: 56px;
+    line-height: 1;
+    color: var(--c-sea);
+  }
+
+  .est__unit {
+    font-size: 16px;
+    color: var(--c-quiet);
+  }
+
+  .est__note {
+    font-size: 15.5px;
+    color: var(--c-body);
+  }
+
+  .est__cta {
+    width: 100%;
+  }
+
+  .est__more {
+    font-size: 15.5px;
+    color: var(--c-quiet);
+    max-width: 46ch;
+  }
+
+  .est__tiers {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: var(--stroke-hair) solid var(--c-rule);
+    padding-top: var(--sp-sm);
+  }
+
+  .est__tiers caption {
+    text-align: left;
+    padding-block: var(--sp-sm) var(--sp-3xs);
+  }
+
+  .est__tiers th,
+  .est__tiers td {
+    font-weight: 400;
+    text-align: left;
+    padding-block: 9px;
+    color: var(--c-quiet);
+    transition: color 0.2s var(--ease-out);
+  }
+
+  .est__tiers td {
+    text-align: right;
+    font-family: var(--f-display);
+    font-size: 20px;
+  }
+
+  .est__tiers .is-on th,
+  .est__tiers .is-on td {
+    color: var(--c-ink);
+  }
+
+  .est__tiers .is-on th::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--c-ochre);
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  @media (min-width: 700px) {
+    .est {
+      padding: var(--sp-xl) var(--sp-lg);
+      gap: var(--sp-lg);
+    }
+    .est__figure {
+      font-size: 68px;
+    }
+    .est__cta {
+      width: auto;
+      align-self: flex-start;
+    }
+  }
+</style>

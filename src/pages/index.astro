@@ -4,9 +4,8 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import ArchWindow from '../components/ArchWindow.astro';
 import Wave from '../components/Wave.astro';
-import { contact, mailto, pricing, deliversTo } from '../config';
-
-const tiers = [...pricing].reverse();
+import PriceEstimator from '../components/PriceEstimator.astro';
+import { contact, mailto, deliversTo } from '../config';
 
 const care = [
   {
@@ -115,25 +114,13 @@ const deliveryLine = `We deliver to ${deliversTo
       <div class="price__text">
         <h2>Published, so you needn't ask.</h2>
         <p>
-          Delivery to your resort is included, there is no minimum and no setup fee. It
-          eases as the order grows, because drawing it and driving it out cost the same
-          for twelve bags or for sixty.
+          The price eases as the order grows, because drawing it and driving it out
+          cost the same for twelve bags or for sixty. There is no minimum and no
+          setup fee.
         </p>
         <p class="price__where">{deliveryLine}</p>
       </div>
-      <div class="price__table">
-        {
-          tiers.map((tier) => (
-            <div class="price__row">
-              <span class="cap price__band">{tier.label}</span>
-              <span class="price__figure">${tier.price}</span>
-            </div>
-          ))
-        }
-        <span class="cap price__foot">
-          USD per bag, delivered · half holds your date, the rest on handover
-        </span>
-      </div>
+      <PriceEstimator />
     </div>
   </section>
 
@@ -331,31 +318,6 @@ const deliveryLine = `We deliver to ${deliversTo
   .price__where {
     color: var(--c-quiet);
   }
-  .price__table {
-    display: flex;
-    flex-direction: column;
-  }
-  .price__row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--sp-md);
-    border-top: var(--stroke-hair) solid var(--c-rule);
-    padding-block: var(--sp-sm);
-  }
-  .price__row:last-of-type {
-    border-bottom: var(--stroke-hair) solid var(--c-rule);
-  }
-  .price__band {
-    color: #6e7b75;
-  }
-  .price__figure {
-    font-family: var(--f-display);
-    font-size: 34px;
-  }
-  .price__foot {
-    padding-top: var(--sp-sm);
-  }
 
   /* ── the letter ───────────────────────────────────────────── */
   .write {
@@ -509,10 +471,7 @@ const deliveryLine = `We deliver to ${deliversTo
       grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
       gap: var(--sp-3xl);
     }
-    .price__figure {
-      font-size: 42px;
-    }
-    .write__branch {
+      .write__branch {
       display: block;
     }
     .write p {

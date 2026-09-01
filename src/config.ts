@@ -30,12 +30,25 @@ export const deliversTo = [
   'Tulum',
 ];
 
-/** USD per bag, delivered. Highest quantity first is easier to read in code. */
+/**
+ * USD per bag, delivered. Ascending, so the page reads the way a visitor
+ * counts: from the smallest wedding up.
+ */
 export const pricing = [
-  { from: 50, to: null, label: 'Fifty and above', price: 23 },
-  { from: 25, to: 49, label: 'Twenty-five to forty-nine', price: 26 },
-  { from: 12, to: 24, label: 'Twelve to twenty-four', price: 31 },
+  { from: 12, to: 24, label: '12–24 bags', price: 31 },
+  { from: 25, to: 49, label: '25–49 bags', price: 26 },
+  { from: 50, to: null, label: '50 or more', price: 23 },
 ];
+
+/** The band a given count falls into. Shared by the page and the estimator. */
+export function tierFor(bags: number) {
+  return (
+    [...pricing].reverse().find((t) => bags >= t.from) ?? pricing[0]
+  );
+}
+
+/** Counts offered as one tap. Chosen to sit one in each band, plus a big one. */
+export const quickCounts = [20, 30, 45, 60];
 
 /**
  * The pre-written first email.
@@ -47,17 +60,29 @@ export const pricing = [
  */
 export const draft = {
   subject: 'Welcome bags — our wedding',
-  body: `Hello —
+  /** `count` is filled in when the visitor has already picked a number. */
+  body(count?: number) {
+    const bags = count ? `${count}` : '[number]';
+    const askCapacity =
+      count && count > 100
+        ? '\n\nWe know that is a large order — could you confirm you have the week?'
+        : '';
+    return `Hello —
 
-We're marrying at [venue] on [date] and would like about [number] welcome bags.
-Our colours are [colours].
+We're marrying at [venue] on [date] and would like about ${bags} welcome bags.
+Our colours are [colours].${askCapacity}
 
 Could you send us a drawing?
 
 Thank you,
-[names]`,
+[names]`;
+  },
 };
 
-export const mailto = `mailto:${contact.email}?subject=${encodeURIComponent(
-  draft.subject,
-)}&body=${encodeURIComponent(draft.body)}`;
+export function mailtoFor(count?: number) {
+  return `mailto:${contact.email}?subject=${encodeURIComponent(
+    draft.subject,
+  )}&body=${encodeURIComponent(draft.body(count))}`;
+}
+
+export const mailto = mailtoFor();
