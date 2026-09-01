@@ -5,6 +5,9 @@ import Footer from '../components/Footer.astro';
 import Shot from '../components/Shot.astro';
 import toteBeach from '../assets/tote-beach.jpg';
 import totePalm from '../assets/tote-palm.jpg';
+import toteFlat from '../assets/tote-flat.jpg';
+import toteInside from '../assets/tote-inside.jpg';
+import totePrint from '../assets/tote-print.jpg';
 import Wave from '../components/Wave.astro';
 import PriceEstimator from '../components/PriceEstimator.astro';
 import { contact, mailto, deliversTo } from '../config';
@@ -89,6 +92,21 @@ const deliveryLine = `We deliver to ${deliversTo
           <li class="cap pill">Assembled &amp; delivered</li>
         </ul>
       </div>
+    </div>
+
+    <div class="container bag__gallery">
+      <figure class="bag__plate">
+        <Shot src={toteFlat} alt="The printed tote laid flat on a woven mat with eucalyptus" widths={[352]} sizes="(min-width: 900px) 30vw, 100vw" />
+        <figcaption class="cap">Pressed by hand, in one or two inks</figcaption>
+      </figure>
+      <figure class="bag__plate">
+        <Shot src={toteInside} alt="Looking into the open tote — unlined cotton canvas with reinforced handles" widths={[352]} sizes="(min-width: 900px) 30vw, 100vw" />
+        <figcaption class="cap">Room for the weekend, and for the flight home</figcaption>
+      </figure>
+      <figure class="bag__plate">
+        <Shot src={totePrint} alt="Close up of the printing on the canvas: names, date and town" widths={[352]} sizes="(min-width: 900px) 30vw, 100vw" />
+        <figcaption class="cap">Your names, your date, the town</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -263,6 +281,29 @@ const deliveryLine = `We deliver to ${deliversTo
     gap: var(--sp-2xs);
     flex-wrap: wrap;
     margin-top: var(--sp-3xs);
+  }
+
+  /* Three plates at their native size — the sources are ~360px, so the row is
+     sized to match rather than blow them up. Ratios differ on purpose: an even
+     grid of squares reads like a contact sheet. */
+  .bag__gallery {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-md);
+    align-items: end;
+  }
+  .bag__plate {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2xs);
+    margin: 0;
+  }
+  .bag__plate :global(.shot) {
+    --well-ratio: 1 / 1;
+    border-radius: 999px 999px 14px 14px;
+  }
+  .bag__plate:first-child :global(.shot) {
+    --well-ratio: 8 / 9;
   }
 
   /* ── pull quote ───────────────────────────────────────────── */
@@ -476,6 +517,10 @@ const deliveryLine = `We deliver to ${deliversTo
     .care__row dd,
     .price p {
       font-size: 19px;
+    }
+    .bag__gallery {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--sp-lg);
     }
     .care__row {
       grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);

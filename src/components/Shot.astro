@@ -15,6 +15,7 @@ interface Props {
   eager?: boolean;
   /** Cap the srcset at the source's own width — never upscale a placeholder. */
   widths?: number[];
+  sizes?: string;
   class?: string;
 }
 
@@ -23,6 +24,7 @@ const {
   alt,
   eager = false,
   widths = [420, 700, 1000],
+  sizes = '(min-width: 900px) 46vw, 100vw',
   class: klass = '',
 } = Astro.props;
 ---
@@ -32,7 +34,7 @@ const {
     src={src}
     alt={alt}
     widths={widths}
-    sizes="(min-width: 900px) 46vw, 100vw"
+    sizes={sizes}
     loading={eager ? 'eager' : 'lazy'}
     fetchpriority={eager ? 'high' : 'auto'}
     decoding="async"

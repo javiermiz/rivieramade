@@ -27,10 +27,19 @@ Everything that changes without touching the design lives in
 
 ## The photographs
 
-The two images on the page are **placeholders**, in `src/assets/`:
+The five images on the page are **placeholders**, in `src/assets/`:
 
 - `tote-beach.jpg` — the hero.
-- `tote-print.jpg` — the close-up of the printing.
+- `tote-palm.jpg` — beside the copy about the bag.
+- `tote-flat.jpg`, `tote-inside.jpg`, `tote-print.jpg` — the three plates.
+
+They are cropped at their source's own size and never upscaled; `Shot` takes a
+`widths` prop for exactly that reason.
+
+**The shot still missing:** the four pieces laid out together — the tote, the
+weekend card, the two bottle labels and the luggage tag. The page promises them
+in a sentence and no photograph shows them. That one picture would do more for
+the product than any of the five already there.
 
 They are mockups, not our work: the bag reads *Olivia & Jackson, Cancún*. Swap
 both for real photographs of a real order before the site is promoted anywhere —
