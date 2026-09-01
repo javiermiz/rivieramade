@@ -1,0 +1,100 @@
+{
+  "pages": [
+    {
+      "id": "page-1",
+      "name": "El sitio"
+    },
+    {
+      "id": "page-2",
+      "name": "Sistema de diseño"
+    }
+  ],
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "page": "page-1",
+      "title": "Home — desktop",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 6600,
+      "is_interactive": true
+    },
+    {
+      "file": "HomeMobile.dc.html",
+      "page": "page-1",
+      "title": "Home — mobile",
+      "x": 1560,
+      "y": 0,
+      "w": 390,
+      "h": 6400,
+      "is_interactive": true
+    },
+    {
+      "file": "Planners.dc.html",
+      "page": "page-1",
+      "title": "/planners",
+      "x": 2050,
+      "y": 0,
+      "w": 1440,
+      "h": 3200
+    },
+    {
+      "file": "Venue.dc.html",
+      "page": "page-1",
+      "title": "Venue — plantilla",
+      "x": 2050,
+      "y": 3320,
+      "w": 1440,
+      "h": 3200
+    },
+    {
+      "file": "Confirmation.dc.html",
+      "page": "page-1",
+      "title": "Después del formulario",
+      "x": 2050,
+      "y": 6640,
+      "w": 1000,
+      "h": 720
+    },
+    {
+      "file": "System.dc.html",
+      "page": "page-2",
+      "title": "Riviera Made — cut sheet",
+      "x": 0,
+      "y": 0,
+      "w": 1240,
+      "h": 2200
+    }
+  ],
+  "annotations": [
+    {
+      "id": "que-cambio",
+      "page": "page-1",
+      "x": -430,
+      "y": 40,
+      "w": 340,
+      "text": "Tercera dirección, con tus tres correcciones:\n\n1. UN SOLO PRODUCTO. La bolsa. Ya no hay lista numerada de cuatro piezas que se leía como catálogo — es una bolsa y una frase de lo que trae dentro. Todas las páginas dicen lo mismo.\n\n2. SIN FORMULARIO. Todo botón abre WhatsApp. No necesita servidor y es como ya trabajan.\n\n3. CARIBEÑO Y CON CONTRASTE. Arena, mar profundo, agua, coral y sol. La regla dura: texto tinta oscura sobre todo color brillante, arena sobre mar profundo. Nunca blanco sobre coral."
+    },
+    {
+      "id": "fotos",
+      "page": "page-1",
+      "x": -430,
+      "y": 560,
+      "w": 340,
+      "text": "Los arcos son el motivo: cada foto vive en un arco, que es la forma de las puertas de esta costa. Quedan cuatro huecos de foto en la Home y son los que hay que salir a tomar."
+    },
+    {
+      "id": "sistema",
+      "page": "page-2",
+      "x": 0,
+      "y": -180,
+      "w": 620,
+      "text": "El sistema: paleta con su regla de contraste, Young Serif con Figtree, las formas (arco, card redondeada, botón píldora) y la voz, con la lista de lo que nunca se escribe."
+    }
+  ],
+  "launch": {
+    "view": "canvas",
+    "page": "page-1"
+  }
+}

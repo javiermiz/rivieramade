@@ -1,0 +1,13 @@
+---
+interface Props { width?: number; color?: string; }
+const { width = 46, color = 'var(--ochre)' } = Astro.props;
+---
+<svg width={width} height={width * 0.44} viewBox="0 0 60 34" aria-hidden="true">
+  <path
+    d="M4 22 C14 14 22 26 32 18 C40 11.6 48 15 56 12"
+    stroke={color}
+    stroke-width="1.3"
+    fill="none"
+    stroke-linecap="round"
+  ></path>
+</svg>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Courier+Prime:wght@400;700&display=swap">
+  <style>
+    body{margin:0;background:#F3EDE1;color:#1B1B1A;font-family:'Courier Prime',ui-monospace,Courier,monospace;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+    *{box-sizing:border-box}
+    a{color:#2A4C9B;text-decoration:none}
+    a:hover{color:#C8352C}
+    p{margin:0;max-width:58ch}
+    h1,h2,h3{margin:0;font-family:'DM Serif Text',Georgia,serif;font-weight:400;line-height:1.1;text-wrap:balance}
+    .act{padding-left:96px;padding-right:96px}
+    .stamp{border:2px solid #1B1B1A;padding:20px 26px;background:#FFFDF8}
+    .btn{display:inline-flex;align-items:center;gap:12px;background:#C8352C;color:#FFFDF8;padding:20px 34px;font-family:'Courier Prime',monospace;font-weight:700;font-size:17px;letter-spacing:.04em;border:2px solid #1B1B1A;box-shadow:5px 5px 0 #1B1B1A}
+    .btn:hover{background:#A82A22;color:#FFFDF8;box-shadow:3px 3px 0 #1B1B1A}
+    .mail{font-family:'Courier Prime',monospace;font-weight:700;letter-spacing:.02em}
+  </style>
+</helmet>
+
+<div>
+
+<!-- airmail edge -->
+<div style="height:14px;background:repeating-linear-gradient(45deg,#C8352C 0 22px,#F3EDE1 22px 44px,#2A4C9B 44px 66px,#F3EDE1 66px 88px)"></div>
+
+<!-- ── MASTHEAD ── -->
+<div class="act" style="display:flex;align-items:center;justify-content:space-between;padding-top:30px;padding-bottom:30px;border-bottom:2px solid #1B1B1A">
+  <div style="display:flex;align-items:center;gap:16px">
+    <svg width="52" height="52" viewBox="0 0 60 60" aria-hidden="true">
+      <circle cx="30" cy="30" r="27" fill="none" stroke="#2A4C9B" stroke-width="2"/>
+      <circle cx="30" cy="30" r="21" fill="none" stroke="#2A4C9B" stroke-width="1"/>
+      <text x="30" y="27" text-anchor="middle" font-family="Courier Prime, monospace" font-size="8" fill="#2A4C9B" letter-spacing="1">PUERTO</text>
+      <text x="30" y="37" text-anchor="middle" font-family="Courier Prime, monospace" font-size="8" fill="#2A4C9B" letter-spacing="1">MORELOS</text>
+      <line x1="8" y1="30" x2="14" y2="30" stroke="#2A4C9B" stroke-width="2"/>
+      <line x1="46" y1="30" x2="52" y2="30" stroke="#2A4C9B" stroke-width="2"/>
+    </svg>
+    <div>
+      <div style="font-family:'DM Serif Text',Georgia,serif;font-size:26px;line-height:1">Riviera Made</div>
+      <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#6B665C">Quintana Roo · México</div>
+    </div>
+  </div>
+  <a href="#write" class="btn" style="padding:14px 24px;font-size:15px;box-shadow:4px 4px 0 #1B1B1A">Write to us</a>
+</div>
+
+<!-- ── I. THE OFFER ── -->
+<div class="act" style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:60px;align-items:center;padding-top:70px;padding-bottom:80px">
+  <div style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:inline-flex;align-self:flex-start;gap:10px;align-items:center;border:1.5px solid #2A4C9B;padding:7px 14px">
+      <span style="width:8px;height:8px;background:#C8352C;border-radius:50%"></span>
+      <span style="font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:#2A4C9B">One wedding a week</span>
+    </div>
+    <h1 style="font-size:78px">Welcome bags,<br>posted from<br><i style="color:#C8352C">twenty minutes</i><br>down the road.</h1>
+    <p style="font-size:18px;color:#4A463E;line-height:1.75">One bag, made by hand in Puerto Morelos and driven to your resort three days before you marry. It never crosses a border, and you never carry a thing.</p>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+      <a href="#write" class="btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6.5H21V18H3Z" stroke="#FFFDF8" stroke-width="2" stroke-linejoin="round"/><path d="M3 7L12 13.5L21 7" stroke="#FFFDF8" stroke-width="2" stroke-linejoin="round"/></svg>
+        Write to us
+      </a>
+      <span style="font-size:15px;color:#6B665C">We answer with a drawing of your bag, same day</span>
+    </div>
+  </div>
+
+  <!-- postcard -->
+  <div style="background:#FFFDF8;border:2px solid #1B1B1A;padding:22px;box-shadow:8px 8px 0 #1B1B1A;transform:rotate(-1.4deg)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div style="background:#EDE5D5;border:1.5px solid #1B1B1A;height:250px;display:flex;align-items:flex-end;padding:14px">
+        <span style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#8A8375;line-height:1.7">Photo — the bag on a bed at check-in</span>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:space-between">
+        <div style="display:flex;justify-content:flex-end;gap:10px">
+          <div style="border:1.5px dashed #C8352C;width:62px;height:74px;display:flex;align-items:center;justify-content:center">
+            <svg width="42" height="52" viewBox="0 0 42 52" aria-hidden="true">
+              <rect x="1" y="1" width="40" height="50" fill="#2A4C9B"/>
+              <path d="M8 40 C14 30 20 34 26 26 C30 21 34 20 36 21 L36 44 L8 44 Z" fill="#F3EDE1"/>
+              <circle cx="13" cy="14" r="5" fill="#FFC531"/>
+              <text x="21" y="50" text-anchor="middle" font-family="Courier Prime, monospace" font-size="5" fill="#F3EDE1">MÉXICO</text>
+            </svg>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <div style="height:1.5px;background:#C6BEAE"></div>
+          <div style="height:1.5px;background:#C6BEAE"></div>
+          <div style="height:1.5px;background:#C6BEAE"></div>
+          <div style="font-size:13px;color:#6B665C;padding-top:4px">Tell us the date and where.<br>That's the whole first email.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── II. ONE PRODUCT ── -->
+<div style="background:#1B1B1A;color:#F3EDE1">
+  <div class="act" style="padding-top:80px;padding-bottom:80px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:70px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <span style="font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#E2A79F">We make one thing</span>
+      <h2 style="font-size:56px;color:#FFFDF8">The welcome bag.<br>That's the shop.</h2>
+      <p style="font-size:18px;color:#B5AFA2;line-height:1.75">A cotton tote with your names and your date on it, and inside: the weekend printed on a card, two bottle labels and a luggage tag. Cut and printed by the two of us, for your wedding only.</p>
+      <p style="font-size:18px;color:#B5AFA2;line-height:1.75">No catalogue. No packages with silly names. One bag, done properly.</p>
+    </div>
+    <div style="background:#26261F;border:2px solid #4A4940;padding:26px;display:flex;flex-direction:column;gap:14px">
+      <div style="height:280px;background:#33322A;display:flex;align-items:flex-end;padding:16px">
+        <span style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#7C776C;line-height:1.7">Photo — the bag, close, on linen</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13.5px;color:#8E887C;border-top:1px dashed #4A4940;padding-top:12px">
+        <span>Cotton canvas · pressed by hand</span>
+        <span>Puerto Morelos</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── III. THREE REASONS ── -->
+<div class="act" style="padding-top:80px;padding-bottom:80px">
+  <h2 style="font-size:46px;max-width:20ch;margin-bottom:44px">Three things that stop being your problem</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px">
+    <div class="stamp" style="display:flex;flex-direction:column;gap:12px">
+      <span style="font-family:'DM Serif Text',Georgia,serif;font-size:44px;color:#C8352C;line-height:1">01</span>
+      <h3 style="font-size:25px">It never clears customs</h3>
+      <p style="font-size:15.5px;color:#5A554C;line-height:1.65">Anything ordered from home goes through a border, and the person who can chase it is a country away.</p>
+    </div>
+    <div class="stamp" style="display:flex;flex-direction:column;gap:12px">
+      <span style="font-family:'DM Serif Text',Georgia,serif;font-size:44px;color:#2A4C9B;line-height:1">02</span>
+      <h3 style="font-size:25px">Your count can move</h3>
+      <p style="font-size:15.5px;color:#5A554C;line-height:1.65">Final number ten days out. Anything left over comes back to us, not onto your bill.</p>
+    </div>
+    <div class="stamp" style="display:flex;flex-direction:column;gap:12px">
+      <span style="font-family:'DM Serif Text',Georgia,serif;font-size:44px;color:#C8352C;line-height:1">03</span>
+      <h3 style="font-size:25px">It arrives without you</h3>
+      <p style="font-size:15.5px;color:#5A554C;line-height:1.65">Delivered to the front desk three days ahead, assembled, with a signed receipt.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── IV. PRICE ── -->
+<div style="background:#FFFDF8;border-top:2px solid #1B1B1A;border-bottom:2px solid #1B1B1A">
+  <div class="act" style="padding-top:72px;padding-bottom:72px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:70px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <h2 style="font-size:46px;max-width:15ch">Printed here so you don't have to ask</h2>
+      <p style="font-size:17px;color:#5A554C;line-height:1.7">Delivery to your resort included. No minimum, no setup fee. It eases as the order grows, because drawing it and driving it out cost the same for twelve bags or sixty.</p>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5px dashed #C6BEAE;padding:16px 0"><span style="font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:#6B665C">12–24 bags</span><span style="font-family:'DM Serif Text',Georgia,serif;font-size:34px">$31</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5px dashed #C6BEAE;padding:16px 0"><span style="font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:#6B665C">25–49 bags</span><span style="font-family:'DM Serif Text',Georgia,serif;font-size:34px">$26</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5px dashed #C6BEAE;padding:16px 0"><span style="font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:#6B665C">50 and up</span><span style="font-family:'DM Serif Text',Georgia,serif;font-size:34px">$23</span></div>
+      <p style="font-size:14px;color:#8A8375;padding-top:14px">USD, per bag, delivered. Half holds your date, the rest on handover.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── V. THE EMAIL ── -->
+<div id="write" class="act" style="padding-top:86px;padding-bottom:86px">
+  <div style="display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:70px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:26px">
+      <span style="font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#2A4C9B">The only thing we ask</span>
+      <h2 style="font-size:58px">Send us a short email.</h2>
+      <p style="font-size:18px;color:#4A463E;line-height:1.75">You'll get back a drawing of your own bag — your names, your date, your colours — the same day, at no cost, and yours to keep even if you go somewhere else.</p>
+      <a href="#" class="btn" style="align-self:flex-start;font-size:19px;padding:22px 38px">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6.5H21V18H3Z" stroke="#FFFDF8" stroke-width="2" stroke-linejoin="round"/><path d="M3 7L12 13.5L21 7" stroke="#FFFDF8" stroke-width="2" stroke-linejoin="round"/></svg>
+        Write to us now
+      </a>
+      <span class="mail" style="font-size:20px;color:#2A4C9B">[hola@rivieramade.com]</span>
+    </div>
+
+    <div style="background:#FFFDF8;border:2px solid #1B1B1A;box-shadow:8px 8px 0 #2A4C9B">
+      <div style="border-bottom:2px solid #1B1B1A;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;background:#EDE5D5">
+        <span style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#5A554C">Copy this if it helps</span>
+        <div style="display:flex;gap:7px"><span style="width:10px;height:10px;background:#C8352C;border-radius:50%"></span><span style="width:10px;height:10px;background:#FFC531;border-radius:50%"></span><span style="width:10px;height:10px;background:#2A4C9B;border-radius:50%"></span></div>
+      </div>
+      <div style="padding:28px 30px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:12px;font-size:15px"><span style="color:#8A8375;min-width:44px">To:</span><span class="mail" style="color:#2A4C9B">[hola@rivieramade.com]</span></div>
+        <div style="display:flex;gap:12px;font-size:15px;border-bottom:1px dashed #C6BEAE;padding-bottom:16px"><span style="color:#8A8375;min-width:44px">Re:</span><span>Welcome bags — [our date]</span></div>
+        <p style="font-size:16.5px;color:#3A362E;line-height:1.9">Hi — we're getting married at <span style="background:#FFF0A8">[venue]</span> on <span style="background:#FFF0A8">[date]</span> and we'd like about <span style="background:#FFF0A8">[number]</span> welcome bags. Our colours are <span style="background:#FFF0A8">[colours]</span>. Could you send us a drawing?</p>
+        <span style="font-size:14px;color:#8A8375;border-top:1px dashed #C6BEAE;padding-top:14px">That's genuinely all we need. Nothing else to fill in.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div style="background:#1B1B1A;color:#B5AFA2">
+  <div class="act" style="padding-top:44px;padding-bottom:44px;display:flex;justify-content:space-between;align-items:center;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <span style="font-family:'DM Serif Text',Georgia,serif;font-size:22px;color:#FFFDF8">Riviera Made</span>
+      <span style="font-size:14px">Puerto Morelos · Cancún · Playa del Carmen · Tulum</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;text-align:right">
+      <span class="mail" style="font-size:17px;color:#E2A79F">[hola@rivieramade.com]</span>
+      <span style="font-size:14px">We don't ship. We drive.</span>
+    </div>
+  </div>
+</div>
+
+<div style="height:14px;background:repeating-linear-gradient(45deg,#C8352C 0 22px,#1B1B1A 22px 44px,#2A4C9B 44px 66px,#1B1B1A 66px 88px)"></div>
+
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600&display=swap">
+  <style>
+    body{margin:0;background:#FBEFDD;color:#16323A;font-family:Figtree,'Helvetica Neue',Arial,sans-serif;font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
+    *{box-sizing:border-box}
+    a{color:#16323A;text-decoration:none}
+    a:hover{color:#0E7C86}
+    p{margin:0;max-width:56ch}
+    h1,h2,h3{margin:0;font-family:'Young Serif',Georgia,serif;font-weight:400;letter-spacing:-0.01em;text-wrap:balance;line-height:1.08}
+    .act{padding-left:104px;padding-right:104px}
+    .btn{display:inline-flex;align-items:center;gap:12px;background:#FF6B4A;color:#16323A;padding:19px 32px;border-radius:999px;font-weight:600;font-size:17px}
+    .btn:hover{background:#FF5733;color:#16323A}
+    .btn-dark{background:#16323A;color:#FBEFDD}
+    .btn-dark:hover{background:#0B4451;color:#FBEFDD}
+    .arch{border-radius:999px 999px 24px 24px;overflow:hidden}
+    .lbl{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+  </style>
+</helmet>
+
+<div>
+
+<!-- ── NAV ── -->
+<div class="act" style="display:flex;align-items:center;justify-content:space-between;padding-top:26px;padding-bottom:26px">
+  <div style="font-family:'Young Serif',Georgia,serif;font-size:25px">Riviera Made</div>
+  <div style="display:flex;align-items:center;gap:34px">
+    <a href="#bag" style="font-weight:500">The bag</a>
+    <a href="#price" style="font-weight:500">Price</a>
+    <a href="#studio" style="font-weight:500">Us</a>
+    <a href="#ask" class="btn" style="padding:13px 24px;font-size:15px">Say hi on WhatsApp</a>
+  </div>
+</div>
+
+<!-- ── I. HELLO ── -->
+<div class="act" style="display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:70px;align-items:center;padding-top:46px;padding-bottom:90px">
+  <div style="display:flex;flex-direction:column;gap:28px">
+    <span class="lbl" style="color:#0E7C86">Welcome bags · Riviera Maya</span>
+    <h1 style="font-size:80px">The nicest thing waiting in their room.</h1>
+    <p style="font-size:21px;color:#3D5A62;line-height:1.6">One bag, made by hand twenty minutes from your venue, and carried to your resort three days before you marry. It never crosses a border and you never carry a thing.</p>
+    <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap">
+      <a href="#ask" class="btn">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19.5V6.5C4 5.4 4.9 4.5 6 4.5H18C19.1 4.5 20 5.4 20 6.5V15C20 16.1 19.1 17 18 17H8.5L4 19.5Z" stroke="#16323A" stroke-width="2" stroke-linejoin="round"/></svg>
+        Send us a message
+      </a>
+      <span style="font-size:16px;color:#5C7A82">We draw your bag first — free, within a day</span>
+    </div>
+  </div>
+
+  <!-- arch illustration -->
+  <div class="arch" style="height:580px;background:#08414C;position:relative;display:flex;align-items:flex-end;justify-content:center">
+    <svg viewBox="0 0 320 500" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <rect width="320" height="500" fill="#08414C"/>
+      <circle cx="160" cy="150" r="76" fill="#FFC24A"/>
+      <path d="M0 372 C50 356 78 386 116 380 C154 374 178 350 226 358 C262 364 292 384 320 378 L320 500 L0 500 Z" fill="#2FB6C0"/>
+      <path d="M0 412 C46 400 84 424 126 418 C168 412 196 392 240 400 C276 406 296 420 320 416 L320 500 L0 500 Z" fill="#1E8E9B"/>
+      <!-- tote -->
+      <path d="M108 250 L212 250 L222 396 L98 396 Z" fill="#FBEFDD"/>
+      <path d="M136 250 L136 232 C136 212 148 200 160 200 C172 200 184 212 184 232 L184 250 L172 250 L172 232 C172 220 167 211 160 211 C153 211 148 220 148 232 L148 250 Z" fill="#FBEFDD"/>
+      <rect x="124" y="288" width="72" height="10" rx="5" fill="#FF6B4A"/>
+      <rect x="124" y="308" width="48" height="10" rx="5" fill="#FF6B4A"/>
+      <circle cx="196" cy="340" r="9" fill="#FFC24A"/>
+      <!-- palm -->
+      <path d="M296 500 C286 440 282 400 288 360 L300 360 C296 402 300 444 308 500 Z" fill="#0B5C4A"/>
+      <path d="M294 362 C268 344 244 342 224 352 C246 330 274 328 294 340 Z" fill="#12805F"/>
+      <path d="M300 362 C324 340 348 336 366 344 C346 320 316 324 300 340 Z" fill="#12805F"/>
+      <path d="M296 348 C280 326 262 316 244 316 C266 300 290 312 298 332 Z" fill="#12805F"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ── II. ONE PRODUCT ── -->
+<div id="bag" style="background:#08414C;color:#FBEFDD">
+  <div class="act" style="padding-top:100px;padding-bottom:100px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:80px;align-items:center">
+    <div class="arch" style="height:520px;background:#0B5460;display:flex;align-items:flex-end;padding:24px">
+      <span style="font-size:14px;color:#7FB0B8;letter-spacing:.06em">Photograph — the bag on a bed at check-in, morning light</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:26px">
+      <span class="lbl" style="color:#FFC24A">We make one thing</span>
+      <h2 style="font-size:54px;color:#FFF7EA">The welcome bag. That's it.</h2>
+      <p style="font-size:20px;color:#A9CBD1;line-height:1.65">A cotton tote with your names and your date on it, and inside: the weekend printed on a card, two bottle labels and a luggage tag. Every piece cut and printed by the two of us, in one room, for your wedding only.</p>
+      <p style="font-size:20px;color:#A9CBD1;line-height:1.65">No catalogue, no upsells, no packages with silly names. One bag, done properly.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;padding-top:6px">
+        <span style="border:1.5px solid #2FB6C0;border-radius:999px;padding:11px 20px;font-size:16px;color:#CFEAEE">Your names</span>
+        <span style="border:1.5px solid #2FB6C0;border-radius:999px;padding:11px 20px;font-size:16px;color:#CFEAEE">Your date</span>
+        <span style="border:1.5px solid #2FB6C0;border-radius:999px;padding:11px 20px;font-size:16px;color:#CFEAEE">Your colours</span>
+        <span style="border:1.5px solid #2FB6C0;border-radius:999px;padding:11px 20px;font-size:16px;color:#CFEAEE">Assembled &amp; delivered</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── III. THE THREE GOOD THINGS ── -->
+<div class="act" style="padding-top:100px;padding-bottom:100px">
+  <h2 style="font-size:48px;max-width:20ch;margin-bottom:56px">The hard parts happen on our side of it</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px">
+    <div style="background:#FFC24A;border-radius:28px;padding:40px">
+      <svg width="46" height="46" viewBox="0 0 48 48" fill="none" aria-hidden="true" style="margin-bottom:20px">
+        <path d="M8 18 L24 10 L40 18 L40 34 L24 42 L8 34 Z" stroke="#16323A" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M14 30 L34 16" stroke="#FF6B4A" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <h3 style="font-size:27px;margin-bottom:10px">Never crosses a border</h3>
+      <p style="font-size:17px;color:#4A3E1E;line-height:1.6">Anything you order from home clears customs, and the person who can chase it is a country away. Ours is made down the road.</p>
+    </div>
+    <div style="background:#2FB6C0;border-radius:28px;padding:40px">
+      <svg width="46" height="46" viewBox="0 0 48 48" fill="none" aria-hidden="true" style="margin-bottom:20px">
+        <circle cx="24" cy="24" r="16" stroke="#16323A" stroke-width="2.4"/>
+        <path d="M24 15 L24 24 L31 28" stroke="#16323A" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="38" cy="12" r="5" fill="#FF6B4A"/>
+      </svg>
+      <h3 style="font-size:27px;margin-bottom:10px">Your count can change</h3>
+      <p style="font-size:17px;color:#0C3B41;line-height:1.6">Cousins book late, someone drops out. Tell us the final number ten days before — anything left over comes back to us, not onto your bill.</p>
+    </div>
+    <div style="background:#FF6B4A;border-radius:28px;padding:40px">
+      <svg width="46" height="46" viewBox="0 0 48 48" fill="none" aria-hidden="true" style="margin-bottom:20px">
+        <path d="M8 34 L8 20 L20 20 L20 34" stroke="#16323A" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M20 26 L40 26 L40 34 L8 34" stroke="#16323A" stroke-width="2.4" stroke-linejoin="round"/>
+        <circle cx="15" cy="36" r="4" fill="#16323A"/><circle cx="33" cy="36" r="4" fill="#16323A"/>
+        <path d="M26 14 L30 20 L22 20 Z" fill="#FFC24A"/>
+      </svg>
+      <h3 style="font-size:27px;margin-bottom:10px">Waiting when they land</h3>
+      <p style="font-size:17px;color:#4A1B0E;line-height:1.6">Delivered to your resort three days ahead, assembled, with a signed receipt. The staff put them in the rooms before anyone arrives.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── IV. THE FREE DRAWING ── -->
+<div style="background:#FFC24A">
+  <div class="act" style="padding-top:96px;padding-bottom:96px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:26px">
+    <span class="lbl" style="color:#8A5A12">Before you decide anything</span>
+    <h2 style="font-size:58px;max-width:19ch">We'll draw your bag and send it to you.</h2>
+    <p style="font-size:20px;color:#4A3E1E;max-width:56ch;line-height:1.65">Your names, your date, your colours, on the actual bag — within a day, at no cost, and yours to keep even if you go somewhere else. Nobody should buy something made for one weekend without seeing it first.</p>
+    <a href="#ask" class="btn btn-dark" style="margin-top:8px">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19.5V6.5C4 5.4 4.9 4.5 6 4.5H18C19.1 4.5 20 5.4 20 6.5V15C20 16.1 19.1 17 18 17H8.5L4 19.5Z" stroke="#FBEFDD" stroke-width="2" stroke-linejoin="round"/></svg>
+      Ask us for yours
+    </a>
+  </div>
+</div>
+
+<!-- ── V. PRICE ── -->
+<div id="price" class="act" style="padding-top:100px;padding-bottom:100px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:80px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <span class="lbl" style="color:#0E7C86">Price</span>
+    <h2 style="font-size:50px;max-width:16ch">Right here, so you don't have to email anyone.</h2>
+    <p style="font-size:19px;color:#3D5A62;line-height:1.65">Delivery to your resort is included, there's no minimum and no setup fee. It gets a little cheaper per bag as the order grows, because drawing it and driving it out cost the same for twelve bags or sixty.</p>
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:400px;padding-top:4px">
+      <div style="display:flex;justify-content:space-between;align-items:center;background:#FFF7EA;border-radius:16px;padding:16px 22px"><span style="color:#3D5A62">12–24 bags</span><b style="font-family:'Young Serif',Georgia,serif;font-size:23px">$31</b></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;background:#FFF7EA;border-radius:16px;padding:16px 22px"><span style="color:#3D5A62">25–49 bags</span><b style="font-family:'Young Serif',Georgia,serif;font-size:23px">$26</b></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;background:#FFF7EA;border-radius:16px;padding:16px 22px"><span style="color:#3D5A62">50 and up</span><b style="font-family:'Young Serif',Georgia,serif;font-size:23px">$23</b></div>
+    </div>
+  </div>
+
+  <div style="background:#08414C;border-radius:32px;padding:48px;display:flex;flex-direction:column;gap:24px;color:#FBEFDD">
+    <span class="lbl" style="color:#FFC24A">How many bags?</span>
+    <div style="display:flex;gap:12px">
+      <sc-for list="{{options}}" as="opt" hint-placeholder-count="3">
+        <button onClick="{{opt.pick}}" style="{{opt.style}}">{{opt.label}}</button>
+      </sc-for>
+    </div>
+    <p style="font-size:16px;color:#8FB8C0;line-height:1.6">Most couples order one for each room — about half the guest list.</p>
+    <div style="border-top:1px solid #185C69;padding-top:24px;display:flex;flex-direction:column;gap:8px">
+      <div style="font-family:'Young Serif',Georgia,serif;font-size:74px;line-height:1;color:#FFC24A">{{total}}</div>
+      <span style="font-size:16px;color:#8FB8C0">{{bags}} bags · {{unit}} each · delivered</span>
+    </div>
+    <p style="font-size:16px;color:#CFEAEE;line-height:1.6">Half to hold your date, the rest when we hand them over.</p>
+    <a href="#ask" class="btn" style="justify-content:center">Get this made</a>
+  </div>
+</div>
+
+<!-- ── VI. US ── -->
+<div id="studio" style="background:#FFF7EA">
+  <div class="act" style="padding-top:100px;padding-bottom:100px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:80px;align-items:center">
+    <div class="arch" style="height:520px;background:#F0E2CB;display:flex;align-items:flex-end;padding:24px">
+      <span style="font-size:14px;color:#8A7C66;letter-spacing:.06em">Photograph — the two of them working, hands in frame</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <span class="lbl" style="color:#0E7C86">Puerto Morelos, Quintana Roo</span>
+      <h2 style="font-size:52px;max-width:15ch">Two sisters, one room, one wedding a week.</h2>
+      <p style="font-size:19px;color:#3D5A62;line-height:1.65">The people who cut and press your bags are the same two who answer your messages. We take one wedding a week — and when a week is full we say so early, instead of taking the order and hoping.</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:8px">
+        <div style="background:#2FB6C0;border-radius:22px;padding:22px 28px;min-width:150px"><div style="font-family:'Young Serif',Georgia,serif;font-size:38px;line-height:1;color:#0C3B41">20 min</div><div style="font-size:15px;color:#0C3B41;margin-top:6px">from your venue</div></div>
+        <div style="background:#FF6B4A;border-radius:22px;padding:22px 28px;min-width:150px"><div style="font-family:'Young Serif',Georgia,serif;font-size:38px;line-height:1;color:#4A1B0E">10 days</div><div style="font-size:15px;color:#4A1B0E;margin-top:6px">to change your count</div></div>
+        <div style="background:#FFC24A;border-radius:22px;padding:22px 28px;min-width:150px"><div style="font-family:'Young Serif',Georgia,serif;font-size:38px;line-height:1;color:#4A3E1E">1</div><div style="font-size:15px;color:#4A3E1E;margin-top:6px">wedding a week</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VII. QUESTIONS ── -->
+<div class="act" style="padding-top:100px;padding-bottom:96px">
+  <h2 style="font-size:46px;max-width:18ch;margin-bottom:50px">Things people ask us</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px">
+    <div style="background:#FFF7EA;border-radius:24px;padding:34px">
+      <h3 style="font-size:24px;margin-bottom:10px">Could we just order these online?</h3>
+      <p style="font-size:17px;color:#3D5A62;line-height:1.65">You could, and for some weddings that's the right call. Once you add the printed bits from a second shop, a checked bag to bring it all down and an evening putting them together in your room, it usually lands within a few dollars of ours — with your count fixed weeks earlier.</p>
+    </div>
+    <div style="background:#FFF7EA;border-radius:24px;padding:34px">
+      <h3 style="font-size:24px;margin-bottom:10px">Is there a minimum?</h3>
+      <p style="font-size:17px;color:#3D5A62;line-height:1.65">None. Twelve bags or a hundred and twenty. Under twenty-five is a little more each, because drawing it is the same work either way.</p>
+    </div>
+    <div style="background:#FFF7EA;border-radius:24px;padding:34px">
+      <h3 style="font-size:24px;margin-bottom:10px">How late is too late?</h3>
+      <p style="font-size:17px;color:#3D5A62;line-height:1.65">Four to six weeks is comfy, and we've done ten days more than once. Ask even if you're sure you've left it too long.</p>
+    </div>
+    <div style="background:#FFF7EA;border-radius:24px;padding:34px">
+      <h3 style="font-size:24px;margin-bottom:10px">Who puts them in the rooms?</h3>
+      <p style="font-size:17px;color:#3D5A62;line-height:1.65">The hotel does, at check-in. A few resorts charge a small fee per bag for that, and we'll tell you if yours is one of them.</p>
+    </div>
+    <div style="background:#FFF7EA;border-radius:24px;padding:34px">
+      <h3 style="font-size:24px;margin-bottom:10px">Can you match our colours?</h3>
+      <p style="font-size:17px;color:#3D5A62;line-height:1.65">Send the palette from your invitations, or just a photo of the fabric. You'll see it on the drawing before anything is cut.</p>
+    </div>
+    <div style="background:#FFF7EA;border-radius:24px;padding:34px">
+      <h3 style="font-size:24px;margin-bottom:10px">Where do you deliver?</h3>
+      <p style="font-size:17px;color:#3D5A62;line-height:1.65">Puerto Morelos, Cancún, Playa Mujeres, Playa del Carmen, Xcaret, Akumal and Tulum. We don't ship anywhere at all — if your wedding is elsewhere we'll say so straight away.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIII. SAY HI ── -->
+<div id="ask" style="background:#08414C;color:#FBEFDD">
+  <div class="act" style="padding-top:110px;padding-bottom:110px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px">
+    <svg width="72" height="72" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <path d="M8 39 V13 C8 10.8 9.8 9 12 9 H36 C38.2 9 40 10.8 40 13 V30 C40 32.2 38.2 34 36 34 H17 Z" stroke="#FFC24A" stroke-width="2.6" stroke-linejoin="round"/>
+      <circle cx="18" cy="21.5" r="2.4" fill="#FF6B4A"/><circle cx="24" cy="21.5" r="2.4" fill="#FF6B4A"/><circle cx="30" cy="21.5" r="2.4" fill="#FF6B4A"/>
+    </svg>
+    <h2 style="font-size:60px;color:#FFF7EA;max-width:17ch">Send us a message and tell us the date.</h2>
+    <p style="font-size:20px;color:#A9CBD1;max-width:54ch;line-height:1.7">No forms, no call, no sequence of emails. Write to us the way you'd write to a friend — the date, the venue, roughly how many bags — and one of us answers with a picture of your bag, usually the same afternoon.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;padding-top:10px">
+      <a href="#" class="btn" style="font-size:19px;padding:22px 40px">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19.5V6.5C4 5.4 4.9 4.5 6 4.5H18C19.1 4.5 20 5.4 20 6.5V15C20 16.1 19.1 17 18 17H8.5L4 19.5Z" stroke="#16323A" stroke-width="2" stroke-linejoin="round"/></svg>
+        WhatsApp us
+      </a>
+      <a href="#" style="border:1.5px solid #2FB6C0;border-radius:999px;padding:22px 40px;font-weight:600;font-size:19px;color:#CFEAEE">Or find us on Instagram</a>
+    </div>
+    <span style="font-size:16px;color:#7FB0B8;padding-top:6px">[WHATSAPP NUMBER] · [@INSTAGRAM]</span>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="act" style="padding-top:40px;padding-bottom:48px;display:flex;justify-content:space-between;align-items:center">
+  <div style="font-family:'Young Serif',Georgia,serif;font-size:21px">Riviera Made</div>
+  <span style="font-size:15px;color:#5C7A82">Puerto Morelos, Quintana Roo · rivieramade.com</span>
+  <a href="#" style="font-weight:600;color:#0E7C86">For wedding planners →</a>
+</div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { bags: 30 };
+  }
+  unitFor(n) {
+    if (n >= 50) return 23;
+    if (n >= 25) return 26;
+    return 31;
+  }
+  renderVals() {
+    const bags = this.state.bags;
+    const unit = this.unitFor(bags);
+    const base = "font-family:inherit;font-size:17px;font-weight:600;padding:15px 26px;border-radius:999px;cursor:pointer;";
+    const options = [20, 30, 60].map((n) => {
+      const on = n === bags;
+      return {
+        label: String(n),
+        pick: () => this.setState({ bags: n }),
+        style: on
+          ? base + 'border:1.5px solid #FFC24A;background:#FFC24A;color:#16323A;'
+          : base + 'border:1.5px solid #2FB6C0;background:transparent;color:#CFEAEE;'
+      };
+    });
+    return {
+      options: options,
+      bags: String(bags),
+      unit: '$' + unit,
+      total: '$' + (unit * bags).toLocaleString('en-US')
+    };
+  }
+}
+</script>
+</body>
+</html>

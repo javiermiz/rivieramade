@@ -1,0 +1,29 @@
+---
+import { deliversTo, contact } from '../config';
+---
+<footer class="act foot">
+  <span class="foot__word">riviera made</span>
+  <span class="cap foot__area">{deliversTo.join(' · ')}</span>
+  <a class="cap foot__mail" href={`mailto:${contact.email}`}>{contact.email}</a>
+</footer>
+
+<style>
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 50px;
+    padding-top: 60px;
+    padding-bottom: 66px;
+  }
+  .foot__word {
+    font-size: 15px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .foot__mail { color: var(--ochre); }
+  @media (max-width: 980px) {
+    .foot { flex-direction: column; gap: 16px; align-items: flex-start; }
+  }
+</style>

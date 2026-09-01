@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600&display=swap">
+  <style>
+    body{margin:0;background:#FBEFDD;color:#16323A;font-family:Figtree,'Helvetica Neue',Arial,sans-serif;font-size:17px;line-height:1.65}
+    *{box-sizing:border-box}
+    a{color:#0E7C86}
+    p{margin:0}
+    h1,h2,h3{margin:0;font-family:'Young Serif',Georgia,serif;font-weight:400;letter-spacing:-0.01em;line-height:1.12;text-wrap:balance}
+    .wrap{padding:64px 72px;display:flex;flex-direction:column;gap:52px}
+    .lbl{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+    .card{background:#FFF7EA;border-radius:24px;padding:28px}
+  </style>
+</helmet>
+
+<div class="wrap">
+
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <span class="lbl" style="color:#0E7C86">Riviera Made · design system, third direction</span>
+    <h1 style="font-size:54px;max-width:20ch">Caribbean, cute, and high contrast.</h1>
+    <p style="font-size:19px;color:#3D5A62;max-width:66ch">Two earlier tries were wrong in opposite directions. The print-shop one read as workwear; the quiet one read as an art gallery and needed photographs it does not have. This one is warm, sunny and friendly — the register a couple planning a beach wedding actually wants — with enough contrast that it never turns into pastel mush.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+    <div class="card"><h3 style="font-size:23px;margin-bottom:8px">One product</h3><p style="font-size:16px;color:#3D5A62;line-height:1.6">The welcome bag. Not four pieces listed like a catalogue — one bag, and a sentence about what is inside it. Every page says the same thing.</p></div>
+    <div class="card"><h3 style="font-size:23px;margin-bottom:8px">No forms</h3><p style="font-size:16px;color:#3D5A62;line-height:1.6">Every call to action opens WhatsApp. It is how the studio already works, it needs no server, and a message gets answered faster than a form ever would.</p></div>
+    <div class="card"><h3 style="font-size:23px;margin-bottom:8px">Contrast on purpose</h3><p style="font-size:16px;color:#3D5A62;line-height:1.6">Dark teal grounds under bright shapes, and dark ink text on every bright fill. Nothing light-on-light, nothing that goes grey in the sun.</p></div>
+  </div>
+
+  <div style="height:1px;background:#E8D6BC"></div>
+
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <h2 style="font-size:32px">Colour</h2>
+    <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px">
+      <div><div style="height:110px;background:#FBEFDD;border-radius:18px;border:1px solid #E8D6BC"></div><div class="lbl" style="margin-top:10px;font-size:12px">Sand</div><div style="font-size:13px;color:#5C7A82">#FBEFDD</div></div>
+      <div><div style="height:110px;background:#FFF7EA;border-radius:18px;border:1px solid #E8D6BC"></div><div class="lbl" style="margin-top:10px;font-size:12px">Shell</div><div style="font-size:13px;color:#5C7A82">#FFF7EA</div></div>
+      <div><div style="height:110px;background:#08414C;border-radius:18px"></div><div class="lbl" style="margin-top:10px;font-size:12px">Deep sea</div><div style="font-size:13px;color:#5C7A82">#08414C</div></div>
+      <div><div style="height:110px;background:#2FB6C0;border-radius:18px"></div><div class="lbl" style="margin-top:10px;font-size:12px">Water</div><div style="font-size:13px;color:#5C7A82">#2FB6C0</div></div>
+      <div><div style="height:110px;background:#FF6B4A;border-radius:18px"></div><div class="lbl" style="margin-top:10px;font-size:12px">Coral</div><div style="font-size:13px;color:#5C7A82">#FF6B4A</div></div>
+      <div><div style="height:110px;background:#FFC24A;border-radius:18px"></div><div class="lbl" style="margin-top:10px;font-size:12px">Sun</div><div style="font-size:13px;color:#5C7A82">#FFC24A</div></div>
+    </div>
+    <p style="font-size:16.5px;color:#3D5A62;max-width:74ch"><b>The contrast rule:</b> text is always ink #16323A on the bright colours, and sand on deep sea. Never white on coral, never coral on sand as text, never two brights touching without ink between them. That single rule is what keeps it cheerful instead of childish.</p>
+  </div>
+
+  <div style="height:1px;background:#E8D6BC"></div>
+
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <h2 style="font-size:32px">Type and shape</h2>
+    <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:36px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div><span class="lbl" style="color:#5C7A82">Young Serif · headlines, sentence case</span><div style="font-family:'Young Serif',Georgia,serif;font-size:46px;line-height:1.1;margin-top:8px">The nicest thing waiting in their room.</div></div>
+        <div><span class="lbl" style="color:#5C7A82">Figtree 400 · body, 56ch</span><p style="font-size:18px;color:#3D5A62;margin-top:8px;max-width:56ch">One bag, made by hand twenty minutes from your venue, and carried to your resort three days before you marry.</p></div>
+        <div><span class="lbl" style="color:#5C7A82">Figtree 600 · 13px · 0.14em · labels</span><div class="lbl" style="color:#0E7C86;margin-top:8px">We make one thing</div></div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:14px">
+        <span class="lbl" style="color:#0E7C86">Shapes</span>
+        <div style="display:flex;gap:12px;align-items:flex-end">
+          <div style="width:70px;height:96px;background:#2FB6C0;border-radius:999px 999px 20px 20px"></div>
+          <div style="width:70px;height:70px;background:#FF6B4A;border-radius:22px"></div>
+          <div style="height:44px;padding:0 22px;background:#FFC24A;border-radius:999px;display:flex;align-items:center;font-weight:600">Pill</div>
+        </div>
+        <p style="font-size:16px;color:#3D5A62;line-height:1.6">The <b>arch</b> holds every photograph — a doorway, which is what this coast is built out of. Cards are softly rounded, buttons are full pills. Nothing is a sharp rectangle and nothing is a plain rounded box with a coloured bar down the side.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:1px;background:#E8D6BC"></div>
+
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <h2 style="font-size:32px">Voice</h2>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px">
+      <div class="card" style="display:flex;flex-direction:column;gap:14px">
+        <span class="lbl" style="color:#0E7C86">How it sounds</span>
+        <p style="font-size:16.5px;color:#3D5A62;line-height:1.7">Warm and plain, like a message from someone you like. Contractions are fine. Say the useful thing and stop. "No catalogue, no upsells, no packages with silly names." "We'll draw your bag and send it to you."</p>
+        <p style="font-size:16.5px;color:#3D5A62;line-height:1.7">The most expensive-sounding fact is true and stays: <b>one wedding a week</b>.</p>
+      </div>
+      <div style="background:#08414C;border-radius:24px;padding:28px;color:#FBEFDD;display:flex;flex-direction:column;gap:12px">
+        <span class="lbl" style="color:#FFC24A">Never written</span>
+        <p style="font-size:16.5px;line-height:1.8;color:#A9CBD1">Welcome to · Crafted with love · Elevate your · Unforgettable memories · Your special day · Luxury · Bespoke · Premium · Get started · Learn more · Discover · Curated · Seamless · Don't miss out</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

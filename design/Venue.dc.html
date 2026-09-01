@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600&display=swap">
+  <style>
+    body{margin:0;background:#FBEFDD;color:#16323A;font-family:Figtree,'Helvetica Neue',Arial,sans-serif;font-size:18px;line-height:1.65}
+    *{box-sizing:border-box}
+    a{color:#16323A;text-decoration:none}
+    a:hover{color:#0E7C86}
+    p{margin:0;max-width:56ch}
+    h1,h2,h3{margin:0;font-family:'Young Serif',Georgia,serif;font-weight:400;letter-spacing:-0.01em;text-wrap:balance;line-height:1.1}
+    .act{padding-left:104px;padding-right:104px}
+    .btn{display:inline-flex;align-items:center;gap:12px;background:#FF6B4A;color:#16323A;padding:19px 32px;border-radius:999px;font-weight:600;font-size:17px}
+    .btn:hover{background:#FF5733;color:#16323A}
+    .arch{border-radius:999px 999px 24px 24px;overflow:hidden}
+    .lbl{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+    .slot{color:#C4441E}
+  </style>
+</helmet>
+
+<div>
+
+<div class="act" style="display:flex;align-items:center;justify-content:space-between;padding-top:26px;padding-bottom:26px">
+  <div style="font-family:'Young Serif',Georgia,serif;font-size:25px">Riviera Made</div>
+  <a href="#ask" class="btn" style="padding:13px 24px;font-size:15px">Say hi on WhatsApp</a>
+</div>
+
+<div class="act" style="padding-bottom:18px">
+  <div style="background:#FFE9D4;border-radius:16px;padding:14px 22px;font-size:14px;color:#8A5A12">
+    <b>Template</b> — one page per venue. Only the bracketed lines change. Acamaya first, then Dreams, Secrets, Xcaret, Playa Mujeres.
+  </div>
+</div>
+
+<div class="act" style="display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:70px;align-items:center;padding-top:36px;padding-bottom:84px">
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <span class="lbl" style="color:#0E7C86">Welcome bags · <span class="slot">[Venue]</span></span>
+    <h1 style="font-size:64px">Welcome bags for weddings at <span class="slot">[Venue]</span>.</h1>
+    <p style="font-size:20px;color:#3D5A62;line-height:1.6">We're <span class="slot">[X]</span> minutes from <span class="slot">[Venue]</span>. Your bags are made here and handed to the front desk three days before the wedding — nothing shipped, nothing through customs, and your count is due ten days out.</p>
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <a href="#ask" class="btn">Send us a message</a>
+      <span style="font-size:16px;color:#5C7A82">From $23 a bag, delivered</span>
+    </div>
+  </div>
+  <div class="arch" style="height:500px;background:#08414C;display:flex;align-items:flex-end;padding:24px">
+    <span style="font-size:14px;color:#7FB0B8;letter-spacing:.06em">Photograph — bags at [venue], or the drive there at dawn</span>
+  </div>
+</div>
+
+<div style="background:#08414C;color:#FBEFDD">
+  <div class="act" style="padding-top:90px;padding-bottom:90px">
+    <h2 style="font-size:46px;color:#FFF7EA;max-width:24ch;margin-bottom:44px">What we already know about <span style="color:#FFC24A">[Venue]</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px">
+      <div style="background:#0B5460;border-radius:24px;padding:30px">
+        <div style="font-family:'Young Serif',Georgia,serif;font-size:38px;line-height:1;color:#FFC24A">[X] min</div>
+        <div style="font-size:15px;color:#A9CBD1;margin-top:10px">from the studio</div>
+        <p style="font-size:16px;color:#7FB0B8;margin-top:12px;line-height:1.55">We've made this drive [N] times.</p>
+      </div>
+      <div style="background:#0B5460;border-radius:24px;padding:30px">
+        <div style="font-family:'Young Serif',Georgia,serif;font-size:38px;line-height:1;color:#FFC24A">[Desk]</div>
+        <div style="font-size:15px;color:#A9CBD1;margin-top:10px">where bags are left</div>
+        <p style="font-size:16px;color:#7FB0B8;margin-top:12px;line-height:1.55">[Any access rule this venue keeps.]</p>
+      </div>
+      <div style="background:#0B5460;border-radius:24px;padding:30px">
+        <div style="font-family:'Young Serif',Georgia,serif;font-size:38px;line-height:1;color:#FFC24A">[$X]</div>
+        <div style="font-size:15px;color:#A9CBD1;margin-top:10px">room placement fee</div>
+        <p style="font-size:16px;color:#7FB0B8;margin-top:12px;line-height:1.55">Charged by the resort, never by us.</p>
+      </div>
+      <div style="background:#0B5460;border-radius:24px;padding:30px">
+        <div style="font-family:'Young Serif',Georgia,serif;font-size:38px;line-height:1;color:#FFC24A">[N]</div>
+        <div style="font-size:15px;color:#A9CBD1;margin-top:10px">bags, a typical wedding here</div>
+        <p style="font-size:16px;color:#7FB0B8;margin-top:12px;line-height:1.55">About [$N] at that size.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="act" style="padding-top:90px;padding-bottom:90px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:70px;align-items:center">
+  <div class="arch" style="height:460px;background:#F0E2CB;display:flex;align-items:flex-end;padding:24px">
+    <span style="font-size:14px;color:#8A7C66;letter-spacing:.06em">Photograph — the bag, close, on linen</span>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <span class="lbl" style="color:#0E7C86">We make one thing</span>
+    <h2 style="font-size:48px;max-width:16ch">The welcome bag. That's it.</h2>
+    <p style="font-size:19px;color:#3D5A62;line-height:1.65">A cotton tote with your names and your date, and inside: the weekend printed on a card, two bottle labels and a luggage tag. Assembled here, so nothing lands in your suitcase.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;padding-top:4px">
+      <div style="background:#2FB6C0;border-radius:20px;padding:20px 26px"><div style="font-family:'Young Serif',Georgia,serif;font-size:32px;line-height:1;color:#0C3B41">$26</div><div style="font-size:14px;color:#0C3B41;margin-top:5px">a bag at thirty</div></div>
+      <div style="background:#FF6B4A;border-radius:20px;padding:20px 26px"><div style="font-family:'Young Serif',Georgia,serif;font-size:32px;line-height:1;color:#4A1B0E">3 days</div><div style="font-size:14px;color:#4A1B0E;margin-top:5px">before the wedding</div></div>
+    </div>
+  </div>
+</div>
+
+<div style="background:#FFF7EA">
+  <div class="act" style="padding-top:90px;padding-bottom:90px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:70px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <span class="lbl" style="color:#0E7C86">A wedding here</span>
+      <h2 style="font-size:42px"><span class="slot">[Couple]</span>, <span class="slot">[month year]</span></h2>
+      <p style="font-size:18px;color:#3D5A62;line-height:1.65">[One paragraph: how many bags, the colours, one true detail about the delivery. Written after the wedding, never before it.]</p>
+      <p style="font-size:20px;line-height:1.6;background:#FFE9D4;border-radius:20px;padding:24px;max-width:46ch">"[Their words, once there are some.]"</p>
+    </div>
+    <div class="arch" style="height:400px;background:#F0E2CB;display:flex;align-items:flex-end;padding:24px">
+      <span style="font-size:14px;color:#8A7C66;letter-spacing:.06em">Photograph from that wedding — stays offline until it exists</span>
+    </div>
+  </div>
+</div>
+
+<div id="ask" style="background:#08414C;color:#FBEFDD">
+  <div class="act" style="padding-top:100px;padding-bottom:100px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px">
+    <h2 style="font-size:56px;color:#FFF7EA;max-width:20ch">Marrying at <span style="color:#FFC24A">[Venue]</span>?</h2>
+    <p style="font-size:19px;color:#A9CBD1;max-width:54ch;line-height:1.7">Send us the date and your colours. Within a day you'll have a picture of your own bag — free, and yours to keep even if you go somewhere else.</p>
+    <a href="#" class="btn" style="margin-top:8px;font-size:18px;padding:21px 38px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19.5V6.5C4 5.4 4.9 4.5 6 4.5H18C19.1 4.5 20 5.4 20 6.5V15C20 16.1 19.1 17 18 17H8.5L4 19.5Z" stroke="#16323A" stroke-width="2" stroke-linejoin="round"/></svg>
+      WhatsApp us
+    </a>
+    <span style="font-size:15px;color:#7FB0B8;padding-top:8px">Riviera Made · Puerto Morelos · [WHATSAPP NUMBER]</span>
+  </div>
+</div>
+
+</div>
+</x-dc>
+</body>
+</html>

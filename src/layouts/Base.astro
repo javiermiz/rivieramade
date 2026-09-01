@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import { site } from '../config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  path = '/',
+} = Astro.props;
+
+const canonical = new URL(path, Astro.site ?? `https://${site.domain}`).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@300;400;500&display=swap"
+    />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'LocalBusiness',
+        name: site.name,
+        description: site.description,
+        url: `https://${site.domain}`,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Puerto Morelos',
+          addressRegion: 'Quintana Roo',
+          addressCountry: 'MX',
+        },
+        areaServed: [
+          'Puerto Morelos',
+          'Cancún',
+          'Playa Mujeres',
+          'Playa del Carmen',
+          'Akumal',
+          'Tulum',
+        ],
+      })}
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
