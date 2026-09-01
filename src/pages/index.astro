@@ -29,14 +29,18 @@ const contents = [
   { n: 'III', label: 'What it costs', href: '#price' },
   { n: 'IV', label: 'How to begin', href: '#write' },
 ];
+
+const deliveryLine = `We deliver to ${deliversTo
+  .slice(0, -1)
+  .join(', ')} and ${deliversTo.at(-1)} — and we do not ship anywhere at all.`;
 ---
 
 <Base>
   <Nav />
 
   <!-- ── I. Hero ─────────────────────────────────────────────── -->
-  <section class="act hero">
-    <div class="hero__grid">
+  <section class="section hero">
+    <div class="container hero__grid">
       <div class="hero__text">
         <span class="cap rise" style="animation-delay:.05s">Welcome bags · Riviera Maya</span>
         <h1 class="rise" style="animation-delay:.14s">
@@ -52,31 +56,33 @@ const contents = [
           <span class="hero__note">A drawing of your bag comes back the same day</span>
         </div>
       </div>
-      <div class="rise" style="animation-delay:.2s"><ArchWindow /></div>
+      <div class="hero__window rise" style="animation-delay:.2s"><ArchWindow /></div>
     </div>
   </section>
 
   <!-- ── Contents ────────────────────────────────────────────── -->
-  <section class="act contents">
-    <hr class="rule" />
-    <ol class="contents__list">
-      {
-        contents.map((item) => (
-          <li>
-            <a href={item.href}>
-              <span class="num">{item.n}</span>
-              <span class="contents__label">{item.label}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ol>
+  <section class="section contents">
+    <div class="container">
+      <hr class="rule" />
+      <ol class="contents__list">
+        {
+          contents.map((item) => (
+            <li>
+              <a href={item.href}>
+                <span class="num">{item.n}</span>
+                <span class="contents__label">{item.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
   </section>
 
   <!-- ── II. The bag ─────────────────────────────────────────── -->
-  <section id="bag" class="bag">
-    <div class="bag__grid">
-      <figure class="bag__shot">
+  <section id="bag" class="section bag">
+    <div class="bleed bag__grid">
+      <figure class="well arch bag__shot">
         <figcaption class="cap">Photograph — the bag, on the bed, at check-in</figcaption>
       </figure>
       <div class="bag__text">
@@ -103,8 +109,8 @@ const contents = [
   </section>
 
   <!-- ── Pull quote ──────────────────────────────────────────── -->
-  <section class="quote">
-    <div class="act quote__inner">
+  <section class="section quote">
+    <div class="container quote__inner">
       <Wave />
       <h2><i>One wedding a week</i> — so yours is the only one on the table.</h2>
       <p>
@@ -115,53 +121,55 @@ const contents = [
   </section>
 
   <!-- ── III. What we take off your hands ────────────────────── -->
-  <section id="care" class="act care">
-    <div class="eyebrow">
-      <span class="num">II</span><span class="cap">What we take off your hands</span>
+  <section id="care" class="section care">
+    <div class="container">
+      <div class="eyebrow care__head">
+        <span class="num">II</span><span class="cap">What we take off your hands</span>
+      </div>
+      <dl class="care__list">
+        {
+          care.map((item) => (
+            <div class="care__row">
+              <dt><h3>{item.title}</h3></dt>
+              <dd>{item.body}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
-    <dl class="care__list">
-      {
-        care.map((item) => (
-          <div class="care__row">
-            <dt><h3>{item.title}</h3></dt>
-            <dd>{item.body}</dd>
-          </div>
-        ))
-      }
-    </dl>
   </section>
 
   <!-- ── IV. Price ───────────────────────────────────────────── -->
-  <section id="price" class="act price">
-    <div class="price__text">
-      <div class="eyebrow"><span class="num">III</span><span class="cap">What it costs</span></div>
-      <h2>Published, so you needn't ask.</h2>
-      <p>
-        Delivery to your resort is included, there is no minimum and no setup fee. It
-        eases as the order grows, because drawing it and driving it out cost the same
-        for twelve bags or for sixty.
-      </p>
-      <p class="price__where">
-        {`We deliver to ${deliversTo.slice(0, -1).join(', ')} and ${deliversTo.at(-1)} — and we do not ship anywhere at all.`}
-      </p>
-    </div>
-    <div class="price__table">
-      {
-        tiers.map((tier) => (
-          <div class="price__row">
-            <span class="cap price__band">{tier.label}</span>
-            <span class="price__figure">${tier.price}</span>
-          </div>
-        ))
-      }
-      <span class="cap price__foot">
-        USD per bag, delivered · half holds your date, the rest on handover
-      </span>
+  <section id="price" class="section price">
+    <div class="container price__grid">
+      <div class="price__text">
+        <div class="eyebrow"><span class="num">III</span><span class="cap">What it costs</span></div>
+        <h2>Published, so you needn't ask.</h2>
+        <p>
+          Delivery to your resort is included, there is no minimum and no setup fee. It
+          eases as the order grows, because drawing it and driving it out cost the same
+          for twelve bags or for sixty.
+        </p>
+        <p class="price__where">{deliveryLine}</p>
+      </div>
+      <div class="price__table">
+        {
+          tiers.map((tier) => (
+            <div class="price__row">
+              <span class="cap price__band">{tier.label}</span>
+              <span class="price__figure">${tier.price}</span>
+            </div>
+          ))
+        }
+        <span class="cap price__foot">
+          USD per bag, delivered · half holds your date, the rest on handover
+        </span>
+      </div>
     </div>
   </section>
 
   <!-- ── V. The letter ───────────────────────────────────────── -->
-  <section id="write" class="write">
+  <section id="write" class="section write">
     <svg class="write__branch" width="360" height="440" viewBox="0 0 360 440" aria-hidden="true">
       <g stroke="#c98a4b" stroke-width="1.1" fill="none" stroke-linecap="round">
         <path d="M186 440 C176 350 168 274 156 210"></path>
@@ -172,7 +180,7 @@ const contents = [
       </g>
     </svg>
 
-    <div class="act write__grid">
+    <div class="container write__grid">
       <div class="write__text">
         <div class="eyebrow">
           <span class="num">IV</span><span class="cap write__cap">How to begin</span>
@@ -211,204 +219,170 @@ const contents = [
 </Base>
 
 <style>
-  .eyebrow {
-    display: flex;
-    align-items: baseline;
-    gap: 18px;
-  }
+  /* Sections own vertical rhythm; containers own the gutter. Nothing below
+     sets a height, and the breakpoints reassign properties rather than
+     restating rules. */
 
   /* ── hero ─────────────────────────────────────────────────── */
-  .hero {
-    padding-top: 76px;
-    padding-bottom: 64px;
-  }
   .hero__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
-    gap: 76px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xl);
     align-items: end;
   }
   .hero__text {
     display: flex;
     flex-direction: column;
-    gap: 38px;
+    gap: var(--sp-lg);
   }
   .hero h1 {
-    font-size: clamp(52px, 7.4vw, 112px);
+    font-size: clamp(46px, 7.4vw, 112px);
     max-width: 12ch;
   }
   .hero h1 i {
-    color: var(--sea);
+    color: var(--c-sea);
   }
   .hero__lede {
-    font-size: 21px;
-    color: var(--muted);
+    font-size: 18.5px;
+    color: var(--c-body);
     line-height: 1.7;
   }
   .hero__cta {
     display: flex;
-    align-items: center;
-    gap: 28px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: var(--sp-xs);
+    text-align: center;
   }
   .hero__note {
-    font-size: 16.5px;
-    color: var(--quiet);
+    font-size: 16px;
+    color: var(--c-quiet);
   }
 
   /* ── contents ─────────────────────────────────────────────── */
-  .contents {
-    padding-top: 26px;
-    padding-bottom: var(--section);
-  }
   .contents__list {
-    list-style: none;
-    margin: 26px 0 0;
-    padding: 0;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 36px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-xs);
+    margin-top: var(--sp-md);
   }
   .contents__list a {
     display: flex;
-    gap: 16px;
+    gap: var(--sp-xs);
     align-items: baseline;
-    color: var(--muted);
+    color: var(--c-body);
   }
   .contents__label {
     font-size: 17px;
   }
 
   /* ── the bag ──────────────────────────────────────────────── */
-  .bag {
-    padding-bottom: var(--section);
-  }
   .bag__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    gap: 90px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xl);
     align-items: center;
   }
-  /* deliberately breaks the left margin — the page is otherwise too even */
+  /* The arch escapes the gutter on the left on purpose — the page is
+     otherwise too even. It keeps its own ratio, never a height. */
   .bag__shot {
-    margin: 0;
-    height: 640px;
-    background: var(--mist);
-    border-radius: 0 999px 18px 0;
-    display: flex;
-    align-items: flex-end;
-    padding: 30px;
+    --well-ratio: 5 / 4;
+    background: var(--c-mist);
+    border-radius: 0 260px 18px 0;
+    margin-right: var(--container-pad);
   }
   .bag__text {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    padding-right: var(--gutter);
+    gap: var(--sp-md);
+    padding-inline: var(--container-pad);
   }
   .bag h2 {
-    font-size: clamp(40px, 4.6vw, 68px);
+    font-size: clamp(36px, 4.6vw, 68px);
     max-width: 13ch;
   }
   .bag p {
-    font-size: 19px;
-    color: var(--muted);
+    font-size: 17.5px;
+    color: var(--c-body);
     line-height: 1.85;
   }
   .bag__pills {
-    list-style: none;
-    margin: 8px 0 0;
-    padding: 0;
     display: flex;
-    gap: 12px;
+    gap: var(--sp-2xs);
     flex-wrap: wrap;
+    margin-top: var(--sp-3xs);
   }
 
   /* ── pull quote ───────────────────────────────────────────── */
   .quote {
-    background: var(--sand);
+    background: var(--c-sand);
+    width: 100%;
   }
   .quote__inner {
-    padding-top: 104px;
-    padding-bottom: 104px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 30px;
+    gap: var(--sp-md);
   }
   .quote h2 {
-    font-size: clamp(34px, 4.2vw, 60px);
+    font-size: clamp(32px, 4.2vw, 60px);
     max-width: 22ch;
     line-height: 1.12;
   }
   .quote p {
-    font-size: 18.5px;
+    font-size: 18px;
     color: #6e7b75;
     max-width: 52ch;
   }
 
   /* ── care ─────────────────────────────────────────────────── */
-  .care {
-    padding-top: var(--section);
-    padding-bottom: var(--section);
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
-  }
-  .care__list {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+  .care__head {
+    margin-bottom: var(--sp-lg);
   }
   .care__row {
     display: grid;
-    grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
-    gap: 80px;
-    border-top: 1px solid var(--rule);
-    padding: 40px 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xs);
+    border-top: var(--stroke-hair) solid var(--c-rule);
+    padding-block: var(--sp-lg);
   }
   .care__row:last-child {
-    border-bottom: 1px solid var(--rule);
-  }
-  .care__row dt {
-    margin: 0;
+    border-bottom: var(--stroke-hair) solid var(--c-rule);
   }
   .care__row h3 {
-    font-size: clamp(27px, 2.6vw, 34px);
+    font-size: clamp(26px, 2.6vw, 34px);
     line-height: 1.2;
   }
   .care__row dd {
-    margin: 0;
-    font-size: 19px;
-    color: var(--muted);
+    font-size: 17.5px;
+    color: var(--c-body);
     max-width: 62ch;
     line-height: 1.8;
   }
 
   /* ── price ────────────────────────────────────────────────── */
-  .price {
-    padding-bottom: 130px;
+  .price__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-    gap: 100px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xl);
     align-items: start;
   }
   .price__text {
     display: flex;
     flex-direction: column;
-    gap: 26px;
+    gap: var(--sp-md);
   }
   .price h2 {
-    font-size: clamp(36px, 4vw, 58px);
+    font-size: clamp(34px, 4vw, 58px);
     max-width: 15ch;
   }
   .price p {
-    font-size: 19px;
-    color: var(--muted);
+    font-size: 17.5px;
+    color: var(--c-body);
     line-height: 1.85;
   }
   .price__where {
-    color: var(--quiet);
+    color: var(--c-quiet);
   }
   .price__table {
     display: flex;
@@ -418,29 +392,29 @@ const contents = [
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 20px;
-    border-top: 1px solid var(--rule);
-    padding: 22px 0;
+    gap: var(--sp-md);
+    border-top: var(--stroke-hair) solid var(--c-rule);
+    padding-block: var(--sp-sm);
   }
   .price__row:last-of-type {
-    border-bottom: 1px solid var(--rule);
+    border-bottom: var(--stroke-hair) solid var(--c-rule);
   }
   .price__band {
     color: #6e7b75;
   }
   .price__figure {
-    font-family: var(--serif);
-    font-size: 42px;
+    font-family: var(--f-display);
+    font-size: 34px;
   }
   .price__foot {
-    padding-top: 18px;
+    padding-top: var(--sp-sm);
   }
 
   /* ── the letter ───────────────────────────────────────────── */
   .write {
-    background: var(--ink);
-    color: #dce3df;
-    position: relative;
+    background: var(--c-ink);
+    color: var(--c-ink-fg);
+    width: 100%;
     overflow: hidden;
   }
   .write__branch {
@@ -448,210 +422,184 @@ const contents = [
     left: -60px;
     bottom: -40px;
     opacity: 0.22;
+    display: none;
   }
   .write__grid {
-    padding-top: 130px;
-    padding-bottom: 130px;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-    gap: 90px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xl);
     align-items: center;
     position: relative;
   }
   .write__text {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: var(--sp-md);
     align-items: flex-start;
   }
   .write__cap {
-    color: #7e8c86;
+    color: var(--c-ink-faint);
   }
   .write h2 {
-    font-size: clamp(40px, 5.2vw, 74px);
-    color: #f4f1ea;
+    font-size: clamp(38px, 5.2vw, 74px);
+    color: var(--c-ink-head);
     max-width: 13ch;
   }
   .write p {
-    font-size: 20px;
-    color: #9eaaa4;
+    font-size: 18px;
+    color: var(--c-ink-body);
     line-height: 1.85;
   }
   .write__mail {
-    font-family: var(--serif);
-    font-size: 32px;
-    color: var(--ochre);
+    font-family: var(--f-display);
+    font-size: 24px;
+    color: var(--c-ochre);
     word-break: break-word;
   }
 
   .letter {
-    background: var(--paper);
-    color: var(--ink);
-    padding: 52px 56px;
-    transform: rotate(-0.9deg);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28);
+    background: var(--c-paper);
+    color: var(--c-ink);
+    padding: var(--sp-lg) var(--sp-md);
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: var(--sp-md);
   }
   .letter__head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 18px;
+    border-bottom: var(--stroke-hair) solid var(--c-rule);
+    padding-bottom: var(--sp-sm);
   }
   .letter__to {
     display: flex;
-    gap: 16px;
+    gap: var(--sp-xs);
     align-items: baseline;
     font-size: 16.5px;
   }
   .letter__addr {
-    color: var(--sea);
+    color: var(--c-sea);
     word-break: break-word;
   }
   .letter__body {
-    font-size: 19px;
+    font-size: 17.5px;
     color: #3b4a45;
-    line-height: 2.05;
+    line-height: 1.95;
     max-width: none;
   }
   .blank {
-    border-bottom: 1.5px solid var(--ochre);
+    border-bottom: var(--stroke-blank) solid var(--c-ochre);
     padding-bottom: 2px;
   }
   .letter__foot {
-    border-top: 1px solid var(--rule);
-    padding-top: 20px;
+    border-top: var(--stroke-hair) solid var(--c-rule);
+    padding-top: var(--sp-sm);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    gap: var(--sp-3xs);
     font-size: 16px;
-    color: var(--quiet);
+    color: var(--c-quiet);
   }
   .letter__sign {
-    font-family: var(--serif);
+    font-family: var(--f-display);
     font-style: italic;
     font-size: 23px;
-    color: var(--sea);
+    color: var(--c-sea);
   }
 
-  /* ── responsive ───────────────────────────────────────────── */
-  @media (max-width: 1180px) {
-    .hero__grid,
-    .bag__grid,
-    .write__grid {
-      gap: 52px;
-    }
-    .care__row {
-      gap: 44px;
-    }
-    .price {
-      gap: 56px;
-    }
-    .bag__shot {
-      height: 520px;
-    }
-  }
+  /* ── from here the layout has room: two columns, and a few
+        properties reassigned. No rule is restated. ──────────── */
 
-  @media (max-width: 980px) {
+  @media (min-width: 700px) {
+    .hero__cta {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--sp-lg);
+      text-align: left;
+    }
     .contents__list {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 22px 36px;
+      gap: var(--sp-sm) var(--sp-2xl);
+    }
+    .letter {
+      padding: var(--sp-2xl) var(--sp-3xl);
+    }
+    .letter__foot {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 
-  @media (max-width: 860px) {
-    .hero {
-      padding-top: 34px;
-      padding-bottom: 40px;
-    }
-    .hero__grid,
-    .bag__grid,
-    .price,
-    .write__grid {
-      grid-template-columns: minmax(0, 1fr);
-    }
-    .hero__text {
-      gap: 26px;
+  @media (min-width: 900px) {
+    .hero__grid {
+      grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
+      gap: var(--sp-3xl);
     }
     .hero__lede {
-      font-size: 18.5px;
+      font-size: 21px;
     }
-    .hero__cta {
-      gap: 14px;
-      flex-direction: column;
-      align-items: stretch;
-      text-align: center;
-    }
-    .contents__list {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 14px;
+    .bag__grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: var(--sp-3xl);
     }
     .bag__shot {
-      height: 380px;
-      border-radius: 0 260px 18px 0;
-      padding: 20px;
+      --well-ratio: var(--ratio-shot);
+      border-radius: 0 999px 18px 0;
+      margin-right: 0;
     }
     .bag__text {
-      padding-right: 0;
+      padding-left: 0;
     }
-    .bag p {
-      font-size: 17.5px;
-    }
-    .quote__inner {
-      padding-top: 64px;
-      padding-bottom: 64px;
-      gap: 22px;
-    }
-    .care {
-      gap: 34px;
+    .bag p,
+    .care__row dd,
+    .price p {
+      font-size: 19px;
     }
     .care__row {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 12px;
-      padding: 28px 0;
+      grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+      gap: var(--sp-3xl);
+      padding-block: var(--sp-xl);
     }
-    .care__row dd {
-      font-size: 17.5px;
-    }
-    .price {
-      padding-bottom: 64px;
-    }
-    .price p {
-      font-size: 17.5px;
+    .price__grid,
+    .write__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+      gap: var(--sp-3xl);
     }
     .price__figure {
-      font-size: 34px;
-    }
-    .write__grid {
-      padding-top: 64px;
-      padding-bottom: 64px;
-      gap: 40px;
-    }
-    .write p {
-      font-size: 18px;
-    }
-    .write__mail {
-      font-size: 24px;
+      font-size: 42px;
     }
     .write__branch {
-      display: none;
+      display: block;
+    }
+    .write p {
+      font-size: 20px;
+    }
+    .write__mail {
+      font-size: 32px;
     }
     .letter {
-      padding: 30px 26px;
-      transform: none;
+      transform: rotate(-0.9deg);
+      box-shadow: 0 30px 70px rgb(0 0 0 / 0.28);
     }
     .letter__body {
-      font-size: 17.5px;
-      line-height: 1.95;
+      font-size: 19px;
+      line-height: 2.05;
     }
-    .letter__foot {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
+  }
+
+  @media (min-width: 1280px) {
+    .contents__list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--sp-xl);
+    }
+    .price__grid,
+    .write__grid {
+      gap: var(--sp-4xl);
+    }
+    .bag__grid {
+      gap: var(--sp-4xl);
     }
   }
 </style>

@@ -1,12 +1,14 @@
 ---
 /**
  * The hero window: an arch with a drawn horizon, a sun and two branches.
- * This exists so the page reads as finished before the photographs are taken —
- * a grey placeholder box would read as unfinished, a drawing does not.
+ *
+ * It exists so the page reads as finished before the photographs are taken —
+ * a grey placeholder box reads as unfinished, a drawing does not. It takes its
+ * size from the column and --ratio-window; it never declares a height.
  */
 ---
 
-<div class="arch window">
+<figure class="well arch window">
   <svg viewBox="0 0 360 560" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
     <defs>
       <linearGradient id="isla-sky" x1="0" y1="0" x2="0" y2="1">
@@ -25,7 +27,6 @@
       <path d="M18 362 C80 352 120 372 178 364 C236 356 292 368 342 360"></path>
     </g>
 
-    <!-- sea grape, right -->
     <g stroke="#2a5d53" stroke-width="1.1" fill="none" stroke-linecap="round">
       <path d="M300 560 C296 500 292 452 286 412"></path>
       <path d="M286 424 C266 414 258 396 262 378 C282 380 292 398 290 418"></path>
@@ -33,27 +34,21 @@
       <path d="M294 486 C274 478 264 460 268 442 C288 444 298 462 296 480"></path>
     </g>
 
-    <!-- palm, left -->
     <g stroke="#c98a4b" stroke-width="1" fill="none" stroke-linecap="round">
       <path d="M60 560 C64 512 66 480 62 452"></path>
       <path d="M62 462 C44 452 34 436 38 420 C56 424 66 440 64 456"></path>
       <path d="M66 492 C86 484 96 470 94 454 C76 454 66 470 66 486"></path>
     </g>
   </svg>
-</div>
+</figure>
 
 <style>
   .window {
-    height: 520px;
-    background: var(--sand);
+    --well-ratio: var(--ratio-window);
+    padding: 0;
   }
   .window svg {
     width: 100%;
     height: 100%;
-  }
-  @media (max-width: 860px) {
-    .window {
-      height: 380px;
-    }
   }
 </style>

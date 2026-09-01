@@ -1,31 +1,99 @@
-/* ── Riviera Made — "Isla" ──────────────────────────────────────────────
-   Serene and editorial. The grain is what stops the flat colours from
-   reading as a template; the line drawings are what let the page look
-   finished before the photographs exist.
-   ───────────────────────────────────────────────────────────────────── */
+/* ============================================================
+   RIVIERA MADE — foundation
+   Direction: "Isla" · desktop 1440px · mobile 375px
+
+   Layout convention: section > container > content.
+     section    owns vertical rhythm (padding-block, stack gap)
+     container  owns the horizontal gutter and the max width
+     content    sizes itself; nothing declares a height
+
+   Everything tunable lives in a custom property, and breakpoints
+   mostly just reassign those properties rather than restate rules.
+   ============================================================ */
 
 :root {
-  --paper: #f6f3ec;
-  --sand: #e7decd;
-  --shell: #efdcd0;
-  --mist: #dce5e0;
-  --ink: #1f2b27;
-  --sea: #2a5d53;
-  --ochre: #c98a4b;
-  --muted: #4e5c57;
-  --quiet: #7c8a84;
-  --faint: #8a968f;
-  --rule: #e0d9cb;
+  /* --- Colour --- */
+  --c-paper: #f6f3ec;
+  --c-sand: #e7decd;
+  --c-shell: #efdcd0;
+  --c-mist: #dce5e0;
+  --c-ink: #1f2b27;
+  --c-sea: #2a5d53;
+  --c-ochre: #c98a4b;
 
-  --serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-  --sans: Jost, 'Helvetica Neue', Arial, sans-serif;
+  --c-body: #4e5c57;
+  --c-quiet: #7c8a84;
+  --c-faint: #8a968f;
+  --c-rule: #e0d9cb;
 
-  --gutter: 124px;
-  --section: 120px;
+  /* On the ink section only. */
+  --c-ink-fg: #dce3df;
+  --c-ink-head: #f4f1ea;
+  --c-ink-body: #9eaaa4;
+  --c-ink-faint: #7e8c86;
+
+  /* --- Type --- */
+  --f-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --f-body: Jost, 'Helvetica Neue', Arial, sans-serif;
+
+  /* --- Layout ---
+     The container caps at the design width so ultra-wide screens centre the
+     content instead of stretching it edge to edge. Raise --container-max to
+     let the layout breathe wider. */
+  --container-max: 1440px;
+  --container-pad: 26px;
+  --section-py: 64px;
+  --section-gap: 34px;
+
+  /* --- Spacing scale, taken from the rhythm the design actually uses --- */
+  --sp-3xs: 6px;
+  --sp-2xs: 10px;
+  --sp-xs: 14px;
+  --sp-sm: 18px;
+  --sp-md: 22px;
+  --sp-lg: 30px;
+  --sp-xl: 38px;
+  --sp-2xl: 52px;
+  --sp-3xl: 76px;
+  --sp-4xl: 100px;
+
+  /* --- Media wells ---
+     Ratios, never heights: the well takes its size from the column it sits in. */
+  --ratio-window: 3 / 4;
+  --ratio-shot: 4 / 5;
+
+  /* --- Strokes --- */
+  --stroke-hair: 1px;
+  --stroke-blank: 1.5px;
+
+  /* --- Motion --- */
+  --ease-out: cubic-bezier(0.22, 0.7, 0.3, 1);
+  --m-rise: 1s;
 
   /* Paper grain. Cheap, and the single biggest lift in the whole stylesheet. */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
 }
+
+@media (min-width: 900px) {
+  :root {
+    --container-pad: 64px;
+    --section-py: 92px;
+    --section-gap: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --container-pad: 124px;
+    --section-py: 120px;
+    --section-gap: 60px;
+    --ratio-window: 4 / 5;
+  }
+}
+
+/* ============================================================
+   Reset
+   ============================================================ */
 
 *,
 *::before,
@@ -39,141 +107,247 @@ html {
 
 body {
   margin: 0;
-  background-color: var(--paper);
+  background-color: var(--c-paper);
   background-image: var(--grain);
-  color: var(--ink);
-  font-family: var(--sans);
+  color: var(--c-ink);
+  font-family: var(--f-body);
   font-weight: 300;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-img {
+@media (min-width: 900px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+img,
+svg {
   display: block;
   max-width: 100%;
 }
 
-p {
+h1,
+h2,
+h3,
+p,
+figure,
+dl,
+dd {
   margin: 0;
-  max-width: 54ch;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 h1,
 h2,
 h3 {
-  margin: 0;
-  font-family: var(--serif);
+  font-family: var(--f-display);
   font-weight: 400;
   line-height: 1.02;
   letter-spacing: -0.012em;
   text-wrap: balance;
 }
 
+p {
+  max-width: 54ch;
+}
+
 a {
-  color: var(--sea);
+  color: var(--c-sea);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--ochre);
+  color: var(--c-ochre);
 }
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--ochre);
+  outline: 2px solid var(--c-ochre);
   outline-offset: 4px;
 }
 
-/* ── shared pieces ─────────────────────────────────────────────────── */
+/* ============================================================
+   Layout primitives
+   ============================================================ */
 
-.act {
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
+/* Vertical rhythm only. Children are either a .container or full-bleed. */
+.section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--section-gap);
+  padding-block: var(--section-py);
 }
 
+/* Horizontal gutter and max width only. Never sets a height.
+   A section that needs a different gutter or a different cap overrides
+   --container-pad / --container-max on its own container, and sets the value
+   back to `unset` at the next breakpoint to inherit the theme default again. */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* For content that must reach the viewport edge (the arch that breaks the
+   margin, a full-width rule). */
+.bleed {
+  width: 100%;
+  max-width: none;
+  padding-inline: 0;
+}
+
+/* The art reaches the section's top and bottom edges, so the vertical inset
+   moves onto the content and the section itself keeps none. */
+.section--flush {
+  padding-block: 0;
+}
+
+/* A measure narrower than the container it sits in, for copy columns that the
+   design insets further than the section gutter. */
+.measure {
+  width: 100%;
+  max-width: var(--measure, none);
+  margin-inline: auto;
+}
+
+/* A media well: takes its size from its column and its ratio, never a height. */
+.well {
+  background: var(--c-sand);
+  aspect-ratio: var(--well-ratio, var(--ratio-shot));
+  display: flex;
+  align-items: flex-end;
+  padding: var(--sp-md);
+  overflow: hidden;
+}
+
+.arch {
+  border-radius: 999px 999px 18px 18px;
+}
+
+/* ============================================================
+   Type and marks
+   ============================================================ */
+
 .cap {
-  font-family: var(--sans);
+  font-family: var(--f-body);
   font-weight: 400;
   font-size: 11.5px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   line-height: 2;
-  color: var(--faint);
+  color: var(--c-faint);
 }
 
 .num {
-  font-family: var(--serif);
+  font-family: var(--f-display);
   font-size: 15px;
   letter-spacing: 0.24em;
-  color: var(--ochre);
+  color: var(--c-ochre);
 }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  background: var(--ink);
-  color: var(--paper);
-  padding: 21px 40px;
-  border-radius: 999px;
-  font-family: var(--sans);
-  font-weight: 400;
-  font-size: 13px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  min-height: 56px;
-  transition: background 0.25s ease;
-}
-
-.btn:hover {
-  background: var(--sea);
-  color: var(--paper);
-}
-
-.btn--light {
-  background: #f4f1ea;
-  color: var(--ink);
-}
-
-.btn--light:hover {
-  background: var(--ochre);
-  color: var(--ink);
-}
-
-.arch {
-  border-radius: 999px 999px 18px 18px;
-  overflow: hidden;
-  position: relative;
+.eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-sm);
 }
 
 .rule {
-  height: 1px;
-  background: var(--rule);
+  height: var(--stroke-hair);
+  background: var(--c-rule);
   border: 0;
-  margin: 0;
 }
 
 .drop::first-letter {
-  font-family: var(--serif);
-  font-size: 76px;
+  font-family: var(--f-display);
+  font-size: 58px;
   line-height: 0.78;
   float: left;
-  padding: 8px 14px 0 0;
-  color: var(--sea);
+  padding: 6px 11px 0 0;
+  color: var(--c-sea);
+}
+
+@media (min-width: 900px) {
+  .drop::first-letter {
+    font-size: 76px;
+    padding: 8px 14px 0 0;
+  }
 }
 
 .pill {
-  border: 1px solid #ddd6c8;
+  border: var(--stroke-hair) solid #ddd6c8;
   border-radius: 999px;
   padding: 9px 18px;
   color: #5e6b65;
 }
 
-/* One orchestrated entrance, and nothing else. */
+/* ============================================================
+   Controls
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-xs);
+  background: var(--c-ink);
+  color: var(--c-paper);
+  padding: 21px 40px;
+  border-radius: 999px;
+  font-family: var(--f-body);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  min-height: 56px;
+  transition: background 0.25s var(--ease-out);
+}
+
+.btn:hover {
+  background: var(--c-sea);
+  color: var(--c-paper);
+}
+
+.btn--light {
+  background: var(--c-ink-head);
+  color: var(--c-ink);
+}
+
+.btn--light:hover {
+  background: var(--c-ochre);
+  color: var(--c-ink);
+}
+
+/* Full width where it is the only thing on the line, natural width once
+   there is room beside it. */
+.btn {
+  width: 100%;
+}
+
+@media (min-width: 700px) {
+  .btn {
+    width: auto;
+  }
+}
+
+/* ============================================================
+   Motion — one orchestrated entrance, and nothing else
+   ============================================================ */
+
 .rise {
-  animation: rise 1s cubic-bezier(0.22, 0.7, 0.3, 1) both;
+  animation: rise var(--m-rise) var(--ease-out) both;
 }
 
 @keyframes rise {
@@ -193,40 +367,5 @@ button:focus-visible {
   }
   html {
     scroll-behavior: auto;
-  }
-}
-
-/* ── responsive ────────────────────────────────────────────────────── */
-
-@media (max-width: 1180px) {
-  :root {
-    --gutter: 64px;
-    --section: 90px;
-  }
-}
-
-@media (max-width: 860px) {
-  :root {
-    --gutter: 26px;
-    --section: 64px;
-  }
-
-  body {
-    font-size: 17px;
-  }
-
-  .drop::first-letter {
-    font-size: 58px;
-    padding-right: 11px;
-  }
-
-  .btn {
-    width: 100%;
-    justify-content: center;
-    padding: 20px 28px;
-  }
-
-  .btn--inline {
-    width: auto;
   }
 }
