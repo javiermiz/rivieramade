@@ -36,10 +36,10 @@ The five images on the page are **placeholders**, in `src/assets/`:
 They are cropped at their source's own size and never upscaled; `Shot` takes a
 `widths` prop for exactly that reason.
 
-**The shot still missing:** the four pieces laid out together — the tote, the
-weekend card, the two bottle labels and the luggage tag. The page promises them
-in a sentence and no photograph shows them. That one picture would do more for
-the product than any of the five already there.
+**The shot still missing:** one bag with everything that comes in it visible —
+the card, the labels and the tag sitting in the open tote. Not four items in a
+row: we sell the bag, and those are what is inside it. The page says so in a
+sentence and no photograph backs it, which is the one picture worth taking next.
 
 They are mockups, not our work: the bag reads *Olivia & Jackson, Cancún*. Swap
 both for real photographs of a real order before the site is promoted anywhere —
