@@ -1,0 +1,44 @@
+---
+/**
+ * A photograph in a well: the column and the ratio give it its size, never a
+ * height. Astro serves the responsive srcset and the modern format.
+ *
+ * The images in src/assets are placeholders until the studio's own
+ * photographs exist — see the README.
+ */
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  /** Above the fold, so the hero opts out of lazy loading. */
+  eager?: boolean;
+  class?: string;
+}
+
+const { src, alt, eager = false, class: klass = '' } = Astro.props;
+---
+
+<figure class:list={['well', 'shot', klass]}>
+  <Image
+    src={src}
+    alt={alt}
+    widths={[420, 700, 1000]}
+    sizes="(min-width: 900px) 46vw, 100vw"
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : 'auto'}
+    decoding="async"
+  />
+</figure>
+
+<style>
+  .shot {
+    padding: 0;
+  }
+
+  .shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

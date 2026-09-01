@@ -2,7 +2,9 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import ArchWindow from '../components/ArchWindow.astro';
+import Shot from '../components/Shot.astro';
+import toteBeach from '../assets/tote-beach.jpg';
+import totePrint from '../assets/tote-print.jpg';
 import Wave from '../components/Wave.astro';
 import PriceEstimator from '../components/PriceEstimator.astro';
 import { contact, mailto, deliversTo } from '../config';
@@ -48,16 +50,25 @@ const deliveryLine = `We deliver to ${deliversTo
           <span class="hero__note">A drawing of your bag comes back the same day</span>
         </div>
       </div>
-      <div class="hero__window rise" style="animation-delay:.2s"><ArchWindow /></div>
+      <div class="hero__window rise" style="animation-delay:.2s">
+        <Shot
+          class="arch"
+          src={toteBeach}
+          alt="A cotton welcome tote printed with a couple's names, standing on the sand at sunset"
+          eager
+        />
+      </div>
     </div>
   </section>
 
   <!-- ── II. The bag ─────────────────────────────────────────── -->
   <section id="bag" class="section bag">
     <div class="bleed bag__grid">
-      <figure class="well arch bag__shot">
-        <figcaption class="cap">Photograph — the bag, on the bed, at check-in</figcaption>
-      </figure>
+      <Shot
+        class="arch bag__shot"
+        src={totePrint}
+        alt="Close up of the printing on the canvas: the couple's names, the date and the town"
+      />
       <div class="bag__text">
         <h2>The welcome bag. Nothing else.</h2>
         <p>
@@ -177,6 +188,10 @@ const deliveryLine = `We deliver to ${deliversTo
      restating rules. */
 
   /* ── hero ─────────────────────────────────────────────────── */
+  .hero__window :global(.shot) {
+    --well-ratio: var(--ratio-window);
+  }
+
   .hero__grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr);

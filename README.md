@@ -25,15 +25,24 @@ Everything that changes without touching the design lives in
 - `pricing` — $31 / $26 / $23 per bag. Change here, the page follows.
 - `deliversTo` — the delivery area, also printed into the page copy.
 
-## The two photographs
+## The photographs
 
-`.bag__shot` in `src/pages/index.astro` and the hero window are still drawings
-and tone fields. Two real photographs finish the page:
+The two images on the page are **placeholders**, in `src/assets/`:
 
-1. The bag on linen, from above, morning light.
-2. The bag on a bed at check-in.
+- `tote-beach.jpg` — the hero.
+- `tote-print.jpg` — the close-up of the printing.
 
-Everything else on the page is real and can ship as it is.
+They are mockups, not our work: the bag reads *Olivia & Jackson, Cancún*. Swap
+both for real photographs of a real order before the site is promoted anywhere —
+same filenames and nothing else changes. Astro handles the sizes and formats.
+
+A third placeholder sits in `design/placeholders/tote-evening.jpg` and is
+deliberately **not** on the page: the bag in it says Charleston, South Carolina,
+which contradicts the one thing this site promises.
+
+One rule that outlives the placeholders: these are product shots and belong
+where the bag is described. Nothing may present them as a wedding we delivered —
+that section stays offline until there is a real delivery to photograph.
 
 ## Why the page is built this way
 
