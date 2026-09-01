@@ -18,7 +18,8 @@ const initialTotal = initial * initialTier.price;
 ---
 
 <div class="est" data-est>
-  <div class="est__ask">
+  <div class="est__controls">
+    <div class="est__ask">
     <label class="est__label" for="bags">How many bags?</label>
     <div class="est__field">
       <button type="button" class="est__step" data-step="-5" aria-label="Five fewer bags">–</button>
@@ -38,28 +39,30 @@ const initialTotal = initial * initialTier.price;
     </div>
   </div>
 
-  <ul class="est__quick" aria-label="Common counts">
-    {
-      quickCounts.map((n) => (
-        <li>
-          <button
-            type="button"
-            class="est__chip"
-            data-quick={n}
-            aria-pressed={n === initial ? 'true' : 'false'}
-          >
-            {n}
-          </button>
-        </li>
-      ))
-    }
-  </ul>
+    <ul class="est__quick" aria-label="Common counts">
+      {
+        quickCounts.map((n) => (
+          <li>
+            <button
+              type="button"
+              class="est__chip"
+              data-quick={n}
+              aria-pressed={n === initial ? 'true' : 'false'}
+            >
+              {n}
+            </button>
+          </li>
+        ))
+      }
+    </ul>
 
-  <p class="est__hint">
-    Most couples order one bag per room — roughly half the guest list.
-  </p>
+    <p class="est__hint">
+      Most couples order one bag per room — roughly half the guest list.
+    </p>
+  </div>
 
-  <div class="est__out">
+  <div class="est__result">
+    <div class="est__out">
     <div class="est__total">
       <span class="est__figure" data-total>${initialTotal.toLocaleString('en-US')}</span>
       <span class="est__unit">
@@ -69,14 +72,15 @@ const initialTotal = initial * initialTier.price;
     <p class="est__note" data-note>Delivery to your resort included. Half holds your date, the rest on handover.</p>
   </div>
 
-  <a class="btn est__cta" href={mailtoFor(initial)} data-cta>
-    Write to us with these numbers
-  </a>
+    <a class="btn est__cta" href={mailtoFor(initial)} data-cta>
+      Write to us with these numbers
+    </a>
 
-  <p class="est__more">
-    A number that isn't here — eighty, a hundred and twenty? Type it in. We price
-    every size the same day.
-  </p>
+    <p class="est__more">
+      A number that isn't here — eighty, a hundred and twenty? Type it in. We
+      price every size the same day.
+    </p>
+  </div>
 
   <table class="est__tiers">
     <caption class="cap">Price per bag, delivered</caption>
@@ -160,12 +164,19 @@ const initialTotal = initial * initialTier.price;
 
 <style>
   .est {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--sp-md);
     background: var(--c-paper);
     border: var(--stroke-hair) solid var(--c-rule);
     padding: var(--sp-lg) var(--sp-md);
+  }
+
+  .est__controls,
+  .est__result {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-md);
   }
 
   .est__ask {
@@ -349,6 +360,27 @@ const initialTotal = initial * initialTier.price;
     .est__cta {
       width: auto;
       align-self: flex-start;
+    }
+  }
+
+  /* Wide enough to split: what you choose on the left, what it costs on the
+     right, and the bands underneath spanning both. */
+  @media (min-width: 900px) {
+    .est {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: var(--sp-3xl);
+      padding: var(--sp-xl);
+    }
+    .est__result {
+      justify-content: center;
+      gap: var(--sp-lg);
+    }
+    .est__out {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .est__tiers {
+      grid-column: 1 / -1;
     }
   }
 </style>
