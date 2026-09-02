@@ -8,6 +8,7 @@ import toteLinen from '../assets/tote-linen.jpg';
 import toteInks from '../assets/tote-inks.jpg';
 import toteInside from '../assets/tote-inside.jpg';
 import totePrint from '../assets/tote-print.jpg';
+import studio from '../assets/studio.jpg';
 import Wave from '../components/Wave.astro';
 import PriceEstimator from '../components/PriceEstimator.astro';
 import { contact, mailto, deliversTo } from '../config';
@@ -114,13 +115,23 @@ const deliveryLine = `We deliver to ${deliversTo
 
   <!-- ── Pull quote ──────────────────────────────────────────── -->
   <section class="section quote">
-    <div class="container quote__inner reveal">
-      <Wave />
-      <h2><i>One wedding a week</i> — so yours is the only one on the table.</h2>
-      <p>
-        Two sisters, one room in Puerto Morelos, twenty minutes from most of the
-        resorts on this coast.
-      </p>
+    <div class="container quote__grid">
+      <Shot
+        class="arch quote__shot reveal"
+        src={studio}
+        alt="The two sisters who run Riviera Made, at the work table in the studio in Puerto Morelos"
+        widths={[420, 900]}
+        sizes="(min-width: 900px) 38vw, 100vw"
+      />
+      <div class="quote__inner reveal">
+        <Wave />
+        <h2><i>One wedding a week</i> — so yours is the only one on the table.</h2>
+        <p>
+          Two sisters, one room in Puerto Morelos, twenty minutes from most of the
+          resorts on this coast. Your bags are cut, pressed and packed by the two
+          of us, and driven out by the two of us.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -336,12 +347,22 @@ const deliveryLine = `We deliver to ${deliversTo
     background: var(--c-sand);
     width: 100%;
   }
+  .quote__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-xl);
+    align-items: center;
+  }
   .quote__inner {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: var(--sp-md);
+  }
+  .quote__grid :global(.quote__shot) {
+    --well-ratio: 1 / 1;
+    background: var(--c-mist);
   }
   .quote h2 {
     font-size: clamp(32px, 4.2vw, 60px);
@@ -534,6 +555,14 @@ const deliveryLine = `We deliver to ${deliversTo
     }
     .hero__lede {
       font-size: 21px;
+    }
+    .quote__grid {
+      grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
+      gap: var(--sp-3xl);
+    }
+    .quote__inner {
+      align-items: flex-start;
+      text-align: left;
     }
     .bag__grid {
       grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);

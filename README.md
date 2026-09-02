@@ -27,31 +27,47 @@ Everything that changes without touching the design lives in
 
 ## The photographs
 
-The five images on the page are **placeholders**, in `src/assets/`:
+Every image in `src/assets/` is a **placeholder**. They are cropped at their
+source's own size and never upscaled; `Shot` takes a `widths` prop for exactly
+that reason.
 
-- `tote-beach.jpg` — the hero.
-- `tote-palm.jpg` — beside the copy about the bag.
-- `tote-flat.jpg`, `tote-inside.jpg`, `tote-print.jpg` — the three plates.
+| File | Where |
+| --- | --- |
+| `tote-beach.jpg` | the hero, and the hero of every town and venue page |
+| `tote-linen.jpg` | beside the copy about the bag |
+| `tote-inks.jpg`, `tote-inside.jpg`, `tote-print.jpg` | the three plates |
+| `studio.jpg` | beside the pull quote — **see the warning below** |
 
-They are cropped at their source's own size and never upscaled; `Shot` takes a
-`widths` prop for exactly that reason.
+The bags in them read *Olivia & Jackson, Cancún* and other names that are not
+anyone's. They are mockups. Swap them for photographs of a real order before
+the site is promoted anywhere — same filenames, nothing else changes.
+
+### `studio.jpg` is not like the others, and must not ship
+
+It is a generated image of two women, standing in for the two sisters who
+actually run this. It sits under a sentence that says *"Two sisters, one room
+in Puerto Morelos"*, so a visitor reads it as a photograph of them.
+
+A generated product shot is a render, and nobody is misled by one. A generated
+founder is a different thing: this site asks a couple in another country to
+send a deposit to two people they have never met, and the faces are the reason
+they believe there are two people. Invented faces put the whole page's
+credibility on something that would collapse the moment anyone noticed.
+
+It is here to build the layout against, and it is the one placeholder that
+**cannot go live**. Replace it with a real photograph — the two of them at the
+work table, faces visible, taken on a phone by a window — before the site is
+shown to anybody. If neither wants to be photographed, hands at work plus their
+first names is the fallback, and it is still better than a stranger's face.
 
 **The shot still missing:** one bag with everything that comes in it visible —
-the card, the labels and the tag sitting in the open tote. Not four items in a
-row: we sell the bag, and those are what is inside it. The page says so in a
-sentence and no photograph backs it, which is the one picture worth taking next.
+the card, the labels and the tag sitting in the open tote. The page says so in
+a sentence and no photograph backs it.
 
-They are mockups, not our work: the bag reads *Olivia & Jackson, Cancún*. Swap
-both for real photographs of a real order before the site is promoted anywhere —
-same filenames and nothing else changes. Astro handles the sizes and formats.
-
-A third placeholder sits in `design/placeholders/tote-evening.jpg` and is
-deliberately **not** on the page: the bag in it says Charleston, South Carolina,
-which contradicts the one thing this site promises.
-
-One rule that outlives the placeholders: these are product shots and belong
-where the bag is described. Nothing may present them as a wedding we delivered —
-that section stays offline until there is a real delivery to photograph.
+One rule that outlives the placeholders: the tote images are product shots and
+belong where the bag is described. Nothing may present them as a wedding we
+delivered — that section stays offline until there is a real delivery to
+photograph.
 
 ## Pages
 
