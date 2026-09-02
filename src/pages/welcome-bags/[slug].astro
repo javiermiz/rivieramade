@@ -10,8 +10,10 @@ import Footer from '../../components/Footer.astro';
 import Shot from '../../components/Shot.astro';
 import Wave from '../../components/Wave.astro';
 import toteBeach from '../../assets/tote-beach.jpg';
-import { towns, venuesInTown, type Town } from '../../data/towns';
-import { contact, site, origin, pricing, tierFor } from '../../config';
+import toteLinen from '../../assets/tote-linen.jpg';
+import CoastMap from '../../components/CoastMap.astro';
+import { towns, type Town } from '../../data/towns';
+import { contact, site, origin, pricing } from '../../config';
 
 export function getStaticPaths() {
   return towns.map((town) => ({ params: { slug: town.slug }, props: { town } }));
@@ -22,7 +24,6 @@ interface Props {
 }
 
 const { town } = Astro.props;
-const here = venuesInTown(town);
 const low = Math.min(...pricing.map((t) => t.price));
 
 /** Until one is driven, every number on the page hedges the same way. */
@@ -154,36 +155,28 @@ const schemaNodes = [
           pressed by the two of us, for your wedding and no one else's.
         </p>
         <p class="bag__price">
-          From ${low} a bag, delivered — the whole scale is on the
-          <a href="/#price">price page</a>, and the rest is answered in the
+          From ${low} a bag, delivered — the whole scale is on the{' '}
+          <a href="/#price">price page</a>, and the rest is answered in the{' '}
           <a href="/faq">questions</a>.
         </p>
       </div>
+
+      <Shot
+        class="arch bag__shot"
+        src={toteLinen}
+        alt="A printed cotton welcome tote lying on cream linen, its names and date facing up"
+        widths={[440, 900]}
+      />
     </div>
   </section>
 
-  {
-    here.length > 0 && (
-      <section class="section venues">
-        <div class="container venues__inner">
-          <Wave />
-          <h2>Venues we deliver to in {town.name}</h2>
-          <ul class="venues__list">
-            {here.map((v) => (
-              <li>
-                <a href={`/venues/${v.slug}`}>{v.name}</a>
-              </li>
-            ))}
-          </ul>
-          <p class="venues__note">
-            Not the full list, and not a list of places that recommend us — just
-            the ones we have written a page for. If yours is missing we very
-            probably still drive there.
-          </p>
-        </div>
-      </section>
-    )
-  }
+  <section class="section map">
+    <div class="container map__inner">
+      <Wave />
+      <h2>Where {town.name} sits on the road</h2>
+      <CoastMap current={town.slug} />
+    </div>
+  </section>
 
   <section class="section ask">
     <div class="container ask__inner">
@@ -280,11 +273,20 @@ const schemaNodes = [
     max-width: 56ch;
   }
 
+  .bag__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-xl);
+    align-items: center;
+  }
   .bag__text {
     display: flex;
     flex-direction: column;
     gap: var(--sp-md);
-    max-width: 60ch;
+  }
+  .bag__grid :global(.bag__shot) {
+    --well-ratio: 1 / 1;
+    border-radius: 999px 999px 18px 18px;
   }
   .bag h2 {
     font-size: clamp(32px, 4vw, 54px);
@@ -299,41 +301,20 @@ const schemaNodes = [
     border-bottom: var(--stroke-hair) solid var(--c-rule);
   }
 
-  .venues__inner {
+  .map {
+    background: var(--c-sand);
+    width: 100%;
+  }
+  .map__inner {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: var(--sp-lg);
+  }
+  .map h2 {
+    font-size: clamp(26px, 3.2vw, 40px);
     text-align: center;
-    gap: var(--sp-md);
-  }
-  .venues h2 {
-    font-size: clamp(28px, 3.2vw, 42px);
     max-width: 22ch;
-  }
-  .venues__list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--sp-2xs) var(--sp-md);
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .venues__list a {
-    font-family: var(--f-display);
-    font-size: 20px;
-    color: var(--c-ink);
-    border-bottom: var(--stroke-hair) solid var(--c-rule);
-    padding-bottom: 2px;
-  }
-  .venues__list a:hover {
-    border-bottom-color: var(--c-ochre);
-  }
-  .venues__note {
-    font-size: 15px;
-    color: var(--c-faint);
-    max-width: 52ch;
-    line-height: 1.65;
   }
 
   .ask {
@@ -375,6 +356,10 @@ const schemaNodes = [
     .facts__grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: var(--sp-xl);
+    }
+    .bag__grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: var(--sp-3xl);
     }
   }
 </style>

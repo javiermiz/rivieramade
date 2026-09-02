@@ -80,9 +80,7 @@ const byTown = towns.map((town) => ({
               <dd>
                 <ul class="towns__venues">
                   {list.map((v) => (
-                    <li>
-                      <a href={`/venues/${v.slug}`}>{v.name}</a>
-                    </li>
+                    <li>{v.name}</li>
                   ))}
                 </ul>
               </dd>
@@ -160,15 +158,12 @@ const byTown = towns.map((town) => ({
     padding: 0;
     margin: 0;
   }
-  .towns__venues a {
+  /* Names, not links. Their own pages wait on facts only the hotel can give
+     us, and a page that is not ready is not worth a click. */
+  .towns__venues li {
     font-family: var(--f-display);
     font-size: 20px;
-    color: var(--c-ink);
-    border-bottom: var(--stroke-hair) solid var(--c-rule);
-    padding-bottom: 2px;
-  }
-  .towns__venues a:hover {
-    border-bottom-color: var(--c-ochre);
+    color: var(--c-quiet);
   }
   .head__note {
     font-size: 16px;

@@ -1,0 +1,144 @@
+---
+/**
+ * The coast as one line, with the studio on it and the town you are reading
+ * about marked. It is drawn here rather than embedded from a map service on
+ * purpose: an iframe from Google would load a third party into a page whose
+ * privacy notice says nothing loads from anyone else, and it would look like
+ * every other supplier's contact page. A line and seven dots says the only
+ * thing worth saying — that this is one road, and we drive all of it.
+ *
+ * Positions are the real distances along the coast, so the picture is honest
+ * about which drives are long.
+ */
+import { towns } from '../data/towns';
+
+interface Props {
+  /** The town to mark. Omit for a plain map of the whole run. */
+  current?: string;
+}
+
+const { current } = Astro.props;
+
+const ordered = [...towns].sort((a, b) => a.coastKm - b.coastKm);
+const first = ordered[0].coastKm;
+const last = ordered.at(-1)!.coastKm;
+const span = last - first;
+
+const PAD = 74;
+const W = 900;
+const y = 96;
+
+const at = (coastKm: number) => PAD + ((coastKm - first) / span) * (W - PAD * 2);
+
+/** Alternating sides keep seven labels from colliding on a narrow screen. */
+const points = ordered.map((town, i) => ({
+  town,
+  x: at(town.coastKm),
+  above: i % 2 === 0,
+  isCurrent: town.slug === current,
+  isStudio: town.slug === 'puerto-morelos',
+}));
+---
+
+<figure class="coast">
+  <svg viewBox="0 0 900 192" role="img" aria-label={`The coast we drive, from ${ordered[0].name} to ${ordered.at(-1)!.name}`}>
+    <!-- The road, north to south. -->
+    <path
+      d={`M ${PAD - 34} ${y + 10} C ${W * 0.3} ${y - 14}, ${W * 0.6} ${y + 16}, ${W - PAD + 34} ${y - 8}`}
+      fill="none"
+      stroke="var(--c-rule)"
+      stroke-width="2"
+      stroke-linecap="round"
+    ></path>
+
+    {
+      points.map(({ town, x, above, isCurrent, isStudio }) => (
+        <g>
+          <line
+            x1={x}
+            y1={y + 4}
+            x2={x}
+            y2={above ? y - 22 : y + 30}
+            stroke={isCurrent ? 'var(--c-ochre)' : 'var(--c-rule)'}
+            stroke-width="1"
+          />
+          <circle
+            cx={x}
+            cy={y + 2}
+            r={isCurrent ? 7 : 4}
+            fill={isCurrent ? 'var(--c-ochre)' : isStudio ? 'var(--c-sea)' : 'var(--c-paper)'}
+            stroke={isStudio && !isCurrent ? 'var(--c-sea)' : isCurrent ? 'var(--c-ochre)' : 'var(--c-quiet)'}
+            stroke-width="1.6"
+          />
+          <text
+            x={x}
+            y={above ? y - 32 : y + 48}
+            text-anchor="middle"
+            class:list={['coast__name', isCurrent && 'is-current']}
+          >
+            {town.name}
+          </text>
+          <text x={x} y={above ? y - 32 - 17 : y + 48 + 17} text-anchor="middle" class="coast__min">
+            {town.measured ? '' : '~'}
+            {town.minutes} min
+          </text>
+        </g>
+      ))
+    }
+  </svg>
+  <figcaption class="cap">
+    One road, and we drive all of it. The studio is in Puerto Morelos.
+  </figcaption>
+</figure>
+
+<style>
+  .coast {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-xs);
+  }
+  .coast svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .coast__name {
+    font-family: var(--f-display);
+    font-size: 19px;
+    fill: var(--c-ink);
+  }
+  .coast__name.is-current {
+    fill: var(--c-ochre);
+  }
+  .coast__min {
+    font-family: var(--f-body);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    fill: var(--c-faint);
+  }
+  .coast figcaption {
+    color: var(--c-faint);
+    text-align: center;
+  }
+
+  /* Seven names do not fit across a phone. Let it scroll rather than shrink
+     the type into decoration. */
+  @media (max-width: 780px) {
+    .coast {
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .coast::-webkit-scrollbar {
+      display: none;
+    }
+    .coast svg {
+      width: 780px;
+      flex: 0 0 auto;
+    }
+    .coast figcaption {
+      position: sticky;
+      left: 0;
+    }
+  }
+</style>
