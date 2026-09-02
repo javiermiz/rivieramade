@@ -1,0 +1,380 @@
+---
+/**
+ * The town page. This is the one that can go live today, because everything on
+ * it is ours to know: how far it is, what the road is like, and what we do
+ * when we get there. Nothing here waits on a resort answering an email.
+ */
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Shot from '../../components/Shot.astro';
+import Wave from '../../components/Wave.astro';
+import toteBeach from '../../assets/tote-beach.jpg';
+import { towns, venuesInTown, type Town } from '../../data/towns';
+import { contact, site, origin, pricing, tierFor } from '../../config';
+
+export function getStaticPaths() {
+  return towns.map((town) => ({ params: { slug: town.slug }, props: { town } }));
+}
+
+interface Props {
+  town: Town;
+}
+
+const { town } = Astro.props;
+const here = venuesInTown(town);
+const low = Math.min(...pricing.map((t) => t.price));
+
+/** Until one is driven, every number on the page hedges the same way. */
+const drive = town.measured ? `${town.minutes} minutes` : `about ${town.minutes} minutes`;
+
+const url = `${origin}/welcome-bags/${town.slug}`;
+
+const townMailto = `mailto:${contact.email}?subject=${encodeURIComponent(
+  `Welcome bags — ${town.name}`,
+)}&body=${encodeURIComponent(
+  `Hello —
+
+We're marrying in ${town.name} on [date] and would like about [number] welcome bags.
+Our venue is [venue] and our colours are [colours].
+
+Could you send us a drawing?
+
+Thank you,
+[names]`,
+)}`;
+
+const facts = [
+  { figure: drive.replace('about ', '~'), label: 'from the studio', note: 'We make the drive ourselves, every time.' },
+  { figure: `${town.km} km`, label: 'down the road', note: 'By road. Nothing we make is ever flown or shipped.' },
+  { figure: '3 days', label: 'before the wedding', note: 'Assembled, and handed over against a signed receipt.' },
+  { figure: `$${low}+`, label: 'a bag, delivered', note: `The price eases as the order grows. Twelve bags is where we start.` },
+];
+
+const schemaNodes = [
+  {
+    '@type': 'BreadcrumbList',
+    '@id': `${url}/#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Riviera Made', item: `${origin}/` },
+      { '@type': 'ListItem', position: 2, name: 'Where we deliver', item: `${origin}/venues/` },
+      { '@type': 'ListItem', position: 3, name: town.name },
+    ],
+  },
+  {
+    '@type': 'Service',
+    '@id': `${url}/#service`,
+    name: `Wedding welcome bags delivered in ${town.name}`,
+    serviceType: 'Wedding welcome bags, made and delivered',
+    provider: { '@id': `${origin}/#studio` },
+    areaServed: { '@type': 'City', name: `${town.name}, Quintana Roo, Mexico` },
+    offers: {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'USD',
+      lowPrice: low,
+      highPrice: Math.max(...pricing.map((t) => t.price)),
+      availability: 'https://schema.org/InStock',
+      seller: { '@id': `${origin}/#studio` },
+    },
+  },
+];
+---
+
+<Base
+  title={`Wedding Welcome Bags in ${town.name} | ${site.name}`}
+  description={`Welcome bags for weddings in ${town.name}, made by hand in Puerto Morelos and driven to your venue three days before you marry. ${drive} away, nothing shipped, from $${low} a bag.`}
+  path={`/welcome-bags/${town.slug}`}
+  schemaNodes={schemaNodes}
+>
+  <Nav />
+
+  <section class="section hero">
+    <div class="container hero__grid">
+      <div class="hero__text">
+        <span class="cap">Welcome bags · {town.name}</span>
+        <h1>Welcome bags for weddings in {town.name}.</h1>
+        <p class="hero__lede">
+          Made by hand in Puerto Morelos, {drive} from you, and carried to your
+          venue three days before the wedding. Nothing crosses a border, nothing
+          is shipped, and you carry none of it yourself.
+        </p>
+        <div class="hero__cta">
+          <a href={townMailto} class="btn">Write to us</a>
+          <span class="hero__note">A drawing of your bag comes back the same day</span>
+        </div>
+      </div>
+      <div class="hero__window">
+        <Shot
+          class="arch"
+          src={toteBeach}
+          alt={`A printed cotton welcome tote on the sand near ${town.name}`}
+          widths={[420, 700, 941]}
+          eager
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section facts">
+    <div class="container">
+      <h2 class="facts__head">Getting them to {town.name}</h2>
+      <dl class="facts__grid">
+        {
+          facts.map((fact) => (
+            <div class="facts__cell reveal">
+              <dt class="facts__figure">{fact.figure}</dt>
+              <dd>
+                <span class="cap">{fact.label}</span>
+                <p>{fact.note}</p>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="facts__road reveal">{town.road}</p>
+      {town.note && <p class="facts__road reveal">{town.note}</p>}
+      {
+        !town.measured && (
+          <p class="facts__hedge">
+            The drive is an estimate from the map until we have timed it with a car
+            full of bags. We would rather say so than round it in our favour.
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section bag">
+    <div class="container bag__grid">
+      <div class="bag__text reveal">
+        <h2>The welcome bag. Nothing else.</h2>
+        <p>
+          A cotton tote carrying your names and your date, and inside it the
+          weekend printed on a card, two bottle labels and a luggage tag. Cut and
+          pressed by the two of us, for your wedding and no one else's.
+        </p>
+        <p class="bag__price">
+          From ${low} a bag, delivered — the whole scale is on the
+          <a href="/#price">price page</a>, and the rest is answered in the
+          <a href="/faq">questions</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {
+    here.length > 0 && (
+      <section class="section venues">
+        <div class="container venues__inner">
+          <Wave />
+          <h2>Venues we deliver to in {town.name}</h2>
+          <ul class="venues__list">
+            {here.map((v) => (
+              <li>
+                <a href={`/venues/${v.slug}`}>{v.name}</a>
+              </li>
+            ))}
+          </ul>
+          <p class="venues__note">
+            Not the full list, and not a list of places that recommend us — just
+            the ones we have written a page for. If yours is missing we very
+            probably still drive there.
+          </p>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section ask">
+    <div class="container ask__inner">
+      <h2>Marrying in {town.name}?</h2>
+      <p>
+        Send the date and your colours. Within a day you will have a picture of
+        your own bag — at no cost, and yours to keep even if you go elsewhere.
+      </p>
+      <a href={townMailto} class="btn btn--light btn--inline">Write to us</a>
+      <a class="ask__mail" href={townMailto}>{contact.email}</a>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xl);
+    align-items: end;
+  }
+  .hero__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-lg);
+  }
+  .hero h1 {
+    font-size: clamp(40px, 5.6vw, 80px);
+    max-width: 15ch;
+  }
+  .hero__lede {
+    font-size: 18.5px;
+    color: var(--c-body);
+    line-height: 1.7;
+  }
+  .hero__cta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-xs);
+    text-align: center;
+  }
+  .hero__note {
+    font-size: 16px;
+    color: var(--c-quiet);
+  }
+  .hero__window :global(.shot) {
+    --well-ratio: 1 / 1;
+  }
+
+  .facts {
+    background: var(--c-sand);
+    width: 100%;
+  }
+  .facts__head {
+    font-size: clamp(30px, 3.6vw, 46px);
+    max-width: 22ch;
+    margin-bottom: var(--sp-lg);
+  }
+  .facts__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-lg);
+  }
+  .facts__cell {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+  }
+  .facts__figure {
+    font-family: var(--f-display);
+    font-size: clamp(30px, 3.4vw, 42px);
+    line-height: 1.1;
+  }
+  .facts__cell p {
+    font-size: 16.5px;
+    color: var(--c-quiet);
+    line-height: 1.6;
+    max-width: 34ch;
+  }
+  .facts__road {
+    margin-top: var(--sp-xl);
+    font-size: 18px;
+    color: var(--c-body);
+    line-height: 1.75;
+    max-width: 60ch;
+  }
+  .facts__hedge {
+    margin-top: var(--sp-md);
+    font-size: 15px;
+    color: var(--c-faint);
+    line-height: 1.65;
+    max-width: 56ch;
+  }
+
+  .bag__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-md);
+    max-width: 60ch;
+  }
+  .bag h2 {
+    font-size: clamp(32px, 4vw, 54px);
+  }
+  .bag p {
+    font-size: 18px;
+    color: var(--c-body);
+    line-height: 1.75;
+  }
+  .bag__price a {
+    color: var(--c-ochre);
+    border-bottom: var(--stroke-hair) solid var(--c-rule);
+  }
+
+  .venues__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-md);
+  }
+  .venues h2 {
+    font-size: clamp(28px, 3.2vw, 42px);
+    max-width: 22ch;
+  }
+  .venues__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--sp-2xs) var(--sp-md);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .venues__list a {
+    font-family: var(--f-display);
+    font-size: 20px;
+    color: var(--c-ink);
+    border-bottom: var(--stroke-hair) solid var(--c-rule);
+    padding-bottom: 2px;
+  }
+  .venues__list a:hover {
+    border-bottom-color: var(--c-ochre);
+  }
+  .venues__note {
+    font-size: 15px;
+    color: var(--c-faint);
+    max-width: 52ch;
+    line-height: 1.65;
+  }
+
+  .ask {
+    background: var(--c-ink);
+    color: var(--c-ink-fg);
+    width: 100%;
+  }
+  .ask__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-md);
+  }
+  .ask h2 {
+    color: var(--c-ink-head);
+    font-size: clamp(28px, 3.4vw, 46px);
+    max-width: 20ch;
+  }
+  .ask p {
+    color: var(--c-ink-body);
+    font-size: 18px;
+    max-width: 46ch;
+    line-height: 1.7;
+  }
+  .ask__mail {
+    color: var(--c-ochre);
+    font-size: 17px;
+  }
+
+  @media (min-width: 900px) {
+    .hero__grid {
+      grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
+      gap: var(--sp-3xl);
+    }
+    .hero__window :global(.shot) {
+      --well-ratio: 4 / 5;
+    }
+    .facts__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--sp-xl);
+    }
+  }
+</style>

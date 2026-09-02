@@ -16,7 +16,8 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import Wave from '../../components/Wave.astro';
 import { venues } from '../../data/venues';
-import { site, mailto, deliversTo, origin } from '../../config';
+import { towns } from '../../data/towns';
+import { site, mailto, origin } from '../../config';
 
 /**
  * Every venue is named and every name is a link. The first pass only linked
@@ -24,10 +25,10 @@ import { site, mailto, deliversTo, origin } from '../../config';
  * page — but a venue page no longer prints blanks at a visitor, it simply says
  * less, and a list you cannot click is not a list.
  */
-const towns = [...new Set([...deliversTo, ...venues.map((v) => v.town)])];
-const byTown = towns
-  .map((town) => ({ town, venues: venues.filter((v) => v.town === town) }))
-  .filter((row) => row.venues.length > 0);
+const byTown = towns.map((town) => ({
+  town,
+  venues: venues.filter((v) => v.town === town.name || town.name.includes(v.town)),
+}));
 ---
 
 <Base
@@ -70,7 +71,12 @@ const byTown = towns
         {
           byTown.map(({ town, venues: list }) => (
             <div class="towns__row reveal">
-              <dt><h2>{town}</h2></dt>
+              <dt>
+                <h2><a href={`/welcome-bags/${town.slug}`}>{town.name}</a></h2>
+                <span class="towns__drive cap">
+                  {town.measured ? '' : '~'}{town.minutes} min from the studio
+                </span>
+              </dt>
               <dd>
                 <ul class="towns__venues">
                   {list.map((v) => (
@@ -133,6 +139,18 @@ const byTown = towns
   }
   .towns h2 {
     font-size: clamp(26px, 3vw, 38px);
+  }
+  .towns h2 a {
+    color: var(--c-ink);
+    border-bottom: var(--stroke-hair) solid var(--c-rule);
+  }
+  .towns h2 a:hover {
+    border-bottom-color: var(--c-ochre);
+  }
+  .towns__drive {
+    display: block;
+    color: var(--c-faint);
+    margin-top: var(--sp-3xs);
   }
   .towns__venues {
     display: flex;

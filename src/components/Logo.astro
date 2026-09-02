@@ -1,0 +1,15 @@
+---
+interface Props { size?: number; color?: string; }
+/** The mark: a sun on the water. One ink, because it is also cut in vinyl —
+    two colours would mean two cuts and hand registration on every bag.
+    The colour defaults to `currentColor` so the parent decides it; the
+    viewBox is cropped tight, so any breathing room comes from CSS. */
+const { size = 30, color = 'currentColor' } = Astro.props;
+---
+<svg width={size} height={size} viewBox="6 6 88 88" aria-hidden="true">
+  <path d="M24 41 A26 26 0 0 1 76 41 Z" fill={color}></path>
+  <g fill="none" stroke={color} stroke-width="7" stroke-linecap="round">
+    <path d="M14.5 56 C26.33 51.33 38.17 51.33 50 56 C61.83 60.67 73.67 60.67 85.5 56"></path>
+    <path d="M26 78 C34 82.67 42 82.67 50 78 C58 73.33 66 73.33 74 78"></path>
+  </g>
+</svg>
