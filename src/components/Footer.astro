@@ -7,8 +7,10 @@ import { deliversTo, contact, instagramUrl } from '../config';
     <span class="cap foot__area">{deliversTo.join(' · ')}</span>
     <a class="cap foot__mail" href={`mailto:${contact.email}`}>{contact.email}</a>
     <a class="cap foot__social" href={instagramUrl} rel="me">@{contact.instagram}</a>
+    <a class="cap foot__trade" href="/faq">Questions</a>
     <a class="cap foot__trade" href="/venues">Venues</a>
     <a class="cap foot__trade" href="/planners">For wedding planners</a>
+    <a class="cap foot__fine" href="/privacy">Privacy</a>
   </div>
 </footer>
 
@@ -29,6 +31,7 @@ import { deliversTo, contact, instagramUrl } from '../config';
   .foot__mail { color: var(--c-ochre); }
   .foot__social { color: var(--c-ochre); }
   .foot__trade { color: var(--c-quiet); }
+  .foot__fine { color: var(--c-faint); }
 
   @media (min-width: 980px) {
     .foot__bar {

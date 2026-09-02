@@ -335,11 +335,70 @@ button:focus-visible {
   }
 }
 
+/* Everything below the fold arrives the same way the hero does, once, as it
+   comes into view. The `.js` guard is what keeps this honest: without
+   scripting the class never lands, nothing is ever hidden, and the page reads
+   exactly as it does now. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.75s var(--ease-out),
+    transform 0.75s var(--ease-out);
+}
+
+.js .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* A row of things comes in as a row, not all at once. */
+.js .reveal--stagger > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.75s var(--ease-out),
+    transform 0.75s var(--ease-out);
+}
+
+.js .reveal--stagger.is-in > * {
+  opacity: 1;
+  transform: none;
+}
+
+.js .reveal--stagger.is-in > :nth-child(2) {
+  transition-delay: 0.09s;
+}
+.js .reveal--stagger.is-in > :nth-child(3) {
+  transition-delay: 0.18s;
+}
+.js .reveal--stagger.is-in > :nth-child(4) {
+  transition-delay: 0.27s;
+}
+
+/* Paper has no scroll position. Nothing waits to arrive on a printed page. */
+@media print {
+  .js .reveal,
+  .js .reveal--stagger > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rise {
     animation: none;
   }
   html {
     scroll-behavior: auto;
+  }
+  .js .reveal,
+  .js .reveal.is-in,
+  .js .reveal--stagger > *,
+  .js .reveal--stagger.is-in > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

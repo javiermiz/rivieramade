@@ -1,0 +1,165 @@
+---
+/**
+ * An aviso de privacidad. Mexican law (LFPDPPP) requires one from anyone who
+ * collects personal data, and a couple writing in hands over their names, a
+ * date and a venue, which is exactly that.
+ *
+ * It is written in English because the person reading it is the couple, and in
+ * short sentences because the point is that they understand it. It is short
+ * because the site genuinely does very little: no forms, no accounts, no
+ * analytics, no cookies, no advertising pixels. If any of that changes, this
+ * page changes first.
+ *
+ * The bracketed line is the one thing that cannot be written from here.
+ */
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { site, contact, origin } from '../config';
+
+const updated = 'September 2026';
+
+const sections = [
+  {
+    h: 'Who is asking',
+    p: [
+      `${site.name} is a two-person workshop in ${site.town}, Mexico, which makes and delivers wedding welcome bags. We are the ones responsible for anything you send us. You can reach us, and only us, at ${contact.email}.`,
+    ],
+  },
+  {
+    h: 'What this website collects on its own',
+    p: [
+      'Nothing. There is no contact form, no account to create, no shopping cart, no newsletter, no analytics and no advertising pixel. The site sets no cookies. Fonts and images are served from this domain rather than from somebody else’s, so loading the page does not report you to a third party.',
+      'Our hosting provider keeps ordinary server logs, which include IP addresses, for security and for keeping the site up. We do not read them to identify anyone.',
+    ],
+  },
+  {
+    h: 'What you give us when you write',
+    p: [
+      'When you email us you decide what to send. In practice it is your names, your wedding date, the venue, roughly how many bags you want and the colours you have in mind. Sometimes a phone number, if you offer one.',
+      'We use it for one thing: to draw your bag, quote it, make it and deliver it. Nothing else.',
+    ],
+  },
+  {
+    h: 'Who else sees it',
+    p: [
+      'Your names and your date go onto the bags, which means they pass through the printer and the cutting machine in our workshop, and they are visible to the resort staff who receive the delivery. That is the nature of the product.',
+      'Your email lives in our inbox, which is hosted by Google. If you pay a deposit, the payment is handled by the payment provider, who receives what they need to take the payment — we never see or store your card details.',
+      'We do not sell your information, we do not trade it, and we do not send it to anyone advertising anything. We have no interest in doing so and no mechanism for it.',
+    ],
+  },
+  {
+    h: 'How long we keep it',
+    p: [
+      'The email thread stays in the inbox, because a couple who ordered once sometimes writes again. Ask us to delete it and we will.',
+    ],
+  },
+  {
+    h: 'Your rights',
+    p: [
+      'Under Mexican data protection law you may ask us what we hold about you, have it corrected, have it deleted, or tell us to stop using it. Write to us and say which one. We will answer from the same address, and it costs you nothing.',
+      'If we ever want to use your wedding photographs or your names to show our work, we will ask you first and you can say no without it changing anything.',
+    ],
+  },
+  {
+    h: 'Children',
+    p: ['This is a service sold to adults planning a wedding. We do not knowingly collect anything from children.'],
+  },
+  {
+    h: 'Changes',
+    p: [
+      `If this changes we will change it here and move the date at the top. This version is from ${updated}.`,
+    ],
+  },
+];
+---
+
+<Base
+  title={`Privacy | ${site.name}`}
+  description="What Riviera Made collects, what it does not, and what happens to what you send us. No forms, no cookies, no analytics, nothing sold to anyone."
+  path="/privacy"
+  schemaNodes={[
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${origin}/privacy/#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Riviera Made', item: `${origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'Privacy' },
+      ],
+    },
+  ]}
+>
+  <Nav />
+
+  <section class="section legal">
+    <div class="container legal__inner">
+      <span class="cap">Last updated {updated}</span>
+      <h1>Privacy.</h1>
+      <p class="legal__lede">
+        The short version: this site collects nothing, we only ever have what
+        you email us, and we use it to make your bags and for nothing else.
+      </p>
+
+      {
+        sections.map((section) => (
+          <div class="legal__block reveal">
+            <h2>{section.h}</h2>
+            {section.p.map((line) => (
+              <p>{line}</p>
+            ))}
+          </div>
+        ))
+      }
+
+      <p class="legal__note">
+        [ A lawyer should read this before the site takes its first payment, and
+        the workshop's full address belongs in the first section — an aviso de
+        privacidad names where the responsible party actually is. ]
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .legal__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-sm);
+    max-width: 70ch;
+  }
+  .legal h1 {
+    font-size: clamp(38px, 5vw, 68px);
+  }
+  .legal__lede {
+    font-size: 19px;
+    color: var(--c-body);
+    line-height: 1.7;
+    margin-bottom: var(--sp-lg);
+  }
+  .legal__block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2xs);
+    padding-block: var(--sp-md);
+    border-top: var(--stroke-hair) solid var(--c-rule);
+  }
+  .legal h2 {
+    font-size: clamp(21px, 2.2vw, 27px);
+  }
+  .legal__block p {
+    font-size: 17.5px;
+    color: var(--c-body);
+    line-height: 1.75;
+  }
+  .legal__note {
+    margin-top: var(--sp-lg);
+    background: var(--c-sand);
+    border-left: 3px solid var(--c-ochre);
+    padding: var(--sp-sm) var(--sp-md);
+    font-size: 16px;
+    color: var(--c-body);
+    line-height: 1.65;
+  }
+</style>

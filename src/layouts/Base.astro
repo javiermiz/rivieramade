@@ -142,9 +142,52 @@ const schema = {
     <Font cssVariable="--font-display" preload />
     <Font cssVariable="--font-body" preload />
 
+    {/* Before the first paint, so nothing is hidden on a browser that would
+        never have shown it again. */}
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body>
     <slot />
+
+    <script is:inline>
+      // One observer for the page. Each element is released the moment it has
+      // arrived — the entrance happens once, and scrolling back up does not
+      // replay it.
+      (() => {
+        const items = document.querySelectorAll('.reveal, .reveal--stagger');
+        if (!items.length) return;
+
+        const showAll = () => items.forEach((el) => el.classList.add('is-in'));
+
+        // The stylesheet hides these before the first paint, so the one thing
+        // that must never happen is this script failing quietly and leaving
+        // the page blank. Any way out of here that is not the observer shows
+        // everything instead.
+        try {
+          if (!('IntersectionObserver' in window)) return showAll();
+
+          const io = new IntersectionObserver(
+            (entries) => {
+              for (const entry of entries) {
+                if (!entry.isIntersecting) continue;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              }
+            },
+            // Fire a little before the element is fully on screen, so it is
+            // already settled by the time it is being read.
+            { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+          );
+
+          items.forEach((el) => io.observe(el));
+        } catch {
+          showAll();
+        }
+      })();
+    </script>
   </body>
 </html>

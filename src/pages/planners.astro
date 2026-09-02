@@ -22,7 +22,7 @@ const relief = [
   },
   {
     title: 'The twelve-bag wedding',
-    body: 'Twelve is a real order to us. No minimum means you never have to tell a small wedding it is not worth a supplier’s time.',
+    body: 'Twelve bags is a real order to us and it is where we start. You never have to tell a small wedding it is not worth a supplier’s time.',
   },
 ];
 
@@ -32,7 +32,7 @@ const priceLine = pricing
 
 const terms = [
   ['Price', `${priceLine} — USD, delivery included`],
-  ['Minimum', 'None'],
+  ['Minimum', 'Twelve bags'],
   ['Lead time', 'Four to six weeks comfortably · ten days is possible, ask first'],
   ['Count due', 'Ten days before the wedding · leftovers collected, never billed'],
   ['Proof', 'A drawing of the bag within a day, free, before anything is charged'],
@@ -62,7 +62,7 @@ Thank you,
 
 <Base
   title={`For wedding planners & venues | ${site.name}`}
-  description="Welcome bags made in Puerto Morelos and delivered to your venue. No customs, no minimum, final counts ten days out, and a free sample set for your studio."
+  description="Welcome bags made in Puerto Morelos and delivered to your venue. No customs, twelve bags up, final counts ten days out, and a free sample set for your studio."
   path="/planners"
   schemaNodes={[
     {
@@ -85,8 +85,8 @@ Thank you,
         <h1>When the box doesn’t arrive, it’s your telephone that rings.</h1>
         <p class="hero__lede">
           We make one thing — the welcome bag — twenty minutes up the road, and
-          deliver it to your venue. Nothing crosses a border, there is no minimum,
-          and the count can move until ten days out.
+          deliver it to your venue. Nothing crosses a border, twelve bags is a real
+          order, and the count can move until ten days out.
         </p>
         <div class="hero__cta">
           <a href={sampleMailto} class="btn">Ask for a sample set</a>
@@ -135,7 +135,7 @@ Thank you,
       <dl class="terms__list">
         {
           terms.map(([label, value]) => (
-            <div class="terms__row">
+            <div class="terms__row reveal">
               <dt class="cap">{label}</dt>
               <dd>{value}</dd>
             </div>
@@ -147,7 +147,7 @@ Thank you,
 
   <!-- ── The sample ──────────────────────────────────────────── -->
   <section class="section sample">
-    <div class="container sample__inner">
+    <div class="container sample__inner reveal">
       <Wave />
       <h2>A sample bag for your studio, printed with your name rather than ours.</h2>
       <p>

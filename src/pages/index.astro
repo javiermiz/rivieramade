@@ -68,7 +68,7 @@ const deliveryLine = `We deliver to ${deliversTo
   <!-- ── II. The bag ─────────────────────────────────────────── -->
   <section id="bag" class="section bag">
     <div class="bleed bag__grid">
-      <div class="bag__text">
+      <div class="bag__text reveal">
         <h2>The welcome bag. Nothing else.</h2>
         <p>
           A cotton tote carrying your names and your date, and inside it the weekend
@@ -96,7 +96,7 @@ const deliveryLine = `We deliver to ${deliversTo
       />
     </div>
 
-    <div class="container bag__gallery">
+    <div class="container bag__gallery reveal--stagger">
       <figure class="bag__plate">
         <Shot src={toteInks} alt="Two printed totes side by side — one pressed in a single ink, the other with a green sprig beside the names" widths={[352, 704]} sizes="(min-width: 900px) 30vw, 100vw" />
         <figcaption class="cap">Pressed by hand, in one or two inks</figcaption>
@@ -114,7 +114,7 @@ const deliveryLine = `We deliver to ${deliversTo
 
   <!-- ── Pull quote ──────────────────────────────────────────── -->
   <section class="section quote">
-    <div class="container quote__inner">
+    <div class="container quote__inner reveal">
       <Wave />
       <h2><i>One wedding a week</i> — so yours is the only one on the table.</h2>
       <p>
@@ -130,7 +130,7 @@ const deliveryLine = `We deliver to ${deliversTo
       <dl class="care__list">
         {
           care.map((item) => (
-            <div class="care__row">
+            <div class="care__row reveal">
               <dt><h3>{item.title}</h3></dt>
               <dd>{item.body}</dd>
             </div>
@@ -143,12 +143,12 @@ const deliveryLine = `We deliver to ${deliversTo
   <!-- ── IV. Price ───────────────────────────────────────────── -->
   <section id="price" class="section price">
     <div class="container price__grid">
-      <div class="price__text">
+      <div class="price__text reveal">
         <h2>Published, so you needn't ask.</h2>
         <p>
           The price eases as the order grows, because drawing it and driving it out
-          cost the same for twelve bags or for sixty. There is no minimum and no
-          setup fee.
+          cost the same for twelve bags or for sixty. Twelve is where we start, and
+          there is no setup fee.
         </p>
         <p class="price__where">{deliveryLine}</p>
       </div>
@@ -169,7 +169,7 @@ const deliveryLine = `We deliver to ${deliversTo
     </svg>
 
     <div class="container write__grid">
-      <div class="write__text">
+      <div class="write__text reveal">
         <h2>Tell us the date. We will draw the bag.</h2>
         <p>
           You will have a picture of your own bag — your names, your date, your colours

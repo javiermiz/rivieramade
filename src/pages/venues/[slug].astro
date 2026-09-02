@@ -103,7 +103,7 @@ const schemaNodes = [
 
 <Base
   title={`Wedding Welcome Bags for ${venue.name}, ${venue.town} | ${site.name}`}
-  description={`Welcome bags for weddings at ${venue.name} in ${venue.town} — made by hand nearby and delivered to the front desk three days before you marry. No customs, no minimum, from $23 a bag.`}
+  description={`Welcome bags for weddings at ${venue.name} in ${venue.town} — made by hand nearby and delivered to the front desk three days before you marry. No customs, twelve bags up, from $23 a bag.`}
   path={`/venues/${venue.slug}`}
   noindex={venue.draft}
   schemaNodes={schemaNodes}
@@ -157,7 +157,7 @@ const schemaNodes = [
       <dl class="facts__grid">
         {
           facts.map((fact) => (
-            <div class="facts__cell">
+            <div class="facts__cell reveal">
               <dt class="facts__figure">{fact.figure}</dt>
               <dd>
                 <span class="cap">{fact.label}</span>
@@ -173,7 +173,7 @@ const schemaNodes = [
   <!-- ── The bag ─────────────────────────────────────────────── -->
   <section class="section bag">
     <div class="container bag__grid">
-      <div class="bag__text">
+      <div class="bag__text reveal">
         <h2>The welcome bag. Nothing else.</h2>
         <p>
           A cotton tote carrying your names and your date, and inside it the weekend

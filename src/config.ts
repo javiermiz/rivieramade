@@ -21,7 +21,7 @@ export const site = {
   town: 'Puerto Morelos, Quintana Roo',
   title: 'Wedding Welcome Bags · Cancún & Riviera Maya | Riviera Made',
   description:
-    'Handmade wedding welcome bags for Cancún, Puerto Morelos, Playa del Carmen and Tulum. From $23 a bag delivered to your resort, no minimum and nothing through customs. See a drawing of yours the same day.',
+    'Handmade wedding welcome bags for Cancún, Puerto Morelos, Playa del Carmen and Tulum. From $23 a bag delivered to your resort, twelve bags up, and nothing through customs. See a drawing of yours the same day.',
 };
 
 /**

@@ -1,0 +1,219 @@
+---
+/**
+ * The questions are objections, in the order they actually arrive: can I trust
+ * you with the money, what happens when the count moves, and who carries it.
+ * Every answer is a fact already published somewhere else on the site — this
+ * page states them plainly so a search engine, and the assistants that read
+ * one, can lift a single answer without reading the whole page.
+ *
+ * Answers are plain strings on purpose. They go into the visible page and into
+ * the FAQPage graph from the same array, so the two can never drift apart.
+ */
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Wave from '../components/Wave.astro';
+import { site, mailto, contact, pricing, deliversTo, origin } from '../config';
+
+const low = Math.min(...pricing.map((t) => t.price));
+const high = Math.max(...pricing.map((t) => t.price));
+
+const faqs = [
+  {
+    q: 'Do you ship to the United States?',
+    a: `No, and we never will. Everything we make is carried by road to your resort, from Puerto Morelos as far as Tulum. Nothing we make crosses a border, so nothing sits in customs and there is no tracking number for anyone to chase. If you are marrying outside that drive, we are the wrong studio and we will say so rather than take the order.`,
+  },
+  {
+    q: 'How much is a welcome bag?',
+    a: `Between $${low} and $${high} US dollars a bag, delivered. The price eases as the order grows: $${pricing[0].price} for ${pricing[0].label}, $${pricing[1].price} for ${pricing[1].label}, and $${pricing[2].price} at ${pricing[2].label.toLowerCase()}. Delivery to your resort is included and there is no setup fee.`,
+  },
+  {
+    q: 'Is there a minimum order?',
+    a: `Twelve bags. Below that the drive out costs us more than the order is worth, so twelve is where we start.`,
+  },
+  {
+    q: 'What is in the bag?',
+    a: `A cotton tote printed with your names and your date, and inside it your weekend printed on a card, two bottle labels and a luggage tag. One thing, made well. There is no catalogue and there are no packages with invented names.`,
+  },
+  {
+    q: 'Can I see what it will look like before I pay anything?',
+    a: `Yes, and it costs nothing. Send us your names, your date and your colours and a drawing of your own bag comes back the same day. It is yours to keep whether or not you order from us.`,
+  },
+  {
+    q: 'What if my guest count changes?',
+    a: `Tell us the final number ten days before the wedding. Cousins book late and someone always drops out, so we plan for it. Anything we have already made and you no longer need comes back to us rather than onto your bill.`,
+  },
+  {
+    q: 'How far in advance should I order?',
+    a: `Four to six weeks is comfortable. Ten days is possible — ask first, because we take one wedding a week and when a week is taken we say so early rather than accept the order and hope.`,
+  },
+  {
+    q: 'When and where do you deliver?',
+    a: `To your resort three days before the wedding, assembled, handed over against a signed receipt. We deliver to ${deliversTo.slice(0, -1).join(', ')} and ${deliversTo.at(-1)}, and nowhere else.`,
+  },
+  {
+    q: 'Will the hotel put the bags in the rooms?',
+    a: `Usually yes, and some resorts charge a fee per bag to do it. That fee is charged by the hotel, never by us. We know what several of them charge and will tell you before you are surprised by it, and we coordinate the handover with the front desk ourselves.`,
+  },
+  {
+    q: 'How do I pay, and when?',
+    a: `Half to hold the week, the balance on delivery. The deposit is paid by card through a payment link, so you are not sending money to a stranger in another country without any protection. Nothing is charged before you have approved the drawing.`,
+  },
+  {
+    q: 'Who actually makes them?',
+    a: `Two sisters, in one room in Puerto Morelos, twenty minutes from most of the resorts on this coast. Every piece is cut and pressed by the two of us, which is also why we only take one wedding a week.`,
+  },
+  {
+    q: 'Do you speak English?',
+    a: `Yes. Write in English or in Spanish — hablamos español. Either way you will have an answer from a person, not a form.`,
+  },
+];
+
+const schemaNodes = [
+  {
+    '@type': 'FAQPage',
+    '@id': `${origin}/faq/#faq`,
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  },
+  {
+    '@type': 'BreadcrumbList',
+    '@id': `${origin}/faq/#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Riviera Made', item: `${origin}/` },
+      { '@type': 'ListItem', position: 2, name: 'Questions' },
+    ],
+  },
+];
+---
+
+<Base
+  title={`Questions · Welcome bags in the Riviera Maya | ${site.name}`}
+  description={`What a welcome bag costs, how far ahead to order, what happens when your guest count moves, and why we deliver by road instead of shipping. From $${low} a bag, twelve bags up.`}
+  path="/faq"
+  schemaNodes={schemaNodes}
+>
+  <Nav />
+
+  <section class="section head">
+    <div class="container head__inner">
+      <Wave />
+      <h1>Everything people ask us.</h1>
+      <p class="head__lede">
+        Answered here so you do not have to write in to find out. When you do
+        write, it goes to one of us and comes back the same day.
+      </p>
+    </div>
+  </section>
+
+  <section class="section faq">
+    <div class="container">
+      <dl class="faq__list">
+        {
+          faqs.map(({ q, a }) => (
+            <div class="faq__row reveal">
+              <dt><h2>{q}</h2></dt>
+              <dd>{a}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="section ask">
+    <div class="container ask__inner">
+      <h2>Something we have not answered?</h2>
+      <p>
+        Send the venue and the date with it, and the drawing of your bag comes
+        back in the same reply.
+      </p>
+      <a href={mailto} class="btn btn--light btn--inline">Write to us</a>
+      <a class="ask__mail" href={mailto}>{contact.email}</a>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .head__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-md);
+  }
+  .head h1 {
+    font-size: clamp(38px, 5.4vw, 76px);
+    max-width: 14ch;
+  }
+  .head__lede {
+    font-size: 18.5px;
+    color: var(--c-body);
+    max-width: 48ch;
+    line-height: 1.7;
+  }
+
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+  }
+  .faq__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xs);
+    padding-block: var(--sp-lg);
+    border-top: var(--stroke-hair) solid var(--c-rule);
+  }
+  .faq h2 {
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.25;
+  }
+  .faq dd {
+    margin: 0;
+    font-size: 18px;
+    color: var(--c-body);
+    line-height: 1.75;
+    max-width: 62ch;
+  }
+
+  .ask {
+    background: var(--c-ink);
+    color: var(--c-ink-fg);
+    width: 100%;
+  }
+  .ask__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-md);
+  }
+  .ask h2 {
+    color: var(--c-ink-head);
+    font-size: clamp(28px, 3.4vw, 46px);
+    max-width: 20ch;
+  }
+  .ask p {
+    color: var(--c-ink-body);
+    font-size: 18px;
+    max-width: 44ch;
+    line-height: 1.7;
+  }
+  .ask__mail {
+    color: var(--c-ochre);
+    font-size: 17px;
+  }
+
+  @media (min-width: 900px) {
+    .faq__row {
+      grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
+      gap: var(--sp-3xl);
+      padding-block: var(--sp-xl);
+    }
+  }
+</style>
