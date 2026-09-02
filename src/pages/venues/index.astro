@@ -1,0 +1,204 @@
+---
+/**
+ * The index the venue pages hang from.
+ *
+ * It exists for two reasons and neither is browsing: the breadcrumb on every
+ * venue page points here, and twenty-nine pages with no link into them are
+ * pages a crawler finds late and badly. A couple does not shop for their own
+ * hotel — they arrive at its page from a search for its name.
+ *
+ * Drafts are left out. While none is filled in this is a delivery-area page
+ * with a list of towns, which is true and useful, and it is noindex until it
+ * has something a search result would not be embarrassed by.
+ */
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Wave from '../../components/Wave.astro';
+import { venues } from '../../data/venues';
+import { site, mailto, deliversTo, origin } from '../../config';
+
+const live = venues.filter((v) => !v.draft);
+
+/** Towns in the order we drive them, each with whatever is ready to show. */
+const byTown = deliversTo
+  .map((town) => ({ town, venues: live.filter((v) => v.town === town) }))
+  .concat(
+    // A live venue in a town that is not in the driving list would otherwise
+    // vanish. Better an odd heading than a page that quietly drops a venue.
+    live
+      .filter((v) => !deliversTo.includes(v.town))
+      .reduce<{ town: string; venues: typeof live }[]>((acc, v) => {
+        const found = acc.find((row) => row.town === v.town);
+        if (found) found.venues.push(v);
+        else acc.push({ town: v.town, venues: [v] });
+        return acc;
+      }, []),
+  );
+---
+
+<Base
+  title={`Venues we deliver to · Cancún & Riviera Maya | ${site.name}`}
+  description="The resorts and venues we carry welcome bags to, by road, from Playa Mujeres down to Tulum. Nothing is shipped and nothing crosses a border."
+  path="/venues"
+  noindex={live.length === 0}
+  schemaNodes={[
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${origin}/venues/#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Riviera Made', item: `${origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'Venues' },
+      ],
+    },
+  ]}
+>
+  <Nav />
+
+  <section class="section head">
+    <div class="container head__inner">
+      <Wave />
+      <h1>Every venue we drive to.</h1>
+      <p>
+        We deliver by road, from Playa Mujeres down to Tulum, and we deliver
+        nowhere else. If your resort is not named here it is very probably still
+        on the way — write and ask, and if it falls outside the drive we will
+        say so rather than take the order and hope.
+      </p>
+      <p class="head__note">
+        A venue earns its own page once we have made the drive and written down
+        what it actually takes.
+      </p>
+    </div>
+  </section>
+
+  <section class="section towns">
+    <div class="container">
+      <dl class="towns__list">
+        {
+          byTown.map(({ town, venues: list }) => (
+            <div class="towns__row">
+              <dt><h2>{town}</h2></dt>
+              <dd>
+                {/* No filler under a town with nothing to link yet — the note
+                    above says why once, rather than seven times. */}
+                {list.length > 0 && (
+                  <ul class="towns__venues">
+                    {list.map((v) => (
+                      <li>
+                        <a href={`/venues/${v.slug}`}>{v.name}</a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="section ask">
+    <div class="container ask__inner">
+      <h2>Marrying somewhere not on this list?</h2>
+      <p>
+        Send the venue and the date. If it is within the drive you will have a
+        picture of your own bag the same day.
+      </p>
+      <a href={mailto} class="btn btn--light btn--inline">Write to us</a>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .head__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-md);
+  }
+  .head h1 {
+    font-size: clamp(38px, 5.4vw, 76px);
+    max-width: 16ch;
+  }
+  .head p {
+    font-size: 18.5px;
+    color: var(--c-body);
+    max-width: 54ch;
+    line-height: 1.7;
+  }
+
+  .towns__list {
+    display: flex;
+    flex-direction: column;
+  }
+  .towns__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xs);
+    padding-block: var(--sp-lg);
+    border-top: var(--stroke-hair) solid var(--c-rule);
+  }
+  .towns h2 {
+    font-size: clamp(26px, 3vw, 38px);
+  }
+  .towns__venues {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .towns__venues a {
+    font-family: var(--f-display);
+    font-size: 20px;
+    color: var(--c-ink);
+    border-bottom: var(--stroke-hair) solid var(--c-rule);
+    padding-bottom: 2px;
+  }
+  .towns__venues a:hover {
+    border-bottom-color: var(--c-ochre);
+  }
+  .head__note {
+    font-size: 16px;
+    color: var(--c-quiet);
+    max-width: 46ch;
+  }
+
+  .ask {
+    background: var(--c-ink);
+    color: var(--c-ink-fg);
+    width: 100%;
+  }
+  .ask__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-md);
+  }
+  .ask h2 {
+    color: var(--c-ink-head);
+    font-size: clamp(28px, 3.4vw, 46px);
+    max-width: 20ch;
+  }
+  .ask p {
+    color: var(--c-ink-body);
+    font-size: 18px;
+    max-width: 46ch;
+    line-height: 1.7;
+  }
+
+  @media (min-width: 900px) {
+    .towns__row {
+      grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+      gap: var(--sp-3xl);
+      padding-block: var(--sp-xl);
+    }
+  }
+</style>

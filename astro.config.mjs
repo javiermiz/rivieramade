@@ -8,6 +8,14 @@ const draftPaths = venues
   .filter((v) => v.draft)
   .map((v) => `https://rivieramade.com/venues/${v.slug}/`);
 
+/**
+ * The venue index is noindex until one venue is filled in, and a noindex page
+ * in the sitemap is a crawl spent to be told to go away.
+ */
+if (!venues.some((v) => !v.draft)) {
+  draftPaths.push('https://rivieramade.com/venues/');
+}
+
 export default defineConfig({
   site: 'https://rivieramade.com',
 
