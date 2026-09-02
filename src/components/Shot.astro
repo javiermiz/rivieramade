@@ -16,6 +16,8 @@ interface Props {
   /** Cap the srcset at the source's own width — never upscale a placeholder. */
   widths?: number[];
   sizes?: string;
+  /** Fabric close-ups carry grain that webp pays dearly for. Lower it there. */
+  quality?: number;
   class?: string;
 }
 
@@ -25,6 +27,7 @@ const {
   eager = false,
   widths = [420, 700, 1000],
   sizes = '(min-width: 900px) 46vw, 100vw',
+  quality = 80,
   class: klass = '',
 } = Astro.props;
 ---
@@ -35,6 +38,7 @@ const {
     alt={alt}
     widths={widths}
     sizes={sizes}
+    quality={quality}
     loading={eager ? 'eager' : 'lazy'}
     fetchpriority={eager ? 'high' : 'auto'}
     decoding="async"

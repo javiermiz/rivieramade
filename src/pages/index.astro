@@ -4,8 +4,8 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Shot from '../components/Shot.astro';
 import toteBeach from '../assets/tote-beach.jpg';
-import totePalm from '../assets/tote-palm.jpg';
-import toteFlat from '../assets/tote-flat.jpg';
+import toteLinen from '../assets/tote-linen.jpg';
+import toteInks from '../assets/tote-inks.jpg';
 import toteInside from '../assets/tote-inside.jpg';
 import totePrint from '../assets/tote-print.jpg';
 import Wave from '../components/Wave.astro';
@@ -58,6 +58,7 @@ const deliveryLine = `We deliver to ${deliversTo
           class="arch"
           src={toteBeach}
           alt="A cotton welcome tote printed with a couple's names, standing on the sand at sunset"
+          widths={[420, 700, 941]}
           eager
         />
       </div>
@@ -89,23 +90,23 @@ const deliveryLine = `We deliver to ${deliversTo
 
       <Shot
         class="arch bag__shot"
-        src={totePalm}
-        alt="A printed cotton welcome tote hanging by a palm on the beach in the Riviera Maya"
-        widths={[372]}
+        src={toteLinen}
+        alt="A printed cotton welcome tote lying on cream linen, its names and date facing up"
+        widths={[440, 900]}
       />
     </div>
 
     <div class="container bag__gallery">
       <figure class="bag__plate">
-        <Shot src={toteFlat} alt="The printed tote laid flat on a woven mat with eucalyptus" widths={[352]} sizes="(min-width: 900px) 30vw, 100vw" />
+        <Shot src={toteInks} alt="Two printed totes side by side — one pressed in a single ink, the other with a green sprig beside the names" widths={[352, 704]} sizes="(min-width: 900px) 30vw, 100vw" />
         <figcaption class="cap">Pressed by hand, in one or two inks</figcaption>
       </figure>
       <figure class="bag__plate">
-        <Shot src={toteInside} alt="Looking into the open tote — unlined cotton canvas with reinforced handles" widths={[352]} sizes="(min-width: 900px) 30vw, 100vw" />
+        <Shot src={toteInside} alt="Looking into the open tote — unlined cotton canvas with reinforced handles" widths={[352, 704]} sizes="(min-width: 900px) 30vw, 100vw" />
         <figcaption class="cap">Room for the weekend, and for the flight home</figcaption>
       </figure>
       <figure class="bag__plate">
-        <Shot src={totePrint} alt="Close up of the printing on the canvas: names, date and town" widths={[352]} sizes="(min-width: 900px) 30vw, 100vw" />
+        <Shot src={totePrint} alt="Close up of the printing on the canvas: names, date and town" widths={[352, 704]} quality={58} sizes="(min-width: 900px) 30vw, 100vw" />
         <figcaption class="cap">Your names, your date, the town</figcaption>
       </figure>
     </div>
@@ -295,9 +296,9 @@ const deliveryLine = `We deliver to ${deliversTo
     margin-top: var(--sp-3xs);
   }
 
-  /* Three plates at their native size — the sources are ~360px, so the row is
-     sized to match rather than blow them up. Ratios differ on purpose: an even
-     grid of squares reads like a contact sheet. */
+  /* Three plates, each one no wider than a phone column so the row reads as a
+     set rather than a slideshow. Ratios differ on purpose: an even grid of
+     squares reads like a contact sheet. */
   .bag__gallery {
     display: grid;
     grid-auto-flow: column;

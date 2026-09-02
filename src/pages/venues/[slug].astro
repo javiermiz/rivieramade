@@ -4,7 +4,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import Shot from '../../components/Shot.astro';
 import toteBeach from '../../assets/tote-beach.jpg';
-import totePalm from '../../assets/tote-palm.jpg';
+import toteLinen from '../../assets/tote-linen.jpg';
 import { venues, type Venue } from '../../data/venues';
 import { contact, mailtoFor, tierFor, site } from '../../config';
 
@@ -104,6 +104,7 @@ const facts = [
           class="arch"
           src={toteBeach}
           alt={`A printed cotton welcome tote on the sand near ${venue.name}`}
+          widths={[420, 700, 941]}
           eager
         />
       </div>
@@ -148,9 +149,9 @@ const facts = [
 
       <Shot
         class="arch bag__shot"
-        src={totePalm}
-        alt="A printed cotton welcome tote hanging by a palm on the beach"
-        widths={[372]}
+        src={toteLinen}
+        alt="A printed cotton welcome tote lying on cream linen, its names and date facing up"
+        widths={[440, 900]}
       />
     </div>
   </section>
