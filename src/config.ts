@@ -19,6 +19,12 @@ export const site = {
     'Handmade wedding welcome bags for Cancún, Puerto Morelos, Playa del Carmen and Tulum. From $23 a bag delivered to your resort, no minimum and nothing through customs. See a drawing of yours the same day.',
 };
 
+/**
+ * The one place a schema.org `@id` is built from, so a node minted on a venue
+ * page points at the same studio as the node minted on the home page.
+ */
+export const origin = `https://${site.domain}`;
+
 /** Delivery area, in the order we drive it. */
 export const deliversTo = [
   'Puerto Morelos',

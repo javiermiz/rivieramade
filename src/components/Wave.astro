@@ -1,6 +1,8 @@
 ---
 interface Props { width?: number; color?: string; }
-const { width = 46, color = 'var(--ochre)' } = Astro.props;
+/** The token is --c-ochre. Named without the prefix, the var never resolved
+    and every wave on the site drew nothing at all. */
+const { width = 46, color = 'var(--c-ochre)' } = Astro.props;
 ---
 <svg width={width} height={width * 0.44} viewBox="0 0 60 34" aria-hidden="true">
   <path

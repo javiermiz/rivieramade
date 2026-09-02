@@ -32,9 +32,12 @@
   --c-ink-body: #9eaaa4;
   --c-ink-faint: #93a09a;
 
-  /* --- Type --- */
-  --f-display: Newsreader, Georgia, 'Times New Roman', serif;
-  --f-body: Figtree, 'Helvetica Neue', Arial, sans-serif;
+  /* --- Type ---
+     --font-display and --font-body come from the fonts block in
+     astro.config.mjs, and already carry their own metric-matched fallbacks.
+     The literal stacks after them are the belt to that braces. */
+  --f-display: var(--font-display), Georgia, 'Times New Roman', serif;
+  --f-body: var(--font-body), 'Helvetica Neue', Arial, sans-serif;
 
   /* --- Layout ---
      The container caps at the design width so ultra-wide screens centre the

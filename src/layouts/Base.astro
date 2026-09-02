@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
-import { site, contact, pricing, deliversTo } from '../config';
+import { Font } from 'astro:assets';
+import { site, contact, pricing, deliversTo, origin } from '../config';
 
 interface Props {
   title?: string;
@@ -8,6 +9,14 @@ interface Props {
   path?: string;
   /** Set on pages that should not be indexed on their own. */
   noindex?: boolean;
+  /** What the share card shows, when a page has a better one than the default. */
+  ogImage?: string;
+  ogImageAlt?: string;
+  /**
+   * Extra schema.org nodes for this page, merged into the site-wide graph.
+   * A venue page adds its breadcrumb and its own service here.
+   */
+  schemaNodes?: Record<string, unknown>[];
 }
 
 const {
@@ -15,22 +24,34 @@ const {
   description = site.description,
   path = '/',
   noindex = false,
+  ogImage: ogImageProp,
+  ogImageAlt = 'A printed cotton welcome tote on the sand in the Riviera Maya',
+  schemaNodes = [],
 } = Astro.props;
 
-const origin = (Astro.site ?? new URL(`https://${site.domain}`)).origin;
 const canonical = new URL(path, origin).href;
-const ogImage = new URL('/og.jpg', origin).href;
+const ogImage = new URL(ogImageProp ?? '/og.jpg', origin).href;
 
 const prices = pricing.map((t) => t.price);
 
 /**
- * One graph, two nodes: the studio and the thing it sells. Search engines and
- * the assistants that read them both want the price range and the area we
- * actually serve — the two questions every competitor leaves unanswered.
+ * One graph, three nodes: the site, the studio and the thing it sells. Search
+ * engines and the assistants that read them both want the price range and the
+ * area we actually serve — the two questions every competitor leaves
+ * unanswered. Pages append their own nodes through `schemaNodes`.
  */
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${origin}/#website`,
+      url: `${origin}/`,
+      name: site.name,
+      description: site.description,
+      inLanguage: 'en',
+      publisher: { '@id': `${origin}/#studio` },
+    },
     {
       '@type': 'LocalBusiness',
       '@id': `${origin}/#studio`,
@@ -72,6 +93,7 @@ const schema = {
         seller: { '@id': `${origin}/#studio` },
       },
     },
+    ...schemaNodes,
   ],
 };
 ---
@@ -88,28 +110,34 @@ const schema = {
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
     <meta name="theme-color" content="#f6f3ec" />
 
+    <!-- The studio is in Mexico and the couple is not. Say which is which. -->
+    <meta name="geo.region" content="MX-ROO" />
+    <meta name="geo.placename" content="Puerto Morelos, Quintana Roo" />
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="631" />
-    <meta property="og:image:alt" content="A printed cotton welcome tote on the sand in the Riviera Maya" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Figtree:wght@400;500;600&display=swap"
-    />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-body" preload />
 
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>

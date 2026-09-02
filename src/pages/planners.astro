@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import Shot from '../components/Shot.astro';
 import Wave from '../components/Wave.astro';
 import toteBeach from '../assets/tote-beach.jpg';
-import { contact, mailtoFor, pricing, deliversTo, site } from '../config';
+import { contact, mailtoFor, pricing, deliversTo, site, origin } from '../config';
 
 const relief = [
   {
@@ -61,6 +61,16 @@ Thank you,
   title={`For wedding planners & venues | ${site.name}`}
   description="Welcome bags made in Puerto Morelos and delivered to your venue. No customs, no minimum, final counts ten days out, and a free sample set for your studio."
   path="/planners"
+  schemaNodes={[
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${origin}/planners/#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Riviera Made', item: `${origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'For wedding planners' },
+      ],
+    },
+  ]}
 >
   <Nav />
 

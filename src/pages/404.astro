@@ -1,0 +1,98 @@
+---
+/**
+ * A wrong URL is usually a stale link from a planner's old email, not a lost
+ * visitor. So this page does not apologise at length — it points at the three
+ * things anyone arriving here was looking for.
+ */
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Wave from '../components/Wave.astro';
+import { site, mailto, deliversTo } from '../config';
+---
+
+<Base
+  title={`Page not found | ${site.name}`}
+  description="That page is not here. The bag, the price and the way to write to us are."
+  path="/404"
+  noindex
+>
+  <Nav />
+
+  <section class="section lost">
+    <div class="container lost__inner">
+      <Wave />
+      <span class="cap">Error 404</span>
+      <h1>That page is not here.</h1>
+      <p class="lost__lede">
+        The link is probably an old one. Everything the site has is on three
+        pages, and none of them is far.
+      </p>
+      <div class="lost__links">
+        <a href="/#bag" class="lost__link">The bag <span>what is in it, and what it costs to make</span></a>
+        <a href="/#price" class="lost__link">The price <span>published by the bag, from $23 delivered</span></a>
+        <a href="/planners" class="lost__link">For planners <span>trade terms and a sample in your hands</span></a>
+      </div>
+      <a href={mailto} class="btn">Write to us</a>
+      <p class="lost__area cap">{deliversTo.join(' · ')}</p>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .lost__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-md);
+  }
+  .lost h1 {
+    font-size: clamp(38px, 5.4vw, 76px);
+    max-width: 16ch;
+  }
+  .lost__lede {
+    font-size: 18.5px;
+    color: var(--c-body);
+    max-width: 46ch;
+    line-height: 1.7;
+  }
+  .lost__links {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-2xs);
+    width: 100%;
+    max-width: 620px;
+    margin-block: var(--sp-sm);
+    text-align: left;
+  }
+  .lost__link {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: var(--sp-sm) var(--sp-md);
+    background: var(--c-sand);
+    border-radius: 14px;
+    color: var(--c-ink);
+    font-family: var(--f-display);
+    font-size: 21px;
+  }
+  .lost__link span {
+    font-family: var(--f-body);
+    font-size: 15.5px;
+    color: var(--c-quiet);
+  }
+  .lost__area {
+    color: var(--c-quiet);
+    margin-top: var(--sp-sm);
+  }
+
+  @media (min-width: 900px) {
+    .lost__links {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      max-width: none;
+    }
+  }
+</style>

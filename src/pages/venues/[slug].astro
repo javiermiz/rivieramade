@@ -6,7 +6,7 @@ import Shot from '../../components/Shot.astro';
 import toteBeach from '../../assets/tote-beach.jpg';
 import toteLinen from '../../assets/tote-linen.jpg';
 import { venues, type Venue } from '../../data/venues';
-import { contact, mailtoFor, tierFor, site } from '../../config';
+import { contact, mailtoFor, tierFor, site, origin } from '../../config';
 
 export function getStaticPaths() {
   return venues.map((venue) => ({ params: { slug: venue.slug }, props: { venue } }));
@@ -61,6 +61,44 @@ const facts = [
     note: `About $${(typical * typicalTier.price).toLocaleString('en-US')} at that size.`,
   },
 ];
+
+const url = `${origin}/venues/${venue.slug}`;
+
+/**
+ * A venue page is a local search result before it is anything else, so it
+ * carries its own service — named for the hotel, priced, and pinned to the
+ * town — rather than leaning on the site-wide business node alone.
+ */
+const schemaNodes = [
+  {
+    '@type': 'BreadcrumbList',
+    '@id': `${url}/#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Riviera Made', item: `${origin}/` },
+      { '@type': 'ListItem', position: 2, name: 'Venues', item: `${origin}/venues/` },
+      { '@type': 'ListItem', position: 3, name: venue.name },
+    ],
+  },
+  {
+    '@type': 'Service',
+    '@id': `${url}/#service`,
+    name: `Wedding welcome bags for ${venue.name}`,
+    serviceType: 'Wedding welcome bags, made and delivered',
+    provider: { '@id': `${origin}/#studio` },
+    areaServed: {
+      '@type': 'Place',
+      name: `${venue.name}, ${venue.town}, Quintana Roo, Mexico`,
+    },
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'USD',
+      price: typicalTier.price,
+      description: `Per bag at a typical ${typical}-bag wedding here, delivered to the venue.`,
+      availability: 'https://schema.org/InStock',
+      seller: { '@id': `${origin}/#studio` },
+    },
+  },
+];
 ---
 
 <Base
@@ -68,6 +106,7 @@ const facts = [
   description={`Welcome bags for weddings at ${venue.name} in ${venue.town} — made by hand nearby and delivered to the front desk three days before you marry. No customs, no minimum, from $23 a bag.`}
   path={`/venues/${venue.slug}`}
   noindex={venue.draft}
+  schemaNodes={schemaNodes}
 >
   <Nav />
 
