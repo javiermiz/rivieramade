@@ -26,7 +26,7 @@ const span = last - first;
 
 const PAD = 74;
 const W = 900;
-const y = 96;
+const y = 120;
 
 const at = (coastKm: number) => PAD + ((coastKm - first) / span) * (W - PAD * 2);
 
@@ -41,13 +41,13 @@ const points = ordered.map((town, i) => ({
 ---
 
 <figure class="coast">
-  <svg viewBox="0 0 900 192" role="img" aria-label={`The coast we drive, from ${ordered[0].name} to ${ordered.at(-1)!.name}`}>
+  <svg viewBox="0 0 900 246" role="img" aria-label={`The coast we drive, from ${ordered[0].name} to ${ordered.at(-1)!.name}`}>
     <!-- The road, north to south. -->
     <path
       d={`M ${PAD - 34} ${y + 10} C ${W * 0.3} ${y - 14}, ${W * 0.6} ${y + 16}, ${W - PAD + 34} ${y - 8}`}
       fill="none"
       stroke="var(--c-rule)"
-      stroke-width="2"
+      stroke-width="2.5"
       stroke-linecap="round"
     ></path>
 
@@ -58,27 +58,27 @@ const points = ordered.map((town, i) => ({
             x1={x}
             y1={y + 4}
             x2={x}
-            y2={above ? y - 22 : y + 30}
+            y2={above ? y - 30 : y + 38}
             stroke={isCurrent ? 'var(--c-ochre)' : 'var(--c-rule)'}
             stroke-width="1"
           />
           <circle
             cx={x}
             cy={y + 2}
-            r={isCurrent ? 7 : 4}
+            r={isCurrent ? 9 : 5.5}
             fill={isCurrent ? 'var(--c-ochre)' : isStudio ? 'var(--c-sea)' : 'var(--c-paper)'}
             stroke={isStudio && !isCurrent ? 'var(--c-sea)' : isCurrent ? 'var(--c-ochre)' : 'var(--c-quiet)'}
-            stroke-width="1.6"
+            stroke-width="2"
           />
           <text
             x={x}
-            y={above ? y - 32 : y + 48}
+            y={above ? y - 44 : y + 64}
             text-anchor="middle"
             class:list={['coast__name', isCurrent && 'is-current']}
           >
             {town.name}
           </text>
-          <text x={x} y={above ? y - 32 - 17 : y + 48 + 17} text-anchor="middle" class="coast__min">
+          <text x={x} y={above ? y - 44 - 24 : y + 64 + 24} text-anchor="middle" class="coast__min">
             {town.measured ? '' : '~'}
             {town.minutes} min
           </text>
@@ -96,7 +96,11 @@ const points = ordered.map((town, i) => ({
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--sp-xs);
+    gap: var(--sp-md);
+    /* In a centred column this is a flex item, and a flex item shrinks to its
+       contents unless told otherwise. That is what made it small. */
+    width: 100%;
+    align-self: stretch;
   }
   .coast svg {
     width: 100%;
@@ -105,7 +109,7 @@ const points = ordered.map((town, i) => ({
   }
   .coast__name {
     font-family: var(--f-display);
-    font-size: 19px;
+    font-size: 26px;
     fill: var(--c-ink);
   }
   .coast__name.is-current {
@@ -113,8 +117,8 @@ const points = ordered.map((town, i) => ({
   }
   .coast__min {
     font-family: var(--f-body);
-    font-size: 13px;
-    letter-spacing: 0.08em;
+    font-size: 17px;
+    letter-spacing: 0.06em;
     fill: var(--c-faint);
   }
   .coast figcaption {
