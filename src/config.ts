@@ -3,12 +3,17 @@
  * The three values at the top are the ones to fill in before going live.
  */
 
+/**
+ * Two ways to reach the studio and no more. WhatsApp was a field waiting for a
+ * number that nobody had decided on, and an unused field is a promise the site
+ * cannot keep — it comes back when there is a line to answer it.
+ */
 export const contact = {
   email: 'rivieramadestore@gmail.com',
-  // TODO: international format, no + and no spaces, e.g. '5219981234567'
-  whatsapp: '',
-  instagram: '',
+  instagram: 'rivieramade.store',
 };
+
+export const instagramUrl = `https://instagram.com/${contact.instagram}`;
 
 export const site = {
   name: 'Riviera Made',

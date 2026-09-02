@@ -1,11 +1,12 @@
 ---
-import { deliversTo, contact } from '../config';
+import { deliversTo, contact, instagramUrl } from '../config';
 ---
 <footer class="section foot">
   <div class="container foot__bar">
     <span class="foot__word">riviera made</span>
     <span class="cap foot__area">{deliversTo.join(' · ')}</span>
     <a class="cap foot__mail" href={`mailto:${contact.email}`}>{contact.email}</a>
+    <a class="cap foot__social" href={instagramUrl} rel="me">@{contact.instagram}</a>
     <a class="cap foot__trade" href="/planners">For wedding planners</a>
   </div>
 </footer>
@@ -25,6 +26,7 @@ import { deliversTo, contact } from '../config';
     white-space: nowrap;
   }
   .foot__mail { color: var(--c-ochre); }
+  .foot__social { color: var(--c-ochre); }
   .foot__trade { color: var(--c-quiet); }
 
   @media (min-width: 980px) {

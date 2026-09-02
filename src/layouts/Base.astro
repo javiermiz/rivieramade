@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { Font } from 'astro:assets';
-import { site, contact, pricing, deliversTo, origin } from '../config';
+import { site, contact, pricing, deliversTo, origin, instagramUrl } from '../config';
 
 interface Props {
   title?: string;
@@ -60,6 +60,9 @@ const schema = {
       url: `${origin}/`,
       image: ogImage,
       email: contact.email,
+      /* The one profile that exists. It ties the site to the account a search
+         engine already knows, which is most of what sameAs is good for. */
+      sameAs: [instagramUrl],
       priceRange: `$${Math.min(...prices)}–$${Math.max(...prices)} USD`,
       currenciesAccepted: 'USD, MXN',
       address: {
