@@ -19,15 +19,11 @@ import { venues } from '../../data/venues';
 import { site, mailto, deliversTo, origin } from '../../config';
 
 /**
- * Every venue is named, because the question this page answers is "do you come
- * to my hotel", and the answer is yes whether or not its page is written yet.
- * Only a finished venue becomes a link — sending a couple to a page that says
- * "[X] minutes away" would answer the question worse than not linking at all.
- *
- * Running the dev server, drafts link too, so the pages can be worked on.
+ * Every venue is named and every name is a link. The first pass only linked
+ * finished ones, on the theory that a half-written page answers worse than no
+ * page — but a venue page no longer prints blanks at a visitor, it simply says
+ * less, and a list you cannot click is not a list.
  */
-const linkable = (venue: (typeof venues)[number]) => !venue.draft || import.meta.env.DEV;
-
 const towns = [...new Set([...deliversTo, ...venues.map((v) => v.town)])];
 const byTown = towns
   .map((town) => ({ town, venues: venues.filter((v) => v.town === town) }))
@@ -79,11 +75,7 @@ const byTown = towns
                 <ul class="towns__venues">
                   {list.map((v) => (
                     <li>
-                      {linkable(v) ? (
-                        <a href={`/venues/${v.slug}`}>{v.name}</a>
-                      ) : (
-                        <span class="towns__unwritten">{v.name}</span>
-                      )}
+                      <a href={`/venues/${v.slug}`}>{v.name}</a>
                     </li>
                   ))}
                 </ul>
@@ -159,12 +151,6 @@ const byTown = towns
   }
   .towns__venues a:hover {
     border-bottom-color: var(--c-ochre);
-  }
-  /* Named, so the coverage is complete, but not yet worth a click. */
-  .towns__unwritten {
-    font-family: var(--f-display);
-    font-size: 20px;
-    color: var(--c-quiet);
   }
   .head__note {
     font-size: 16px;

@@ -18,10 +18,6 @@ interface Props {
 
 const { venue } = Astro.props;
 
-/** A blank stays visibly blank. Inventing a drive time would be worse than an empty one. */
-const or = (value: string | number | null, fallback: string) =>
-  value === null || value === '' ? fallback : String(value);
-
 const typical = venue.typicalBags ?? 30;
 const typicalTier = tierFor(typical);
 
@@ -39,28 +35,43 @@ Thank you,
 [names]`,
 )}`;
 
+/**
+ * Only what we actually know. A fact we have not learned yet is left out
+ * rather than printed as a bracket — the page is a real page for a couple
+ * from the day it exists, and it simply says less until someone has made the
+ * drive. The bracketed version was only ever readable by us.
+ */
 const facts = [
-  {
-    figure: or(venue.minutes && `${venue.minutes} min`, '[X] min'),
+  venue.minutes !== null && {
+    figure: `${venue.minutes} min`,
     label: 'from the studio',
     note: 'We make the drive ourselves, every time.',
   },
-  {
-    figure: or(venue.dropOff, '[front desk]'),
+  venue.dropOff !== null && {
+    figure: venue.dropOff,
     label: 'where the bags are left',
-    note: or(venue.note, '[Any access rule this venue keeps.]'),
+    note: venue.note ?? 'Handed over against a signed receipt.',
   },
-  {
-    figure: or(venue.placementFee, '[$X]'),
+  venue.placementFee !== null && {
+    figure: venue.placementFee,
     label: 'to place them in the rooms',
     note: 'Charged by the resort, never by us.',
   },
-  {
+  venue.typicalBags !== null && {
     figure: `${typical} bags`,
     label: 'a wedding here, typically',
     note: `About $${(typical * typicalTier.price).toLocaleString('en-US')} at that size.`,
   },
-];
+].filter(Boolean) as { figure: string; label: string; note: string }[];
+
+/** What we still owe this page, listed for us and shown to nobody else. */
+const missing = [
+  venue.minutes === null && 'minutes from the studio',
+  venue.dropOff === null && 'where the bags are handed over',
+  venue.placementFee === null && 'what the resort charges to place them',
+  venue.typicalBags === null && 'bags in a typical wedding here',
+  venue.note === null && 'the access rule',
+].filter(Boolean);
 
 const url = `${origin}/venues/${venue.slug}`;
 
@@ -114,9 +125,8 @@ const schemaNodes = [
     venue.draft && (
       <div class="container">
         <p class="draft">
-          Draft — the bracketed facts are still blank, so this page is kept out of
-          the index. Fill them in <code>src/data/venues.ts</code> and set{' '}
-          <code>draft: false</code>.
+          Draft, and out of the index. Still missing: {missing.join(', ')}. Fill
+          them in <code>src/data/venues.ts</code> and set <code>draft: false</code>.
         </p>
       </div>
     )
@@ -129,9 +139,12 @@ const schemaNodes = [
         <span class="cap">Welcome bags · {venue.town}</span>
         <h1>Welcome bags for weddings at {venue.name}.</h1>
         <p class="hero__lede">
-          We are {or(venue.minutes, '[X]')} minutes away. Your bags are made here and
-          handed to the front desk three days before the wedding — nothing shipped,
-          nothing through customs, and your count is due ten days out.
+          {venue.minutes !== null
+            ? `We are ${venue.minutes} minutes away.`
+            : `${venue.town} is on the road we drive.`}{' '}
+          Your bags are made in Puerto Morelos and handed over three days before the
+          wedding — nothing shipped, nothing through customs, and your count is due
+          ten days out.
         </p>
         <div class="hero__cta">
           <a href={venueMailto} class="btn">Write to us</a>
@@ -151,6 +164,7 @@ const schemaNodes = [
   </section>
 
   <!-- ── What we know about this venue ───────────────────────── -->
+  {facts.length > 0 && (
   <section class="section facts">
     <div class="container">
       <h2 class="facts__head">What we already know about {venue.name}</h2>
@@ -169,6 +183,7 @@ const schemaNodes = [
       </dl>
     </div>
   </section>
+  )}
 
   <!-- ── The bag ─────────────────────────────────────────────── -->
   <section class="section bag">
@@ -195,19 +210,23 @@ const schemaNodes = [
     </div>
   </section>
 
-  <!-- ── A wedding here ──────────────────────────────────────── -->
-  <section class="section proof">
-    <div class="container proof__inner">
-      <h2>A wedding at {venue.name}</h2>
-      <p>
-        [ Written after the first one: how many bags, the colours, and one true
-        detail about the delivery. Never before it. ]
-      </p>
-      <p class="proof__rule">
-        This section stays offline until there is a real delivery to photograph.
-      </p>
-    </div>
-  </section>
+  {/* The slot for the first real delivery here. Nobody but us sees it until
+      there is one to write about — a promise of a story is not a story. */}
+  {import.meta.env.DEV && (
+    <section class="section proof">
+      <div class="container proof__inner">
+        <h2>A wedding at {venue.name}</h2>
+        <p>
+          [ Written after the first one: how many bags, the colours, and one true
+          detail about the delivery. Never before it. ]
+        </p>
+        <p class="proof__rule">
+          Visible only while developing. It goes live when there is a real delivery
+          to photograph.
+        </p>
+      </div>
+    </section>
+  )}
 
   <!-- ── Ask ─────────────────────────────────────────────────── -->
   <section class="section ask">
@@ -222,10 +241,28 @@ const schemaNodes = [
     </div>
   </section>
 
+  {/* Saying who we are not is cheap, and it is the line that keeps a page
+      naming someone else's hotel plainly factual. */}
+  <div class="container">
+    <p class="unaffiliated">
+      Riviera Made is an independent workshop in Puerto Morelos. We are not
+      affiliated with {venue.name}, and naming it here says only that we deliver
+      to couples marrying there.
+    </p>
+  </div>
+
   <Footer />
 </Base>
 
 <style>
+  .unaffiliated {
+    font-size: 14.5px;
+    color: var(--c-faint);
+    line-height: 1.65;
+    max-width: 68ch;
+    padding-top: var(--sp-lg);
+  }
+
   .draft {
     background: var(--c-sand);
     border-left: 3px solid var(--c-ochre);

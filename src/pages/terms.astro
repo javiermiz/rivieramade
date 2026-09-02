@@ -1,0 +1,203 @@
+---
+/**
+ * Terms, in the plainest English the subject allows.
+ *
+ * Everything here is already promised somewhere else on the site — the price
+ * page, the planners table, the FAQ. This is the one place they are gathered
+ * and stated as a commitment, which matters most for the thing a custom
+ * workshop has to be clear about: a bag with somebody's names on it cannot be
+ * resold, so it cannot simply be sent back.
+ *
+ * The bracketed block at the end is what is still ours to decide.
+ */
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { site, contact, pricing, deliversTo, origin } from '../config';
+
+const updated = 'September 2026';
+const low = Math.min(...pricing.map((t) => t.price));
+const high = Math.max(...pricing.map((t) => t.price));
+
+const sections = [
+  {
+    h: 'Who you are dealing with',
+    p: [
+      `${site.name} is a two-person workshop in ${site.town}, Mexico. We make wedding welcome bags and deliver them ourselves. When these terms say "we", that is who it is. You can reach us at ${contact.email}.`,
+      'These terms apply to every order. Ordering means you accept them.',
+    ],
+  },
+  {
+    h: 'What we make',
+    p: [
+      'One thing: a cotton tote printed with your names and your date, holding a card with your weekend on it, two bottle labels and a luggage tag. It is made for your wedding and for nobody else’s.',
+      'Because each bag carries your names, no part of an order can be resold to anyone. That single fact is behind most of what follows.',
+    ],
+  },
+  {
+    h: 'Prices',
+    p: [
+      `Between $${low} and $${high} US dollars a bag, delivered, depending on how many you order. The scale is published on the price page and it does not change because a wedding is large or small, or because of who introduced us.`,
+      'Delivery within our area is included. There is no setup fee and no design fee. Prices are in US dollars.',
+      'A price we quote you holds for thirty days.',
+    ],
+  },
+  {
+    h: 'The smallest order we take',
+    p: [
+      'Twelve bags. Below that the drive out costs us more than the order is worth.',
+    ],
+  },
+  {
+    h: 'How an order is made',
+    p: [
+      'You write to us with your names, your date, your venue and roughly how many bags you want. We send back a drawing of your bag. That drawing is free, it comes the same day, and it is yours whether or not you go ahead.',
+      'Nothing is charged and nothing is made until you have approved a drawing in writing. Approving it means the spelling, the date and the colours in front of you are the ones we will press. Please read your own names carefully — once pressed they cannot be unpressed.',
+      'We take one wedding a week. A week is only yours once the deposit has been paid.',
+    ],
+  },
+  {
+    h: 'Paying',
+    p: [
+      'Half when you approve the drawing, which holds your week. The balance when we hand the bags over.',
+      'The deposit is paid by card through a payment link we send you. The balance can be paid by card, by transfer, or in cash on delivery.',
+      'The deposit is what reserves production time we then turn other couples away from.',
+    ],
+  },
+  {
+    h: 'How many bags, and when we need to know',
+    p: [
+      'Tell us the final number ten days before the wedding. Until then it can move in either direction and we will plan for it.',
+      'If the number goes up after that we will do what we can, but we cannot promise it. If it goes down, anything we have not yet made comes off your bill; anything already printed with your names has been made and is charged.',
+    ],
+  },
+  {
+    h: 'Delivery',
+    p: [
+      `We deliver by road, ourselves, to ${deliversTo.slice(0, -1).join(', ')} and ${deliversTo.at(-1)}. We do not ship, anywhere, ever — not within Mexico and not abroad. If you are marrying outside that area we are the wrong workshop for you.`,
+      'Bags arrive at your venue three days before the wedding, assembled, and are handed over against a signed receipt. From that receipt onward the bags are in the venue’s hands.',
+      'Some resorts charge a fee per bag to place them in the guests’ rooms. That fee is theirs, not ours, and it is paid to them by you. We will tell you what we know about it before you are surprised by it.',
+    ],
+  },
+  {
+    h: 'If something is wrong with what we made',
+    p: [
+      'If we misspell a name we approved with you, print the wrong date, or deliver a bag that is damaged or faulty, tell us within three days of delivery and send a photograph. We will remake it or refund it, whichever you prefer, and we will not argue about it.',
+      'What we cannot do is take back bags that are exactly what you approved because you changed your mind. They carry your names and they cannot go to anybody else.',
+    ],
+  },
+  {
+    h: 'If the wedding moves or is called off',
+    p: [
+      'Weddings move. Tell us as soon as you know. If your new date is a week we still have, we move the order to it at no extra cost.',
+      'If you cancel, what you owe depends on what we have already made with your names on it. Nothing made, nothing owed beyond the deposit. Bags already pressed are yours and are charged.',
+      'If something outside anybody’s control stops us — a hurricane, a road closed, an evacuation — we will refund everything we have not already spent making your bags, and we will tell you the moment we know.',
+    ],
+  },
+  {
+    h: 'Photographs of your bags',
+    p: [
+      'We may want to show what we made. We will ask you first, and no is a complete answer that changes nothing about your order. We never publish your surname, your venue or your date without asking.',
+    ],
+  },
+  {
+    h: 'The law that applies',
+    p: [
+      'These terms are governed by the laws of Mexico, and by the consumer protection rules that apply to a sale made here. Nothing in them takes away a right the law gives you.',
+      `If we change these terms, the change applies to orders placed afterwards, never to one already agreed. This version is from ${updated}.`,
+    ],
+  },
+];
+---
+
+<Base
+  title={`Terms | ${site.name}`}
+  description="How an order works at Riviera Made: a free drawing first, half to hold the week, the balance on delivery, a twelve-bag minimum, and delivery by road with no shipping."
+  path="/terms"
+  schemaNodes={[
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${origin}/terms/#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Riviera Made', item: `${origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'Terms' },
+      ],
+    },
+  ]}
+>
+  <Nav />
+
+  <section class="section legal">
+    <div class="container legal__inner">
+      <span class="cap">Last updated {updated}</span>
+      <h1>Terms.</h1>
+      <p class="legal__lede">
+        The short version: you see a drawing before you pay anything, half holds
+        your week, the rest is due when we hand the bags over, and because every
+        bag carries your names we cannot take them back once they are pressed.
+      </p>
+
+      {
+        sections.map((section) => (
+          <div class="legal__block reveal">
+            <h2>{section.h}</h2>
+            {section.p.map((line) => (
+              <p>{line}</p>
+            ))}
+          </div>
+        ))
+      }
+
+      <p class="legal__note">
+        [ Two things here are still ours to decide and a lawyer should see the
+        page before the first payment: whether the deposit is refundable at all
+        if a couple cancels before anything is made, and how long we hold a
+        moved date before it becomes a new order. ]
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .legal__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-sm);
+    max-width: 70ch;
+  }
+  .legal h1 {
+    font-size: clamp(38px, 5vw, 68px);
+  }
+  .legal__lede {
+    font-size: 19px;
+    color: var(--c-body);
+    line-height: 1.7;
+    margin-bottom: var(--sp-lg);
+  }
+  .legal__block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2xs);
+    padding-block: var(--sp-md);
+    border-top: var(--stroke-hair) solid var(--c-rule);
+  }
+  .legal h2 {
+    font-size: clamp(21px, 2.2vw, 27px);
+  }
+  .legal__block p {
+    font-size: 17.5px;
+    color: var(--c-body);
+    line-height: 1.75;
+  }
+  .legal__note {
+    margin-top: var(--sp-lg);
+    background: var(--c-sand);
+    border-left: 3px solid var(--c-ochre);
+    padding: var(--sp-sm) var(--sp-md);
+    font-size: 16px;
+    color: var(--c-body);
+    line-height: 1.65;
+  }
+</style>
