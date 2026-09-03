@@ -4,13 +4,18 @@
  */
 
 /**
- * Two ways to reach the studio and no more. WhatsApp was a field waiting for a
- * number that nobody had decided on, and an unused field is a promise the site
- * cannot keep — it comes back when there is a line to answer it.
+ * Three ways to reach the studio and no more. The line exists because Google
+ * asks a business for one and then checks that the site says the same number;
+ * a profile and a page that disagree are two businesses as far as it can tell.
+ *
+ * `phone` is E.164 for machines — the schema, the tel: href — and `phoneShown`
+ * is the same number spaced the way a person reads it aloud.
  */
 export const contact = {
   email: 'rivieramadestore@gmail.com',
   instagram: 'rivieramade.store',
+  phone: '+525659885635',
+  phoneShown: '+52 56 5988 5635',
 };
 
 export const instagramUrl = `https://instagram.com/${contact.instagram}`;

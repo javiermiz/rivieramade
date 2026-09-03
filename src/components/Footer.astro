@@ -7,6 +7,7 @@ import { deliversTo, contact, instagramUrl } from '../config';
     <span class="cap foot__area">{deliversTo.join(' · ')}</span>
     <a class="cap foot__mail" href={`mailto:${contact.email}`}>{contact.email}</a>
     <a class="cap foot__social" href={instagramUrl} rel="me">@{contact.instagram}</a>
+    <a class="cap foot__mail" href={`tel:${contact.phone}`}>{contact.phoneShown}</a>
     <a class="cap foot__trade" href="/faq">Questions</a>
     <a class="cap foot__trade" href="/venues">Venues</a>
     <a class="cap foot__trade" href="/planners">For wedding planners</a>
