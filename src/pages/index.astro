@@ -11,7 +11,7 @@ import totePrint from '../assets/tote-print.jpg';
 import studio from '../assets/studio.jpg';
 import Wave from '../components/Wave.astro';
 import PriceEstimator from '../components/PriceEstimator.astro';
-import { contact, mailto, deliversTo } from '../config';
+import { contact, mailto, whatsapp, deliversTo } from '../config';
 
 const care = [
   {
@@ -51,6 +51,7 @@ const deliveryLine = `We deliver to ${deliversTo
         </p>
         <div class="hero__cta rise" style="animation-delay:.36s">
           <a href={mailto} class="btn">Write to us</a>
+          <a href={whatsapp} class="hero__wa">or send us a WhatsApp</a>
           <span class="hero__note">A drawing of your bag comes back the same day</span>
         </div>
       </div>
@@ -189,6 +190,7 @@ const deliveryLine = `We deliver to ${deliversTo
         </p>
         <a href={mailto} class="btn btn--light">Write to us</a>
         <a class="write__mail" href={mailto}>{contact.email}</a>
+        <a class="write__mail" href={whatsapp}>{contact.phoneShown} on WhatsApp</a>
       </div>
 
       <div class="letter">
@@ -252,6 +254,13 @@ const deliveryLine = `We deliver to ${deliversTo
     flex-direction: column;
     gap: var(--sp-xs);
     text-align: center;
+  }
+  .hero__wa {
+    font-size: 16px;
+    color: var(--c-ochre);
+    border-bottom: var(--stroke-hair) solid rgb(201 138 75 / 0.5);
+    padding-bottom: 2px;
+    align-self: center;
   }
   .hero__note {
     font-size: 16px;

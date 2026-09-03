@@ -14,11 +14,28 @@
 export const contact = {
   email: 'rivieramadestore@gmail.com',
   instagram: 'rivieramade.store',
-  phone: '+525659885635',
-  phoneShown: '+52 56 5988 5635',
+  phone: '+529991725577',
+  phoneShown: '+52 999 172 5577',
 };
 
 export const instagramUrl = `https://instagram.com/${contact.instagram}`;
+
+/**
+ * The same line, on WhatsApp. A couple planning a wedding from another country
+ * answers a message on their phone and postpones an email until they are at a
+ * desk, so the draft is offered on both and kept shorter here — nobody types
+ * five lines into a chat window.
+ */
+export const whatsappNumber = contact.phone.replace('+', '');
+
+export function whatsappFor(count?: number) {
+  const bags = count ? `${count}` : '[number]';
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    `Hello — we're marrying at [venue] on [date] and would like about ${bags} welcome bags. Could you send us a drawing?`,
+  )}`;
+}
+
+export const whatsapp = whatsappFor();
 
 export const site = {
   name: 'Riviera Made',
