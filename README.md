@@ -27,38 +27,38 @@ Everything that changes without touching the design lives in
 
 ## The photographs
 
-Every image in `src/assets/` is a **placeholder**. They are cropped at their
-source's own size and never upscaled; `Shot` takes a `widths` prop for exactly
-that reason.
+Every image in `src/assets/` is a **placeholder except `studio.jpg`**, which is
+the two of them. They are cropped at their source's own size and never
+upscaled; `Shot` takes a `widths` prop for exactly that reason.
 
 | File | Where |
 | --- | --- |
 | `tote-beach.jpg` | the hero, and the hero of every town and venue page |
 | `tote-linen.jpg` | beside the copy about the bag |
 | `tote-inks.jpg`, `tote-inside.jpg`, `tote-print.jpg` | the three plates |
-| `studio.jpg` | beside the pull quote — **see the warning below** |
+| `studio.jpg` | beside the pull quote — the real one, see below |
 
 The bags in them read *Olivia & Jackson, Cancún* and other names that are not
 anyone's. They are mockups. Swap them for photographs of a real order before
 the site is promoted anywhere — same filenames, nothing else changes.
 
-### `studio.jpg` is not like the others, and must not ship
+### `studio.jpg` is the two of them, and it is the one that is real
 
-It is a generated image of two women, standing in for the two sisters who
-actually run this. It sits under a sentence that says *"Two sisters, one room
-in Puerto Morelos"*, so a visitor reads it as a photograph of them.
+It is the only image on the site that is not a mockup. Both faces are the
+sisters who run this. They were photographed separately and the two shots were
+composited into one frame, which is retouching, not invention: the person in
+the picture is the person a couple ends up dealing with.
 
-A generated product shot is a render, and nobody is misled by one. A generated
-founder is a different thing: this site asks a couple in another country to
-send a deposit to two people they have never met, and the faces are the reason
-they believe there are two people. Invented faces put the whole page's
-credibility on something that would collapse the moment anyone noticed.
+That matters more here than anywhere else on the page. This site asks someone
+in another country to send a deposit to two people they have never met, and the
+faces are the reason they believe there are two people to send it to. It sits
+directly under *"Two sisters, one room in Puerto Morelos"*, which is the
+sentence it exists to back.
 
-It is here to build the layout against, and it is the one placeholder that
-**cannot go live**. Replace it with a real photograph — the two of them at the
-work table, faces visible, taken on a phone by a window — before the site is
-shown to anybody. If neither wants to be photographed, hands at work plus their
-first names is the fallback, and it is still better than a stranger's face.
+Worth upgrading when the chance comes, for one reason only: it should read as a
+photograph rather than as something rendered, and a plain snapshot of the two of
+them at the work table would carry that better than a composite. Same filename,
+nothing else changes.
 
 **The shot still missing:** one bag with everything that comes in it visible —
 the card, the labels and the tag sitting in the open tote. The page says so in
