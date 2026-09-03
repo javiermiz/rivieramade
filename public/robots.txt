@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rivieramade.com/sitemap-index.xml
+Sitemap: https://www.rivieramade.com/sitemap-index.xml

@@ -22,7 +22,11 @@ export const instagramUrl = `https://instagram.com/${contact.instagram}`;
 
 export const site = {
   name: 'Riviera Made',
-  domain: 'rivieramade.com',
+  /* The host the server actually serves. Vercel 308s the bare domain to www,
+     so www is what canonicals, the sitemap and every schema @id must say —
+     a canonical pointing at a URL that redirects is a contradiction, and the
+     one host Google is told about should be the one it lands on. */
+  domain: 'www.rivieramade.com',
   town: 'Puerto Morelos, Quintana Roo',
   title: 'Wedding Welcome Bags · Cancún & Riviera Maya | Riviera Made',
   description:

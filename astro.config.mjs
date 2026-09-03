@@ -3,14 +3,17 @@ import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { venues } from './src/data/venues';
 
+/** Must match `site` below, or the draft filter silently matches nothing. */
+const site = 'https://www.rivieramade.com';
+
 /** A venue whose facts are still bracketed is noindex, so keep it out too. */
 const draftPaths = venues
   .filter((v) => v.draft)
-  .map((v) => `https://rivieramade.com/venues/${v.slug}/`);
+  .map((v) => `${site}/venues/${v.slug}/`);
 
 
 export default defineConfig({
-  site: 'https://rivieramade.com',
+  site,
 
   /**
    * The two faces are downloaded at build time and served from our own origin.
